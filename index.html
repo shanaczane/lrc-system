@@ -806,101 +806,313 @@
 
     <!-- ========== RESERVATIONS ========== -->
     <section class="page" id="page-reservations">
-      <div class="page-header">
-        <div>
-          <h1 class="page-title">My <em>Reservations</em></h1>
-          <p class="page-subtitle">Active and upcoming holds</p>
-        </div>
-      </div>
 
-      <div class="card" style="margin-bottom:24px;">
-        <div style="display:flex;align-items:center;gap:14px;padding:8px 0;">
-          <div class="row-cover v3" style="width:60px;height:80px;"></div>
-          <div style="flex:1;">
-            <div style="font-weight:700;font-family:var(--font-display);font-size:18px;">Designing Data-Intensive Applications</div>
-            <div style="color:var(--ink-500);font-size:13px;margin:4px 0;">Martin Kleppmann · Reserved Nov 14</div>
-            <span class="pill pill-available">Ready for pickup</span>
-          </div>
-          <div style="text-align:right;">
-            <div style="font-size:11px;color:var(--ink-500);text-transform:uppercase;letter-spacing:0.08em;font-weight:600;">Pickup by</div>
-            <div style="font-family:var(--font-display);font-size:22px;font-weight:600;">Nov 21</div>
-            <button class="btn btn-primary" style="margin-top:8px;padding:6px 14px;font-size:12px;">View QR</button>
+      <!-- Student / Faculty Reservations -->
+      <div class="role-view" data-role="student">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">My <em>Reservations</em></h1>
+            <p class="page-subtitle">Active and upcoming holds</p>
           </div>
         </div>
-      </div>
 
-      <h3 class="section-title" style="margin-bottom:16px;">Reserve a new book</h3>
-
-      <div class="stepper">
-        <div class="step done">
-          <div class="step-num">✓</div>
-          <div class="step-label">Select book</div>
-        </div>
-        <div class="step-line"></div>
-        <div class="step active">
-          <div class="step-num">2</div>
-          <div class="step-label">Pickup date</div>
-        </div>
-        <div class="step-line"></div>
-        <div class="step">
-          <div class="step-num">3</div>
-          <div class="step-label">Confirm</div>
-        </div>
-      </div>
-
-      <div class="reserve-grid">
-        <div class="date-picker">
-          <div class="calendar-head">
-            <div class="month-name">November 2025</div>
-            <div class="cal-nav">
-              <button><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg></button>
-              <button><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
+        <div class="card" style="margin-bottom:24px;">
+          <div style="display:flex;align-items:center;gap:14px;padding:8px 0;">
+            <div class="row-cover v3" style="width:60px;height:80px;"></div>
+            <div style="flex:1;">
+              <div style="font-weight:700;font-family:var(--font-display);font-size:18px;">Designing Data-Intensive Applications</div>
+              <div style="color:var(--ink-500);font-size:13px;margin:4px 0;">Martin Kleppmann · Reserved Nov 14</div>
+              <span class="pill pill-available">Ready for pickup</span>
             </div>
-          </div>
-
-          <div class="cal-grid">
-            <div class="cal-day-name">Sun</div><div class="cal-day-name">Mon</div><div class="cal-day-name">Tue</div>
-            <div class="cal-day-name">Wed</div><div class="cal-day-name">Thu</div><div class="cal-day-name">Fri</div><div class="cal-day-name">Sat</div>
-
-            <div class="cal-day muted">26</div><div class="cal-day muted">27</div><div class="cal-day muted">28</div>
-            <div class="cal-day muted">29</div><div class="cal-day muted">30</div><div class="cal-day muted">31</div><div class="cal-day disabled">1</div>
-
-            <div class="cal-day disabled">2</div><div class="cal-day disabled">3</div><div class="cal-day disabled">4</div>
-            <div class="cal-day disabled">5</div><div class="cal-day disabled">6</div><div class="cal-day disabled">7</div><div class="cal-day disabled">8</div>
-
-            <div class="cal-day disabled">9</div><div class="cal-day disabled">10</div><div class="cal-day disabled">11</div>
-            <div class="cal-day disabled">12</div><div class="cal-day disabled">13</div><div class="cal-day disabled">14</div><div class="cal-day disabled">15</div>
-
-            <div class="cal-day disabled">16</div><div class="cal-day disabled">17</div><div class="cal-day disabled">18</div>
-            <div class="cal-day today">19</div><div class="cal-day">20</div><div class="cal-day">21</div><div class="cal-day">22</div>
-
-            <div class="cal-day">23</div><div class="cal-day">24</div><div class="cal-day selected">25</div>
-            <div class="cal-day">26</div><div class="cal-day">27</div><div class="cal-day">28</div><div class="cal-day">29</div>
-
-            <div class="cal-day">30</div><div class="cal-day muted">1</div><div class="cal-day muted">2</div>
-            <div class="cal-day muted">3</div><div class="cal-day muted">4</div><div class="cal-day muted">5</div><div class="cal-day muted">6</div>
-          </div>
-
-          <div style="margin-top:20px;padding-top:20px;border-top:1px solid var(--ink-100);">
-            <div style="display:flex;gap:8px;flex-wrap:wrap;">
-              <span class="pill pill-available">Available</span>
-              <span class="pill pill-reserved">Limited</span>
-              <span class="pill pill-unavailable">Closed</span>
+            <div style="text-align:right;">
+              <div style="font-size:11px;color:var(--ink-500);text-transform:uppercase;letter-spacing:0.08em;font-weight:600;">Pickup by</div>
+              <div style="font-family:var(--font-display);font-size:22px;font-weight:600;">Nov 21</div>
+              <button class="btn btn-primary" style="margin-top:8px;padding:6px 14px;font-size:12px;">View QR</button>
             </div>
           </div>
         </div>
 
-        <div class="summary-box">
-          <h4 style="font-family:var(--font-display);font-size:18px;font-weight:600;margin-bottom:16px;">Reservation summary</h4>
-          <div class="summary-line"><span class="key">Title</span><span class="val">Clean Code</span></div>
-          <div class="summary-line"><span class="key">Pickup date</span><span class="val">Nov 25, 2025</span></div>
-          <div class="summary-line"><span class="key">Loan period</span><span class="val">14 days</span></div>
-          <div class="summary-line"><span class="key">Return by</span><span class="val">Dec 9, 2025</span></div>
-          <div class="summary-line"><span class="key">Pickup location</span><span class="val">Main LRC, 2nd Floor</span></div>
-          <button class="btn btn-primary btn-full" style="margin-top:20px;">Confirm reservation</button>
-          <button class="btn btn-ghost btn-full" style="margin-top:8px;">Cancel</button>
+        <div class="card" style="margin-bottom:32px;">
+          <div style="display:flex;align-items:center;gap:14px;padding:8px 0;">
+            <div class="row-cover v5" style="width:60px;height:80px;"></div>
+            <div style="flex:1;">
+              <div style="font-weight:700;font-family:var(--font-display);font-size:18px;">The Pragmatic Programmer</div>
+              <div style="color:var(--ink-500);font-size:13px;margin:4px 0;">Thomas, Hunt · Reserved Nov 15</div>
+              <span class="pill pill-reserved">Pending confirmation</span>
+            </div>
+            <div style="text-align:right;">
+              <div style="font-size:11px;color:var(--ink-500);text-transform:uppercase;letter-spacing:0.08em;font-weight:600;">Pickup window</div>
+              <div style="font-family:var(--font-display);font-size:18px;font-weight:600;">Nov 22–24</div>
+              <button class="btn btn-secondary" style="margin-top:8px;padding:6px 14px;font-size:12px;">Cancel hold</button>
+            </div>
+          </div>
+        </div>
+
+        <h3 class="section-title" style="margin-bottom:16px;">Reserve a new book</h3>
+
+        <div class="stepper">
+          <div class="step done">
+            <div class="step-num">✓</div>
+            <div class="step-label">Select book</div>
+          </div>
+          <div class="step-line"></div>
+          <div class="step active">
+            <div class="step-num">2</div>
+            <div class="step-label">Pickup date</div>
+          </div>
+          <div class="step-line"></div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-label">Confirm</div>
+          </div>
+        </div>
+
+        <div class="reserve-grid">
+          <div class="date-picker">
+            <div class="calendar-head">
+              <div class="month-name">November 2025</div>
+              <div class="cal-nav">
+                <button><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg></button>
+                <button><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
+              </div>
+            </div>
+
+            <div class="cal-grid">
+              <div class="cal-day-name">Sun</div><div class="cal-day-name">Mon</div><div class="cal-day-name">Tue</div>
+              <div class="cal-day-name">Wed</div><div class="cal-day-name">Thu</div><div class="cal-day-name">Fri</div><div class="cal-day-name">Sat</div>
+
+              <div class="cal-day muted">26</div><div class="cal-day muted">27</div><div class="cal-day muted">28</div>
+              <div class="cal-day muted">29</div><div class="cal-day muted">30</div><div class="cal-day muted">31</div><div class="cal-day disabled">1</div>
+
+              <div class="cal-day disabled">2</div><div class="cal-day disabled">3</div><div class="cal-day disabled">4</div>
+              <div class="cal-day disabled">5</div><div class="cal-day disabled">6</div><div class="cal-day disabled">7</div><div class="cal-day disabled">8</div>
+
+              <div class="cal-day disabled">9</div><div class="cal-day disabled">10</div><div class="cal-day disabled">11</div>
+              <div class="cal-day disabled">12</div><div class="cal-day disabled">13</div><div class="cal-day disabled">14</div><div class="cal-day disabled">15</div>
+
+              <div class="cal-day disabled">16</div><div class="cal-day disabled">17</div><div class="cal-day disabled">18</div>
+              <div class="cal-day today">19</div><div class="cal-day">20</div><div class="cal-day">21</div><div class="cal-day">22</div>
+
+              <div class="cal-day">23</div><div class="cal-day">24</div><div class="cal-day selected">25</div>
+              <div class="cal-day">26</div><div class="cal-day">27</div><div class="cal-day">28</div><div class="cal-day">29</div>
+
+              <div class="cal-day">30</div><div class="cal-day muted">1</div><div class="cal-day muted">2</div>
+              <div class="cal-day muted">3</div><div class="cal-day muted">4</div><div class="cal-day muted">5</div><div class="cal-day muted">6</div>
+            </div>
+
+            <div style="margin-top:20px;padding-top:20px;border-top:1px solid var(--ink-100);">
+              <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                <span class="pill pill-available">Available</span>
+                <span class="pill pill-reserved">Limited</span>
+                <span class="pill pill-unavailable">Closed</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="summary-box">
+            <h4 style="font-family:var(--font-display);font-size:18px;font-weight:600;margin-bottom:16px;">Reservation summary</h4>
+            <div class="summary-line"><span class="key">Title</span><span class="val">Clean Code</span></div>
+            <div class="summary-line"><span class="key">Pickup date</span><span class="val">Nov 25, 2025</span></div>
+            <div class="summary-line"><span class="key">Loan period</span><span class="val">14 days</span></div>
+            <div class="summary-line"><span class="key">Return by</span><span class="val">Dec 9, 2025</span></div>
+            <div class="summary-line"><span class="key">Pickup location</span><span class="val">Main LRC, 2nd Floor</span></div>
+            <button class="btn btn-primary btn-full" style="margin-top:20px;">Confirm reservation</button>
+            <button class="btn btn-ghost btn-full" style="margin-top:8px;">Cancel</button>
+          </div>
         </div>
       </div>
+
+      <!-- Librarian Reservations Management -->
+      <div class="role-view" data-role="librarian" style="display:none;">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Manage <em>Reservations</em></h1>
+            <p class="page-subtitle">Review, approve, and process all student reservation requests</p>
+          </div>
+          <div style="display:flex;gap:10px;">
+            <button class="btn btn-secondary">Export list</button>
+            <button class="btn btn-primary">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              Approve all pending
+            </button>
+          </div>
+        </div>
+
+        <div class="stat-grid" style="margin-bottom:28px;">
+          <div class="stat gold">
+            <div class="stat-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div class="stat-label">Pending Approval</div>
+            <div class="stat-value">4</div>
+            <div class="stat-meta">Awaiting librarian review</div>
+          </div>
+          <div class="stat">
+            <div class="stat-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div class="stat-label">Ready for Pickup</div>
+            <div class="stat-value">12</div>
+            <div class="stat-meta">At the main desk</div>
+          </div>
+          <div class="stat">
+            <div class="stat-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            </div>
+            <div class="stat-label">Active Holds</div>
+            <div class="stat-value">22</div>
+            <div class="stat-meta">Confirmed, not yet ready</div>
+          </div>
+          <div class="stat warn">
+            <div class="stat-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            </div>
+            <div class="stat-label">Expiring Today</div>
+            <div class="stat-value">3</div>
+            <div class="stat-meta">Hold released if unclaimed</div>
+          </div>
+        </div>
+
+        <div class="notif-tabs" style="margin-bottom:20px;">
+          <button class="notif-tab active">All <span class="count">38</span></button>
+          <button class="notif-tab">Pending <span class="count">4</span></button>
+          <button class="notif-tab">Ready for Pickup <span class="count">12</span></button>
+          <button class="notif-tab">Active <span class="count">22</span></button>
+          <button class="notif-tab">Expiring <span class="count">3</span></button>
+        </div>
+
+        <div class="card" style="padding:8px;">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Student</th>
+                <th>Book</th>
+                <th>Reserved</th>
+                <th>Pickup Window</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <div style="font-weight:600;font-size:13px;">Shan A. Cruz</div>
+                  <div style="font-size:11px;color:var(--ink-500);">2022-10234</div>
+                </td>
+                <td>
+                  <div style="font-size:13px;font-weight:500;">Clean Code</div>
+                  <div style="font-size:11px;color:var(--ink-500);">QA76.76 .M37</div>
+                </td>
+                <td style="color:var(--ink-500);font-size:13px;">Nov 14</td>
+                <td style="font-size:13px;">Nov 25–27</td>
+                <td><span class="pill pill-reserved">Pending</span></td>
+                <td>
+                  <div style="display:flex;gap:6px;">
+                    <button class="btn btn-primary" style="padding:4px 10px;font-size:11px;">Approve</button>
+                    <button class="btn btn-ghost" style="padding:4px 10px;font-size:11px;">Cancel</button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div style="font-weight:600;font-size:13px;">Khatrina Gonzales</div>
+                  <div style="font-size:11px;color:var(--ink-500);">2021-08891</div>
+                </td>
+                <td>
+                  <div style="font-size:13px;font-weight:500;">AI: A Modern Approach</div>
+                  <div style="font-size:11px;color:var(--ink-500);">Q335 .R86</div>
+                </td>
+                <td style="color:var(--ink-500);font-size:13px;">Nov 15</td>
+                <td style="font-size:13px;">Nov 25–27</td>
+                <td><span class="pill pill-reserved">Pending</span></td>
+                <td>
+                  <div style="display:flex;gap:6px;">
+                    <button class="btn btn-primary" style="padding:4px 10px;font-size:11px;">Approve</button>
+                    <button class="btn btn-ghost" style="padding:4px 10px;font-size:11px;">Cancel</button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div style="font-weight:600;font-size:13px;">Jed F. Sayat</div>
+                  <div style="font-size:11px;color:var(--ink-500);">2023-00412</div>
+                </td>
+                <td>
+                  <div style="font-size:13px;font-weight:500;">The Pragmatic Programmer</div>
+                  <div style="font-size:11px;color:var(--ink-500);">QA76.6 .T46</div>
+                </td>
+                <td style="color:var(--ink-500);font-size:13px;">Nov 14</td>
+                <td style="font-size:13px;">Nov 22–24</td>
+                <td><span class="pill pill-available">Ready for Pickup</span></td>
+                <td>
+                  <div style="display:flex;gap:6px;">
+                    <button class="btn btn-secondary" style="padding:4px 10px;font-size:11px;">Mark Claimed</button>
+                    <button class="btn btn-ghost" style="padding:4px 10px;font-size:11px;">Cancel</button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div style="font-weight:600;font-size:13px;">Paolo M. Aguilar</div>
+                  <div style="font-size:11px;color:var(--ink-500);">2020-15503</div>
+                </td>
+                <td>
+                  <div style="font-size:13px;font-weight:500;">Refactoring</div>
+                  <div style="font-size:11px;color:var(--ink-500);">QA76.76 .F69</div>
+                </td>
+                <td style="color:var(--ink-500);font-size:13px;">Nov 13</td>
+                <td style="font-size:13px;">Nov 22–24</td>
+                <td><span class="pill pill-available">Ready for Pickup</span></td>
+                <td>
+                  <div style="display:flex;gap:6px;">
+                    <button class="btn btn-secondary" style="padding:4px 10px;font-size:11px;">Mark Claimed</button>
+                    <button class="btn btn-ghost" style="padding:4px 10px;font-size:11px;">Cancel</button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div style="font-weight:600;font-size:13px;">Maria L. Santos</div>
+                  <div style="font-size:11px;color:var(--ink-500);">2022-07761</div>
+                </td>
+                <td>
+                  <div style="font-size:13px;font-weight:500;">Database System Concepts</div>
+                  <div style="font-size:11px;color:var(--ink-500);">QA76.9 .D3</div>
+                </td>
+                <td style="color:var(--ink-500);font-size:13px;">Nov 10</td>
+                <td style="font-size:13px;">Nov 19–21</td>
+                <td><span class="pill pill-info">Active</span></td>
+                <td>
+                  <div style="display:flex;gap:6px;">
+                    <button class="btn btn-secondary" style="padding:4px 10px;font-size:11px;">View</button>
+                    <button class="btn btn-ghost" style="padding:4px 10px;font-size:11px;">Cancel</button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div style="font-weight:600;font-size:13px;">Ben A. Santos</div>
+                  <div style="font-size:11px;color:var(--ink-500);">2021-11230</div>
+                </td>
+                <td>
+                  <div style="font-size:13px;font-weight:500;">Operating System Concepts</div>
+                  <div style="font-size:11px;color:var(--ink-500);">QA76.76 .O63</div>
+                </td>
+                <td style="color:var(--ink-500);font-size:13px;">Nov 12</td>
+                <td style="font-size:13px;color:var(--warn);font-weight:600;">Nov 19 · Today</td>
+                <td><span class="pill pill-unavailable">Expiring</span></td>
+                <td>
+                  <div style="display:flex;gap:6px;">
+                    <button class="btn btn-secondary" style="padding:4px 10px;font-size:11px;">Extend</button>
+                    <button class="btn btn-ghost" style="padding:4px 10px;font-size:11px;">Release</button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
     </section>
 
     <!-- ========== CHATBOT ========== -->
