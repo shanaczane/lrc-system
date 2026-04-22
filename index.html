@@ -1,1431 +1,2853 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>DLSL Smart Library — AI-Powered LRC System</title>
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,800&family=Manrope:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DLSL Smart Library — AI-Powered LRC System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,800&family=Manrope:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
 
-<!-- Design tokens & base -->
-<link rel="stylesheet" href="css/tokens.css" />
-<!-- App shell: nav, sidebar, layout, responsive -->
-<link rel="stylesheet" href="css/layout.css" />
-<!-- Shared UI components: buttons, cards, stats, book cards, pills, tables -->
-<link rel="stylesheet" href="css/components.css" />
-<!-- Page-specific styles -->
-<link rel="stylesheet" href="css/pages/landing.css" />
-<link rel="stylesheet" href="css/pages/dashboard.css" />
-<link rel="stylesheet" href="css/pages/catalog.css" />
-<link rel="stylesheet" href="css/pages/book-detail.css" />
-<link rel="stylesheet" href="css/pages/reservations.css" />
-<link rel="stylesheet" href="css/pages/chatbot.css" />
-<link rel="stylesheet" href="css/pages/notifications.css" />
-</head>
-<body>
-
-<!-- ========================================
+    <!-- Design tokens & base -->
+    <link rel="stylesheet" href="css/tokens.css" />
+    <!-- App shell: nav, sidebar, layout, responsive -->
+    <link rel="stylesheet" href="css/layout.css" />
+    <!-- Shared UI components: buttons, cards, stats, book cards, pills, tables -->
+    <link rel="stylesheet" href="css/components.css" />
+    <!-- Page-specific styles -->
+    <link rel="stylesheet" href="css/pages/landing.css" />
+    <link rel="stylesheet" href="css/pages/dashboard.css" />
+    <link rel="stylesheet" href="css/pages/catalog.css" />
+    <link rel="stylesheet" href="css/pages/book-detail.css" />
+    <link rel="stylesheet" href="css/pages/reservations.css" />
+    <link rel="stylesheet" href="css/pages/chatbot.css" />
+    <link rel="stylesheet" href="css/pages/notifications.css" />
+  </head>
+  <body>
+    <!-- ========================================
      TOP NAVIGATION
      ======================================== -->
-<header class="topnav">
-  <div class="brand">
-    <div class="brand-mark">L</div>
-    <div class="brand-text">
-      <span>Smart Library</span>
-      <span class="small">De La Salle Lipa · LRC</span>
-    </div>
-  </div>
+    <header class="topnav">
+      <div class="brand">
+        <div class="brand-mark">L</div>
+        <div class="brand-text">
+          <span>Smart Library</span>
+          <span class="small">De La Salle Lipa · LRC</span>
+        </div>
+      </div>
 
-  <div class="nav-search">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-    <input type="text" placeholder="Search books, authors, subjects…" />
-  </div>
+      <div class="nav-search">
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <circle cx="11" cy="11" r="8" />
+          <path d="m21 21-4.3-4.3" />
+        </svg>
+        <input type="text" placeholder="Search books, authors, subjects…" />
+      </div>
 
-  <div class="nav-actions">
-    <div class="role-switcher" id="roleSwitcher">
-      <button class="role-btn active" data-role="student">Student / Faculty</button>
-      <button class="role-btn" data-role="librarian">Librarian</button>
-    </div>
+      <div class="nav-actions">
+        <div class="role-switcher" id="roleSwitcher">
+          <button class="role-btn active" data-role="student">
+            Student / Faculty
+          </button>
+          <button class="role-btn" data-role="librarian">Librarian</button>
+        </div>
 
-    <button class="icon-btn" onclick="navigate('notifications')" title="Notifications">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
-      <span class="badge"></span>
-    </button>
+        <button
+          class="icon-btn"
+          onclick="navigate('notifications')"
+          title="Notifications"
+        >
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" />
+            <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" />
+          </svg>
+          <span class="badge"></span>
+        </button>
 
-    <button class="user-chip">
-      <div class="avatar" id="userAvatar">SC</div>
-      <div class="name" id="userName">Shan Cruz</div>
-    </button>
-  </div>
-</header>
+        <button class="user-chip">
+          <div class="avatar" id="userAvatar">SC</div>
+          <div class="name" id="userName">Shan Cruz</div>
+        </button>
+      </div>
+    </header>
 
-<!-- ========================================
+    <!-- ========================================
      APP SHELL
      ======================================== -->
-<div class="app">
+    <div class="app">
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <!-- Student / Faculty Sidebar -->
+        <div class="sidebar-view" data-role="student">
+          <div class="side-section">
+            <div class="side-label">Main</div>
+            <button
+              class="side-link active"
+              onclick="navigate('dashboard')"
+              data-nav="dashboard"
+            >
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <rect x="3" y="3" width="7" height="9" />
+                <rect x="14" y="3" width="7" height="5" />
+                <rect x="14" y="12" width="7" height="9" />
+                <rect x="3" y="16" width="7" height="5" />
+              </svg>
+              Dashboard
+            </button>
+            <button
+              class="side-link"
+              onclick="navigate('catalog')"
+              data-nav="catalog"
+            >
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <circle cx="11" cy="11" r="8" />
+                <path d="m21 21-4.3-4.3" />
+              </svg>
+              Catalog
+            </button>
+            <button
+              class="side-link"
+              onclick="navigate('reservations')"
+              data-nav="reservations"
+            >
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <rect x="3" y="4" width="18" height="18" rx="2" />
+                <line x1="16" y1="2" x2="16" y2="6" />
+                <line x1="8" y1="2" x2="8" y2="6" />
+                <line x1="3" y1="10" x2="21" y2="10" />
+              </svg>
+              Reservations
+              <span class="count">3</span>
+            </button>
+            <button
+              class="side-link"
+              onclick="navigate('chatbot')"
+              data-nav="chatbot"
+            >
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
+                />
+              </svg>
+              Library Assistant
+            </button>
+            <button
+              class="side-link"
+              onclick="navigate('notifications')"
+              data-nav="notifications"
+            >
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" />
+                <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" />
+              </svg>
+              Notifications
+              <span class="count">5</span>
+            </button>
+          </div>
 
-  <!-- Sidebar -->
-  <aside class="sidebar">
+          <div class="side-section">
+            <div class="side-label">My Library</div>
+            <button class="side-link" onclick="navigate('book-detail')">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+                <path
+                  d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"
+                />
+              </svg>
+              Borrowed Books
+              <span class="count">4</span>
+            </button>
+            <button class="side-link">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <polygon
+                  points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                />
+              </svg>
+              Saved
+            </button>
+            <button class="side-link">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <circle cx="12" cy="12" r="10" />
+                <polyline points="12 6 12 12 16 14" />
+              </svg>
+              History
+            </button>
+          </div>
 
-    <!-- Student / Faculty Sidebar -->
-    <div class="sidebar-view" data-role="student">
-      <div class="side-section">
-        <div class="side-label">Main</div>
-        <button class="side-link active" onclick="navigate('dashboard')" data-nav="dashboard">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>
-          Dashboard
-        </button>
-        <button class="side-link" onclick="navigate('catalog')" data-nav="catalog">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          Catalog
-        </button>
-        <button class="side-link" onclick="navigate('reservations')" data-nav="reservations">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-          Reservations
-          <span class="count">3</span>
-        </button>
-        <button class="side-link" onclick="navigate('chatbot')" data-nav="chatbot">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-          Library Assistant
-        </button>
-        <button class="side-link" onclick="navigate('notifications')" data-nav="notifications">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
-          Notifications
-          <span class="count">5</span>
-        </button>
-      </div>
+          <div class="side-card">
+            <h4>Need help?</h4>
+            <p>Ask Lasallia, our library assistant, anything.</p>
+            <button onclick="navigate('chatbot')">Chat now →</button>
+          </div>
+        </div>
 
-      <div class="side-section">
-        <div class="side-label">My Library</div>
-        <button class="side-link" onclick="navigate('book-detail')">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-          Borrowed Books
-          <span class="count">4</span>
-        </button>
-        <button class="side-link">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          Saved
-        </button>
-        <button class="side-link">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          History
-        </button>
-      </div>
+        <!-- Librarian Sidebar -->
+        <div class="sidebar-view" data-role="librarian" style="display: none">
+          <div class="side-section">
+            <div class="side-label">Operations</div>
+            <button
+              class="side-link active"
+              onclick="navigate('dashboard')"
+              data-nav="dashboard"
+            >
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <rect x="3" y="3" width="7" height="9" />
+                <rect x="14" y="3" width="7" height="5" />
+                <rect x="14" y="12" width="7" height="9" />
+                <rect x="3" y="16" width="7" height="5" />
+              </svg>
+              Dashboard
+            </button>
+            <button
+              class="side-link"
+              onclick="navigate('catalog')"
+              data-nav="catalog"
+            >
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <circle cx="11" cy="11" r="8" />
+                <path d="m21 21-4.3-4.3" />
+              </svg>
+              Book Catalog
+            </button>
+            <button
+              class="side-link"
+              onclick="navigate('reservations')"
+              data-nav="reservations"
+            >
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <rect x="3" y="4" width="18" height="18" rx="2" />
+                <line x1="16" y1="2" x2="16" y2="6" />
+                <line x1="8" y1="2" x2="8" y2="6" />
+                <line x1="3" y1="10" x2="21" y2="10" />
+              </svg>
+              Reservations
+              <span class="count">38</span>
+            </button>
+            <button
+              class="side-link"
+              onclick="navigate('notifications')"
+              data-nav="notifications"
+            >
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" />
+                <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" />
+              </svg>
+              Notifications
+              <span class="count">12</span>
+            </button>
+          </div>
 
-      <div class="side-card">
-        <h4>Need help?</h4>
-        <p>Ask Lasallia, our library assistant, anything.</p>
-        <button onclick="navigate('chatbot')">Chat now →</button>
-      </div>
-    </div>
+          <div class="side-section">
+            <div class="side-label">Manage</div>
+            <button class="side-link">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <line x1="12" y1="5" x2="12" y2="19" />
+                <line x1="5" y1="12" x2="19" y2="12" />
+              </svg>
+              Add New Book
+            </button>
+            <button class="side-link">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                <circle cx="9" cy="7" r="4" />
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+              </svg>
+              Manage Users
+            </button>
+            <button class="side-link">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <circle cx="12" cy="12" r="10" />
+                <line x1="12" y1="8" x2="12" y2="12" />
+                <line x1="12" y1="16" x2="12.01" y2="16" />
+              </svg>
+              Overdue Books
+              <span
+                class="count"
+                style="background: var(--danger-bg); color: var(--danger)"
+                >17</span
+              >
+            </button>
+            <button class="side-link">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <line x1="18" y1="20" x2="18" y2="10" />
+                <line x1="12" y1="20" x2="12" y2="4" />
+                <line x1="6" y1="20" x2="6" y2="14" />
+              </svg>
+              Reports
+            </button>
+          </div>
 
-    <!-- Librarian Sidebar -->
-    <div class="sidebar-view" data-role="librarian" style="display:none;">
-      <div class="side-section">
-        <div class="side-label">Operations</div>
-        <button class="side-link active" onclick="navigate('dashboard')" data-nav="dashboard">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>
-          Dashboard
-        </button>
-        <button class="side-link" onclick="navigate('catalog')" data-nav="catalog">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          Book Catalog
-        </button>
-        <button class="side-link" onclick="navigate('reservations')" data-nav="reservations">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-          Reservations
-          <span class="count">38</span>
-        </button>
-        <button class="side-link" onclick="navigate('notifications')" data-nav="notifications">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
-          Notifications
-          <span class="count">12</span>
-        </button>
-      </div>
-
-      <div class="side-section">
-        <div class="side-label">Manage</div>
-        <button class="side-link">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-          Add New Book
-        </button>
-        <button class="side-link">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-          Manage Users
-        </button>
-        <button class="side-link">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-          Overdue Books
-          <span class="count" style="background:var(--danger-bg);color:var(--danger);">17</span>
-        </button>
-        <button class="side-link">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-          Reports
-        </button>
-      </div>
-
-      <div class="side-card" style="background:var(--green-800);">
-        <h4 style="color:white;">Quick Scanner</h4>
-        <p style="color:rgba(255,255,255,0.75);">Scan a book or student ID to process a transaction instantly.</p>
-        <button style="background:white;color:var(--green-800);border:none;">Activate →</button>
-      </div>
-    </div>
-
-  </aside>
-
-  <!-- Main content -->
-  <main class="main">
-
-    <!-- ========== LANDING / LOGIN ========== -->
-    <section class="page" id="page-landing">
-      <div class="landing">
-        <div class="landing-hero">
-          <div class="landing-content">
-            <div class="landing-eyebrow">
-              <span class="dot"></span>
-              AI-Powered Learning Resource Center
-            </div>
-            <h1 class="landing-title">A library that <em>knows</em> what you need.</h1>
-            <p class="landing-desc">
-              Real-time book availability, smart recommendations, and instant reservations — all from the De La Salle Lipa Learning Resource Center, reimagined for the way you actually study.
+          <div class="side-card" style="background: var(--green-800)">
+            <h4 style="color: white">Quick Scanner</h4>
+            <p style="color: rgba(255, 255, 255, 0.75)">
+              Scan a book or student ID to process a transaction instantly.
             </p>
-            <div class="landing-stats">
-              <div>
-                <div class="landing-stat-num">42K+</div>
-                <div class="landing-stat-lbl">Titles indexed</div>
-              </div>
-              <div>
-                <div class="landing-stat-num">3,800</div>
-                <div class="landing-stat-lbl">Active users</div>
-              </div>
-              <div>
-                <div class="landing-stat-num">24 / 7</div>
-                <div class="landing-stat-lbl">AI assistance</div>
-              </div>
-            </div>
-          </div>
-          <div class="landing-foot">© 2025 DE LA SALLE LIPA · LEARNING RESOURCE CENTER</div>
-        </div>
-
-        <div class="landing-form">
-          <div class="form-wrap">
-            <h2 class="form-title">Welcome back</h2>
-            <p class="form-sub">Sign in with your DLSL credentials to continue.</p>
-
-            <div class="role-select">
-              <button class="role-card active" data-login-role="student" onclick="selectLoginRole('student')">
-                <div class="role-card-icon">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
-                </div>
-                <div>
-                  <div class="role-card-name">Student / Faculty</div>
-                  <div class="role-card-dest">→ Student &amp; Faculty Dashboard</div>
-                </div>
-              </button>
-              <button class="role-card" data-login-role="librarian" onclick="selectLoginRole('librarian')">
-                <div class="role-card-icon">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-                </div>
-                <div>
-                  <div class="role-card-name">Librarian</div>
-                  <div class="role-card-dest">→ Librarian Dashboard</div>
-                </div>
-              </button>
-            </div>
-
-            <div class="field">
-              <label>School ID</label>
-              <input type="text" placeholder="e.g., 2022-12345" />
-            </div>
-            <div class="field">
-              <label>Password</label>
-              <input type="password" placeholder="••••••••" />
-            </div>
-
-            <div class="form-row">
-              <label class="check">
-                <input type="checkbox" /> Remember me
-              </label>
-              <a href="#">Forgot password?</a>
-            </div>
-
-            <button class="btn btn-primary btn-full" id="signInBtn" onclick="loginAndNavigate()">Sign in → Student &amp; Faculty Dashboard</button>
-
-            <div class="form-divide">or continue with</div>
-
-            <button class="alt-login">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-              Continue with DLSL Microsoft 365
+            <button
+              style="background: white; color: var(--green-800); border: none"
+            >
+              Activate →
             </button>
           </div>
         </div>
-      </div>
-    </section>
+      </aside>
 
-    <!-- ========== DASHBOARD (role-aware) ========== -->
-    <section class="page active" id="page-dashboard">
+      <!-- Main content -->
+      <main class="main">
+        <!-- ========== LANDING / LOGIN ========== -->
+        <section class="page" id="page-landing">
+          <div class="landing">
+            <div class="landing-hero">
+              <div class="landing-content">
+                <div class="landing-eyebrow">
+                  <span class="dot"></span>
+                  AI-Powered Learning Resource Center
+                </div>
+                <h1 class="landing-title">
+                  A library that <em>knows</em> what you need.
+                </h1>
+                <p class="landing-desc">
+                  Real-time book availability, smart recommendations, and
+                  instant reservations — all from the De La Salle Lipa Learning
+                  Resource Center, reimagined for the way you actually study.
+                </p>
+                <div class="landing-stats">
+                  <div>
+                    <div class="landing-stat-num">42K+</div>
+                    <div class="landing-stat-lbl">Titles indexed</div>
+                  </div>
+                  <div>
+                    <div class="landing-stat-num">3,800</div>
+                    <div class="landing-stat-lbl">Active users</div>
+                  </div>
+                  <div>
+                    <div class="landing-stat-num">24 / 7</div>
+                    <div class="landing-stat-lbl">AI assistance</div>
+                  </div>
+                </div>
+              </div>
+              <div class="landing-foot">
+                © 2025 DE LA SALLE LIPA · LEARNING RESOURCE CENTER
+              </div>
+            </div>
 
-      <!-- Student / Faculty dashboard -->
-      <div class="role-view" data-role="student">
-        <div class="page-header">
-          <div>
-            <h1 class="page-title">Good morning, <em>Shan</em>.</h1>
-            <p class="page-subtitle">You have 4 books out, 1 due in 2 days.</p>
+            <div class="landing-form">
+              <div class="form-wrap">
+                <h2 class="form-title">Welcome back</h2>
+                <p class="form-sub">
+                  Sign in with your DLSL credentials to continue.
+                </p>
+
+                <div class="role-select">
+                  <button
+                    class="role-card active"
+                    data-login-role="student"
+                    onclick="selectLoginRole('student')"
+                  >
+                    <div class="role-card-icon">
+                      <svg
+                        width="18"
+                        height="18"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                      >
+                        <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+                        <path d="M6 12v5c3 3 9 3 12 0v-5" />
+                      </svg>
+                    </div>
+                    <div>
+                      <div class="role-card-name">Student / Faculty</div>
+                      <div class="role-card-dest">
+                        → Student &amp; Faculty Dashboard
+                      </div>
+                    </div>
+                  </button>
+                  <button
+                    class="role-card"
+                    data-login-role="librarian"
+                    onclick="selectLoginRole('librarian')"
+                  >
+                    <div class="role-card-icon">
+                      <svg
+                        width="18"
+                        height="18"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                      >
+                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+                        <path
+                          d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"
+                        />
+                      </svg>
+                    </div>
+                    <div>
+                      <div class="role-card-name">Librarian</div>
+                      <div class="role-card-dest">→ Librarian Dashboard</div>
+                    </div>
+                  </button>
+                </div>
+
+                <div class="field">
+                  <label>School ID</label>
+                  <input type="text" placeholder="e.g., 2022-12345" />
+                </div>
+                <div class="field">
+                  <label>Password</label>
+                  <input type="password" placeholder="••••••••" />
+                </div>
+
+                <div class="form-row">
+                  <label class="check">
+                    <input type="checkbox" /> Remember me
+                  </label>
+                  <a href="#">Forgot password?</a>
+                </div>
+
+                <button
+                  class="btn btn-primary btn-full"
+                  id="signInBtn"
+                  onclick="loginAndNavigate()"
+                >
+                  Sign in → Student &amp; Faculty Dashboard
+                </button>
+
+                <div class="form-divide">or continue with</div>
+
+                <button class="alt-login">
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M2 12h20" />
+                    <path
+                      d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+                    />
+                  </svg>
+                  Continue with DLSL Microsoft 365
+                </button>
+              </div>
+            </div>
           </div>
-          <button class="btn btn-primary" onclick="navigate('catalog')">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-            Find a book
+        </section>
+
+        <!-- ========== DASHBOARD (role-aware) ========== -->
+        <section class="page active" id="page-dashboard">
+          <!-- Student / Faculty dashboard -->
+          <div class="role-view" data-role="student">
+            <div class="page-header">
+              <div>
+                <h1 class="page-title">Good morning, <em>Shan</em>.</h1>
+                <p class="page-subtitle">
+                  You have 4 books out, 1 due in 2 days.
+                </p>
+              </div>
+              <button class="btn btn-primary" onclick="navigate('catalog')">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <circle cx="11" cy="11" r="8" />
+                  <path d="m21 21-4.3-4.3" />
+                </svg>
+                Find a book
+              </button>
+            </div>
+
+            <div class="stat-grid">
+              <div class="stat">
+                <div class="stat-icon">
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+                    <path
+                      d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"
+                    />
+                  </svg>
+                </div>
+                <div class="stat-label">Borrowed</div>
+                <div class="stat-value">4</div>
+                <div class="stat-meta">Borrowing limit: 5 books</div>
+              </div>
+              <div class="stat warn">
+                <div class="stat-icon">
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <circle cx="12" cy="12" r="10" />
+                    <polyline points="12 6 12 12 16 14" />
+                  </svg>
+                </div>
+                <div class="stat-label">Due Soon</div>
+                <div class="stat-value">1</div>
+                <div class="stat-meta">"Clean Code" — Nov 21</div>
+              </div>
+              <div class="stat gold">
+                <div class="stat-icon">
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <rect x="3" y="4" width="18" height="18" rx="2" />
+                    <line x1="16" y1="2" x2="16" y2="6" />
+                    <line x1="8" y1="2" x2="8" y2="6" />
+                  </svg>
+                </div>
+                <div class="stat-label">Active Reservations</div>
+                <div class="stat-value">2</div>
+                <div class="stat-meta">1 ready for pickup</div>
+              </div>
+              <div class="stat">
+                <div class="stat-icon">
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <polygon
+                      points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                    />
+                  </svg>
+                </div>
+                <div class="stat-label">Recommended For You</div>
+                <div class="stat-value">12</div>
+                <div class="stat-meta">Based on your program</div>
+              </div>
+            </div>
+
+            <div class="two-col">
+              <div>
+                <div class="section-head">
+                  <h3 class="section-title">Currently Borrowed</h3>
+                  <a href="#" class="section-link">See all →</a>
+                </div>
+                <div class="card">
+                  <div class="list-row">
+                    <div class="row-cover v1"></div>
+                    <div class="row-content">
+                      <div class="row-title">
+                        Clean Code: A Handbook of Agile Software Craftsmanship
+                      </div>
+                      <div class="row-meta">
+                        Robert C. Martin · Borrowed Nov 7 ·
+                        <span style="color: var(--warn); font-weight: 600"
+                          >Due in 2 days</span
+                        >
+                      </div>
+                    </div>
+                    <button
+                      class="btn btn-secondary"
+                      style="padding: 6px 12px; font-size: 12px"
+                    >
+                      Renew
+                    </button>
+                  </div>
+                  <div class="list-row">
+                    <div class="row-cover v3"></div>
+                    <div class="row-content">
+                      <div class="row-title">
+                        Designing Data-Intensive Applications
+                      </div>
+                      <div class="row-meta">
+                        Martin Kleppmann · Borrowed Nov 11 · Due Nov 25
+                      </div>
+                    </div>
+                    <button
+                      class="btn btn-secondary"
+                      style="padding: 6px 12px; font-size: 12px"
+                    >
+                      Renew
+                    </button>
+                  </div>
+                  <div class="list-row">
+                    <div class="row-cover v2"></div>
+                    <div class="row-content">
+                      <div class="row-title">
+                        The Pragmatic Programmer, 20th Anniversary Edition
+                      </div>
+                      <div class="row-meta">
+                        David Thomas, Andrew Hunt · Borrowed Nov 13 · Due Nov 27
+                      </div>
+                    </div>
+                    <button
+                      class="btn btn-secondary"
+                      style="padding: 6px 12px; font-size: 12px"
+                    >
+                      Renew
+                    </button>
+                  </div>
+                  <div class="list-row">
+                    <div class="row-cover v4"></div>
+                    <div class="row-content">
+                      <div class="row-title">
+                        Computer Networks, 6th Edition
+                      </div>
+                      <div class="row-meta">
+                        Andrew Tanenbaum · Borrowed Nov 14 · Due Nov 28
+                      </div>
+                    </div>
+                    <button
+                      class="btn btn-secondary"
+                      style="padding: 6px 12px; font-size: 12px"
+                    >
+                      Renew
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <div class="section-head">
+                  <h3 class="section-title">Picked for You</h3>
+                </div>
+                <div class="card">
+                  <div class="list-row">
+                    <div class="row-cover v5"></div>
+                    <div class="row-content">
+                      <div class="row-title">
+                        Artificial Intelligence: A Modern Approach
+                      </div>
+                      <div class="row-meta">Russell · Norvig</div>
+                    </div>
+                  </div>
+                  <div class="list-row">
+                    <div class="row-cover v6"></div>
+                    <div class="row-content">
+                      <div class="row-title">Database System Concepts</div>
+                      <div class="row-meta">Silberschatz et al.</div>
+                    </div>
+                  </div>
+                  <div class="list-row">
+                    <div class="row-cover v3"></div>
+                    <div class="row-content">
+                      <div class="row-title">Operating System Concepts</div>
+                      <div class="row-meta">Silberschatz et al.</div>
+                    </div>
+                  </div>
+                  <a
+                    href="#"
+                    class="section-link"
+                    style="margin-top: 14px; display: inline-flex"
+                    >See more →</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Librarian dashboard -->
+          <div class="role-view" data-role="librarian" style="display: none">
+            <div class="page-header">
+              <div>
+                <h1 class="page-title">LRC <em>Operations</em></h1>
+                <p class="page-subtitle">
+                  Today is Wednesday, November 19, 2025
+                </p>
+              </div>
+              <div style="display: flex; gap: 10px">
+                <button class="btn btn-secondary">Export report</button>
+                <button class="btn btn-primary">
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <line x1="12" y1="5" x2="12" y2="19" />
+                    <line x1="5" y1="12" x2="19" y2="12" />
+                  </svg>
+                  Add new book
+                </button>
+              </div>
+            </div>
+
+            <div class="stat-grid">
+              <div class="stat">
+                <div class="stat-icon">
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+                    <path
+                      d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"
+                    />
+                  </svg>
+                </div>
+                <div class="stat-label">Total Collection</div>
+                <div class="stat-value">42,318</div>
+                <div class="stat-meta">
+                  <span class="up">↑ 124</span> this month
+                </div>
+              </div>
+              <div class="stat gold">
+                <div class="stat-icon">
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                    <circle cx="9" cy="7" r="4" />
+                  </svg>
+                </div>
+                <div class="stat-label">Active Borrowers</div>
+                <div class="stat-value">1,247</div>
+                <div class="stat-meta">
+                  <span class="up">↑ 8.2%</span> vs last week
+                </div>
+              </div>
+              <div class="stat warn">
+                <div class="stat-icon">
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <rect x="3" y="4" width="18" height="18" rx="2" />
+                    <line x1="16" y1="2" x2="16" y2="6" />
+                    <line x1="8" y1="2" x2="8" y2="6" />
+                  </svg>
+                </div>
+                <div class="stat-label">Pending Reservations</div>
+                <div class="stat-value">38</div>
+                <div class="stat-meta">12 ready for pickup</div>
+              </div>
+              <div class="stat danger">
+                <div class="stat-icon">
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <circle cx="12" cy="12" r="10" />
+                    <line x1="12" y1="8" x2="12" y2="12" />
+                    <line x1="12" y1="16" x2="12.01" y2="16" />
+                  </svg>
+                </div>
+                <div class="stat-label">Overdue</div>
+                <div class="stat-value">17</div>
+                <div class="stat-meta">3 over 7 days late</div>
+              </div>
+            </div>
+
+            <div class="two-col">
+              <div>
+                <div class="section-head">
+                  <h3 class="section-title">Recent Transactions</h3>
+                  <a href="#" class="section-link">View log →</a>
+                </div>
+                <div class="card" style="padding: 8px">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th>Time</th>
+                        <th>Type</th>
+                        <th>User</th>
+                        <th>Item</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td style="color: var(--ink-500)">10:42 AM</td>
+                        <td><span class="pill pill-info">Check-out</span></td>
+                        <td>Shan A. Cruz</td>
+                        <td>Clean Architecture</td>
+                        <td>
+                          <button
+                            class="btn-ghost"
+                            style="padding: 4px 8px; font-size: 12px"
+                          >
+                            · · ·
+                          </button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="color: var(--ink-500)">10:31 AM</td>
+                        <td><span class="pill pill-available">Return</span></td>
+                        <td>Khatrina Gonzales</td>
+                        <td>Database System Concepts</td>
+                        <td>
+                          <button
+                            class="btn-ghost"
+                            style="padding: 4px 8px; font-size: 12px"
+                          >
+                            · · ·
+                          </button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="color: var(--ink-500)">10:18 AM</td>
+                        <td><span class="pill pill-reserved">Reserve</span></td>
+                        <td>Jed F. Sayat</td>
+                        <td>The Pragmatic Programmer</td>
+                        <td>
+                          <button
+                            class="btn-ghost"
+                            style="padding: 4px 8px; font-size: 12px"
+                          >
+                            · · ·
+                          </button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="color: var(--ink-500)">09:55 AM</td>
+                        <td><span class="pill pill-info">Check-out</span></td>
+                        <td>Maria L. Reyes</td>
+                        <td>Computer Networks (6th Ed)</td>
+                        <td>
+                          <button
+                            class="btn-ghost"
+                            style="padding: 4px 8px; font-size: 12px"
+                          >
+                            · · ·
+                          </button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="color: var(--ink-500)">09:42 AM</td>
+                        <td><span class="pill pill-available">Return</span></td>
+                        <td>Paolo M. Aguilar</td>
+                        <td>Operating System Concepts</td>
+                        <td>
+                          <button
+                            class="btn-ghost"
+                            style="padding: 4px 8px; font-size: 12px"
+                          >
+                            · · ·
+                          </button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div>
+                <div class="section-head">
+                  <h3 class="section-title">Quick Scanner</h3>
+                </div>
+                <div class="qr-card">
+                  <div
+                    style="
+                      font-size: 12px;
+                      text-transform: uppercase;
+                      letter-spacing: 0.1em;
+                      opacity: 0.7;
+                    "
+                  >
+                    Process Transaction
+                  </div>
+                  <div class="qr-frame">
+                    <div class="qr-pattern"></div>
+                  </div>
+                  <h3
+                    style="
+                      font-family: var(--font-display);
+                      font-size: 18px;
+                      font-weight: 600;
+                      margin-bottom: 6px;
+                    "
+                  >
+                    Scan QR code
+                  </h3>
+                  <p
+                    style="font-size: 13px; opacity: 0.85; margin-bottom: 20px"
+                  >
+                    Point camera at book or user ID
+                  </p>
+                  <button
+                    class="btn btn-secondary"
+                    style="
+                      background: white;
+                      color: var(--green-800);
+                      border: none;
+                      width: 100%;
+                      justify-content: center;
+                    "
+                  >
+                    Activate scanner
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========== CATALOG ========== -->
+        <section class="page" id="page-catalog">
+          <div class="page-header">
+            <div>
+              <h1 class="page-title">Search the <em>collection</em></h1>
+              <p class="page-subtitle">
+                42,318 titles indexed · live availability
+              </p>
+            </div>
+          </div>
+
+          <div class="search-bar">
+            <input
+              type="text"
+              placeholder="Try 'algorithms', 'Tanenbaum', or 'machine learning'…"
+              value="clean code"
+            />
+            <button class="btn btn-primary">Search</button>
+          </div>
+
+          <div class="filters">
+            <button class="filter active">
+              All
+              <svg
+                width="12"
+                height="12"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
+            </button>
+            <button class="filter">
+              Subject: Computer Science
+              <svg
+                width="12"
+                height="12"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <polyline points="6 9 12 15 18 9" />
+              </svg>
+            </button>
+            <button class="filter">
+              Available now
+              <svg
+                width="12"
+                height="12"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <polyline points="6 9 12 15 18 9" />
+              </svg>
+            </button>
+            <button class="filter">
+              Year
+              <svg
+                width="12"
+                height="12"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <polyline points="6 9 12 15 18 9" />
+              </svg>
+            </button>
+            <button class="filter">
+              Format
+              <svg
+                width="12"
+                height="12"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <polyline points="6 9 12 15 18 9" />
+              </svg>
+            </button>
+            <button class="filter">
+              Language
+              <svg
+                width="12"
+                height="12"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <polyline points="6 9 12 15 18 9" />
+              </svg>
+            </button>
+          </div>
+
+          <div class="results-meta">
+            <span
+              ><strong style="color: var(--ink-900)">128 results</strong> for
+              "clean code" · sorted by relevance</span
+            >
+            <select
+              style="
+                border: 1px solid var(--ink-200);
+                padding: 6px 10px;
+                border-radius: 8px;
+                background: white;
+                font-size: 13px;
+              "
+            >
+              <option>Most relevant</option>
+              <option>Newest</option>
+              <option>A–Z</option>
+            </select>
+          </div>
+
+          <div class="book-grid">
+            <div class="book-card" onclick="navigate('book-detail')">
+              <div class="book-cover var-1">
+                <div class="book-cover-deco"></div>
+                <div class="book-cover-author">Robert C. Martin</div>
+                <div class="book-cover-title">Clean Code</div>
+              </div>
+              <div class="book-info">
+                <div class="book-title">
+                  Clean Code: A Handbook of Agile Software Craftsmanship
+                </div>
+                <div class="book-author">Robert C. Martin · 2008</div>
+                <div class="book-meta">
+                  <span class="book-call">QA76.76 M37</span>
+                  <span class="pill pill-available">2 of 5</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="book-card">
+              <div class="book-cover var-2">
+                <div class="book-cover-deco"></div>
+                <div class="book-cover-author">Martin · Coplien</div>
+                <div class="book-cover-title">Clean Architecture</div>
+              </div>
+              <div class="book-info">
+                <div class="book-title">
+                  Clean Architecture: A Craftsman's Guide
+                </div>
+                <div class="book-author">Robert C. Martin · 2017</div>
+                <div class="book-meta">
+                  <span class="book-call">QA76.76 M38</span>
+                  <span class="pill pill-available">3 of 4</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="book-card">
+              <div class="book-cover var-3">
+                <div class="book-cover-deco"></div>
+                <div class="book-cover-author">Martin Fowler</div>
+                <div class="book-cover-title">Refactoring</div>
+              </div>
+              <div class="book-info">
+                <div class="book-title">
+                  Refactoring: Improving the Design of Existing Code
+                </div>
+                <div class="book-author">Martin Fowler · 2018</div>
+                <div class="book-meta">
+                  <span class="book-call">QA76.76 F69</span>
+                  <span class="pill pill-reserved">1 of 3</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="book-card">
+              <div class="book-cover var-4">
+                <div class="book-cover-deco"></div>
+                <div class="book-cover-author">Thomas · Hunt</div>
+                <div class="book-cover-title">The Pragmatic Programmer</div>
+              </div>
+              <div class="book-info">
+                <div class="book-title">
+                  The Pragmatic Programmer, 20th Anniv.
+                </div>
+                <div class="book-author">Thomas, Hunt · 2019</div>
+                <div class="book-meta">
+                  <span class="book-call">QA76.6 T46</span>
+                  <span class="pill pill-available">4 of 5</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="book-card">
+              <div class="book-cover var-5">
+                <div class="book-cover-deco"></div>
+                <div class="book-cover-author">McConnell</div>
+                <div class="book-cover-title">Code Complete</div>
+              </div>
+              <div class="book-info">
+                <div class="book-title">
+                  Code Complete: A Practical Handbook
+                </div>
+                <div class="book-author">Steve McConnell · 2004</div>
+                <div class="book-meta">
+                  <span class="book-call">QA76.76 M39</span>
+                  <span class="pill pill-unavailable">0 of 2</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="book-card">
+              <div class="book-cover var-6">
+                <div class="book-cover-deco"></div>
+                <div class="book-cover-author">Kerievsky</div>
+                <div class="book-cover-title">Refactoring to Patterns</div>
+              </div>
+              <div class="book-info">
+                <div class="book-title">Refactoring to Patterns</div>
+                <div class="book-author">Joshua Kerievsky · 2004</div>
+                <div class="book-meta">
+                  <span class="book-call">QA76.76 K47</span>
+                  <span class="pill pill-available">1 of 1</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="book-card">
+              <div class="book-cover var-1">
+                <div class="book-cover-deco"></div>
+                <div class="book-cover-author">Brooks</div>
+                <div class="book-cover-title">The Mythical Man-Month</div>
+              </div>
+              <div class="book-info">
+                <div class="book-title">
+                  The Mythical Man-Month, Anniversary Ed
+                </div>
+                <div class="book-author">Frederick P. Brooks · 1995</div>
+                <div class="book-meta">
+                  <span class="book-call">QA76.6 B76</span>
+                  <span class="pill pill-available">2 of 2</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="book-card">
+              <div class="book-cover var-3">
+                <div class="book-cover-deco"></div>
+                <div class="book-cover-author">Beck</div>
+                <div class="book-cover-title">Test Driven Development</div>
+              </div>
+              <div class="book-info">
+                <div class="book-title">
+                  Test-Driven Development: By Example
+                </div>
+                <div class="book-author">Kent Beck · 2002</div>
+                <div class="book-meta">
+                  <span class="book-call">QA76.76 B43</span>
+                  <span class="pill pill-available">3 of 3</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========== BOOK DETAILS ========== -->
+        <section class="page" id="page-book-detail">
+          <button
+            class="btn btn-ghost"
+            onclick="navigate('catalog')"
+            style="margin-bottom: 24px"
+          >
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <polyline points="15 18 9 12 15 6" />
+            </svg>
+            Back to results
           </button>
-        </div>
 
-        <div class="stat-grid">
-          <div class="stat">
-            <div class="stat-icon">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          <div class="detail-grid">
+            <div class="detail-cover">
+              <div class="book-cover var-1">
+                <div class="book-cover-deco"></div>
+                <div class="book-cover-author">Robert C. Martin</div>
+                <div class="book-cover-title">Clean Code</div>
+              </div>
             </div>
-            <div class="stat-label">Borrowed</div>
-            <div class="stat-value">4</div>
-            <div class="stat-meta">Borrowing limit: 5 books</div>
-          </div>
-          <div class="stat warn">
-            <div class="stat-icon">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            </div>
-            <div class="stat-label">Due Soon</div>
-            <div class="stat-value">1</div>
-            <div class="stat-meta">"Clean Code" — Nov 21</div>
-          </div>
-          <div class="stat gold">
-            <div class="stat-icon">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/></svg>
-            </div>
-            <div class="stat-label">Active Reservations</div>
-            <div class="stat-value">2</div>
-            <div class="stat-meta">1 ready for pickup</div>
-          </div>
-          <div class="stat">
-            <div class="stat-icon">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            </div>
-            <div class="stat-label">Recommended For You</div>
-            <div class="stat-value">12</div>
-            <div class="stat-meta">Based on your program</div>
-          </div>
-        </div>
 
-        <div class="two-col">
-          <div>
-            <div class="section-head">
-              <h3 class="section-title">Currently Borrowed</h3>
-              <a href="#" class="section-link">See all →</a>
+            <div>
+              <span
+                class="pill pill-info"
+                style="margin-bottom: 12px; display: inline-flex"
+                >Software Engineering</span
+              >
+              <h1 class="page-title" style="margin-bottom: 8px">Clean Code</h1>
+              <p
+                style="
+                  font-size: 18px;
+                  color: var(--ink-700);
+                  margin-bottom: 8px;
+                "
+              >
+                A Handbook of Agile Software Craftsmanship
+              </p>
+              <p style="color: var(--ink-500); font-size: 14px">
+                By
+                <strong style="color: var(--ink-900)">Robert C. Martin</strong>
+                · Prentice Hall · 2008
+              </p>
+
+              <div class="detail-meta-list">
+                <div class="meta-item">
+                  <div class="key">Call Number</div>
+                  <div class="val mono">QA76.76 .M37 2008</div>
+                </div>
+                <div class="meta-item">
+                  <div class="key">ISBN</div>
+                  <div class="val mono">978-0-13-235088-4</div>
+                </div>
+                <div class="meta-item">
+                  <div class="key">Pages</div>
+                  <div class="val">464</div>
+                </div>
+                <div class="meta-item">
+                  <div class="key">Edition</div>
+                  <div class="val">1st Edition</div>
+                </div>
+                <div class="meta-item">
+                  <div class="key">Language</div>
+                  <div class="val">English</div>
+                </div>
+                <div class="meta-item">
+                  <div class="key">Loan Period</div>
+                  <div class="val">14 days</div>
+                </div>
+              </div>
+
+              <div class="availability-box">
+                <div class="availability-info">
+                  <strong>2 of 5 copies available</strong>
+                  <span>Reserve now to secure a copy. Avg wait: 2 days.</span>
+                </div>
+                <button
+                  class="btn btn-primary"
+                  onclick="navigate('reservations')"
+                >
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <rect x="3" y="4" width="18" height="18" rx="2" />
+                    <line x1="16" y1="2" x2="16" y2="6" />
+                    <line x1="8" y1="2" x2="8" y2="6" />
+                  </svg>
+                  Reserve copy
+                </button>
+              </div>
+
+              <div class="card" style="margin-bottom: 16px">
+                <h3
+                  class="section-title"
+                  style="font-size: 18px; margin-bottom: 12px"
+                >
+                  About this book
+                </h3>
+                <p
+                  style="
+                    color: var(--ink-700);
+                    font-size: 14px;
+                    line-height: 1.65;
+                  "
+                >
+                  Even bad code can function. But if code isn't clean, it can
+                  bring a development organization to its knees. Every year,
+                  countless hours and significant resources are lost because of
+                  poorly written code. This handbook presents a revolutionary
+                  paradigm with practical advice on writing readable,
+                  maintainable software — drawn from real-world examples by
+                  master craftsmen.
+                </p>
+              </div>
+
+              <div class="card">
+                <h3
+                  class="section-title"
+                  style="font-size: 18px; margin-bottom: 4px"
+                >
+                  Where to find it
+                </h3>
+                <p
+                  style="
+                    color: var(--ink-500);
+                    font-size: 13px;
+                    margin-bottom: 16px;
+                  "
+                >
+                  2nd Floor · Computer Science Section · Aisle B
+                </p>
+                <div class="shelf-locator">
+                  <div
+                    style="
+                      display: flex;
+                      justify-content: space-between;
+                      align-items: center;
+                    "
+                  >
+                    <div>
+                      <div
+                        style="
+                          font-size: 11px;
+                          text-transform: uppercase;
+                          letter-spacing: 0.08em;
+                          color: var(--ink-500);
+                          font-weight: 600;
+                        "
+                      >
+                        Shelf Location
+                      </div>
+                      <div
+                        style="
+                          font-family: var(--font-mono);
+                          font-size: 14px;
+                          font-weight: 600;
+                          margin-top: 2px;
+                        "
+                      >
+                        Aisle B · Shelf 4 · Position 12
+                      </div>
+                    </div>
+                    <span class="pill pill-available">In place</span>
+                  </div>
+                  <div class="shelf-map">
+                    <div class="shelf-cell"></div>
+                    <div class="shelf-cell"></div>
+                    <div class="shelf-cell"></div>
+                    <div class="shelf-cell"></div>
+                    <div class="shelf-cell target"></div>
+                    <div class="shelf-cell"></div>
+                    <div class="shelf-cell"></div>
+                    <div class="shelf-cell"></div>
+                    <div class="shelf-cell"></div>
+                    <div class="shelf-cell"></div>
+                    <div class="shelf-cell"></div>
+                    <div class="shelf-cell"></div>
+                    <div class="shelf-cell"></div>
+                    <div class="shelf-cell"></div>
+                    <div class="shelf-cell"></div>
+                    <div class="shelf-cell"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div style="margin-top: 32px">
+                <h3 class="section-title" style="margin-bottom: 16px">
+                  Readers also borrowed
+                </h3>
+                <div
+                  class="book-grid"
+                  style="
+                    grid-template-columns: repeat(
+                      auto-fill,
+                      minmax(160px, 1fr)
+                    );
+                  "
+                >
+                  <div class="book-card">
+                    <div class="book-cover var-2">
+                      <div class="book-cover-deco"></div>
+                      <div class="book-cover-author">Martin</div>
+                      <div class="book-cover-title">Clean Architecture</div>
+                    </div>
+                  </div>
+                  <div class="book-card">
+                    <div class="book-cover var-3">
+                      <div class="book-cover-deco"></div>
+                      <div class="book-cover-author">Fowler</div>
+                      <div class="book-cover-title">Refactoring</div>
+                    </div>
+                  </div>
+                  <div class="book-card">
+                    <div class="book-cover var-4">
+                      <div class="book-cover-deco"></div>
+                      <div class="book-cover-author">Thomas · Hunt</div>
+                      <div class="book-cover-title">
+                        The Pragmatic Programmer
+                      </div>
+                    </div>
+                  </div>
+                  <div class="book-card">
+                    <div class="book-cover var-5">
+                      <div class="book-cover-deco"></div>
+                      <div class="book-cover-author">McConnell</div>
+                      <div class="book-cover-title">Code Complete</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="card">
-              <div class="list-row">
-                <div class="row-cover v1"></div>
-                <div class="row-content">
-                  <div class="row-title">Clean Code: A Handbook of Agile Software Craftsmanship</div>
-                  <div class="row-meta">Robert C. Martin · Borrowed Nov 7 · <span style="color:var(--warn);font-weight:600;">Due in 2 days</span></div>
-                </div>
-                <button class="btn btn-secondary" style="padding:6px 12px;font-size:12px;">Renew</button>
+          </div>
+        </section>
+
+        <!-- ========== RESERVATIONS ========== -->
+        <section class="page" id="page-reservations">
+          <!-- Student / Faculty Reservations -->
+          <div class="role-view" data-role="student">
+            <div class="page-header">
+              <div>
+                <h1 class="page-title">My <em>Reservations</em></h1>
+                <p class="page-subtitle">Active and upcoming holds</p>
               </div>
-              <div class="list-row">
-                <div class="row-cover v3"></div>
-                <div class="row-content">
-                  <div class="row-title">Designing Data-Intensive Applications</div>
-                  <div class="row-meta">Martin Kleppmann · Borrowed Nov 11 · Due Nov 25</div>
+            </div>
+
+            <div class="card" style="margin-bottom: 24px">
+              <div
+                style="
+                  display: flex;
+                  align-items: center;
+                  gap: 14px;
+                  padding: 8px 0;
+                "
+              >
+                <div
+                  class="row-cover v3"
+                  style="width: 60px; height: 80px"
+                ></div>
+                <div style="flex: 1">
+                  <div
+                    style="
+                      font-weight: 700;
+                      font-family: var(--font-display);
+                      font-size: 18px;
+                    "
+                  >
+                    Designing Data-Intensive Applications
+                  </div>
+                  <div
+                    style="
+                      color: var(--ink-500);
+                      font-size: 13px;
+                      margin: 4px 0;
+                    "
+                  >
+                    Martin Kleppmann · Reserved Nov 14
+                  </div>
+                  <span class="pill pill-available">Ready for pickup</span>
                 </div>
-                <button class="btn btn-secondary" style="padding:6px 12px;font-size:12px;">Renew</button>
+                <div style="text-align: right">
+                  <div
+                    style="
+                      font-size: 11px;
+                      color: var(--ink-500);
+                      text-transform: uppercase;
+                      letter-spacing: 0.08em;
+                      font-weight: 600;
+                    "
+                  >
+                    Pickup by
+                  </div>
+                  <div
+                    style="
+                      font-family: var(--font-display);
+                      font-size: 22px;
+                      font-weight: 600;
+                    "
+                  >
+                    Nov 21
+                  </div>
+                  <button
+                    class="btn btn-primary"
+                    style="margin-top: 8px; padding: 6px 14px; font-size: 12px"
+                  >
+                    View QR
+                  </button>
+                </div>
               </div>
-              <div class="list-row">
-                <div class="row-cover v2"></div>
-                <div class="row-content">
-                  <div class="row-title">The Pragmatic Programmer, 20th Anniversary Edition</div>
-                  <div class="row-meta">David Thomas, Andrew Hunt · Borrowed Nov 13 · Due Nov 27</div>
+            </div>
+
+            <div class="card" style="margin-bottom: 32px">
+              <div
+                style="
+                  display: flex;
+                  align-items: center;
+                  gap: 14px;
+                  padding: 8px 0;
+                "
+              >
+                <div
+                  class="row-cover v5"
+                  style="width: 60px; height: 80px"
+                ></div>
+                <div style="flex: 1">
+                  <div
+                    style="
+                      font-weight: 700;
+                      font-family: var(--font-display);
+                      font-size: 18px;
+                    "
+                  >
+                    The Pragmatic Programmer
+                  </div>
+                  <div
+                    style="
+                      color: var(--ink-500);
+                      font-size: 13px;
+                      margin: 4px 0;
+                    "
+                  >
+                    Thomas, Hunt · Reserved Nov 15
+                  </div>
+                  <span class="pill pill-reserved">Pending confirmation</span>
                 </div>
-                <button class="btn btn-secondary" style="padding:6px 12px;font-size:12px;">Renew</button>
+                <div style="text-align: right">
+                  <div
+                    style="
+                      font-size: 11px;
+                      color: var(--ink-500);
+                      text-transform: uppercase;
+                      letter-spacing: 0.08em;
+                      font-weight: 600;
+                    "
+                  >
+                    Pickup window
+                  </div>
+                  <div
+                    style="
+                      font-family: var(--font-display);
+                      font-size: 18px;
+                      font-weight: 600;
+                    "
+                  >
+                    Nov 22–24
+                  </div>
+                  <button
+                    class="btn btn-secondary"
+                    style="margin-top: 8px; padding: 6px 14px; font-size: 12px"
+                  >
+                    Cancel hold
+                  </button>
+                </div>
               </div>
-              <div class="list-row">
-                <div class="row-cover v4"></div>
-                <div class="row-content">
-                  <div class="row-title">Computer Networks, 6th Edition</div>
-                  <div class="row-meta">Andrew Tanenbaum · Borrowed Nov 14 · Due Nov 28</div>
+            </div>
+
+            <h3 class="section-title" style="margin-bottom: 16px">
+              Reserve a new book
+            </h3>
+
+            <div class="stepper">
+              <div class="step done">
+                <div class="step-num">✓</div>
+                <div class="step-label">Select book</div>
+              </div>
+              <div class="step-line"></div>
+              <div class="step active">
+                <div class="step-num">2</div>
+                <div class="step-label">Pickup date</div>
+              </div>
+              <div class="step-line"></div>
+              <div class="step">
+                <div class="step-num">3</div>
+                <div class="step-label">Confirm</div>
+              </div>
+            </div>
+
+            <div class="reserve-grid">
+              <div class="date-picker">
+                <div class="calendar-head">
+                  <div class="month-name">November 2025</div>
+                  <div class="cal-nav">
+                    <button>
+                      <svg
+                        width="14"
+                        height="14"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                      >
+                        <polyline points="15 18 9 12 15 6" />
+                      </svg>
+                    </button>
+                    <button>
+                      <svg
+                        width="14"
+                        height="14"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                      >
+                        <polyline points="9 18 15 12 9 6" />
+                      </svg>
+                    </button>
+                  </div>
                 </div>
-                <button class="btn btn-secondary" style="padding:6px 12px;font-size:12px;">Renew</button>
+
+                <div class="cal-grid">
+                  <div class="cal-day-name">Sun</div>
+                  <div class="cal-day-name">Mon</div>
+                  <div class="cal-day-name">Tue</div>
+                  <div class="cal-day-name">Wed</div>
+                  <div class="cal-day-name">Thu</div>
+                  <div class="cal-day-name">Fri</div>
+                  <div class="cal-day-name">Sat</div>
+
+                  <div class="cal-day muted">26</div>
+                  <div class="cal-day muted">27</div>
+                  <div class="cal-day muted">28</div>
+                  <div class="cal-day muted">29</div>
+                  <div class="cal-day muted">30</div>
+                  <div class="cal-day muted">31</div>
+                  <div class="cal-day disabled">1</div>
+
+                  <div class="cal-day disabled">2</div>
+                  <div class="cal-day disabled">3</div>
+                  <div class="cal-day disabled">4</div>
+                  <div class="cal-day disabled">5</div>
+                  <div class="cal-day disabled">6</div>
+                  <div class="cal-day disabled">7</div>
+                  <div class="cal-day disabled">8</div>
+
+                  <div class="cal-day disabled">9</div>
+                  <div class="cal-day disabled">10</div>
+                  <div class="cal-day disabled">11</div>
+                  <div class="cal-day disabled">12</div>
+                  <div class="cal-day disabled">13</div>
+                  <div class="cal-day disabled">14</div>
+                  <div class="cal-day disabled">15</div>
+
+                  <div class="cal-day disabled">16</div>
+                  <div class="cal-day disabled">17</div>
+                  <div class="cal-day disabled">18</div>
+                  <div class="cal-day today">19</div>
+                  <div class="cal-day">20</div>
+                  <div class="cal-day">21</div>
+                  <div class="cal-day">22</div>
+
+                  <div class="cal-day">23</div>
+                  <div class="cal-day">24</div>
+                  <div class="cal-day selected">25</div>
+                  <div class="cal-day">26</div>
+                  <div class="cal-day">27</div>
+                  <div class="cal-day">28</div>
+                  <div class="cal-day">29</div>
+
+                  <div class="cal-day">30</div>
+                  <div class="cal-day muted">1</div>
+                  <div class="cal-day muted">2</div>
+                  <div class="cal-day muted">3</div>
+                  <div class="cal-day muted">4</div>
+                  <div class="cal-day muted">5</div>
+                  <div class="cal-day muted">6</div>
+                </div>
+
+                <div
+                  style="
+                    margin-top: 20px;
+                    padding-top: 20px;
+                    border-top: 1px solid var(--ink-100);
+                  "
+                >
+                  <div style="display: flex; gap: 8px; flex-wrap: wrap">
+                    <span class="pill pill-available">Available</span>
+                    <span class="pill pill-reserved">Limited</span>
+                    <span class="pill pill-unavailable">Closed</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="summary-box">
+                <h4
+                  style="
+                    font-family: var(--font-display);
+                    font-size: 18px;
+                    font-weight: 600;
+                    margin-bottom: 16px;
+                  "
+                >
+                  Reservation summary
+                </h4>
+                <div class="summary-line">
+                  <span class="key">Title</span
+                  ><span class="val">Clean Code</span>
+                </div>
+                <div class="summary-line">
+                  <span class="key">Pickup date</span
+                  ><span class="val">Nov 25, 2025</span>
+                </div>
+                <div class="summary-line">
+                  <span class="key">Loan period</span
+                  ><span class="val">14 days</span>
+                </div>
+                <div class="summary-line">
+                  <span class="key">Return by</span
+                  ><span class="val">Dec 9, 2025</span>
+                </div>
+                <div class="summary-line">
+                  <span class="key">Pickup location</span
+                  ><span class="val">Main LRC, 2nd Floor</span>
+                </div>
+                <button
+                  class="btn btn-primary btn-full"
+                  style="margin-top: 20px"
+                >
+                  Confirm reservation
+                </button>
+                <button class="btn btn-ghost btn-full" style="margin-top: 8px">
+                  Cancel
+                </button>
               </div>
             </div>
           </div>
 
-          <div>
-            <div class="section-head">
-              <h3 class="section-title">Picked for You</h3>
-            </div>
-            <div class="card">
-              <div class="list-row">
-                <div class="row-cover v5"></div>
-                <div class="row-content">
-                  <div class="row-title">Artificial Intelligence: A Modern Approach</div>
-                  <div class="row-meta">Russell · Norvig</div>
-                </div>
+          <!-- Librarian Reservations Management -->
+          <div class="role-view" data-role="librarian" style="display: none">
+            <div class="page-header">
+              <div>
+                <h1 class="page-title">Manage <em>Reservations</em></h1>
+                <p class="page-subtitle">
+                  Review, approve, and process all student reservation requests
+                </p>
               </div>
-              <div class="list-row">
-                <div class="row-cover v6"></div>
-                <div class="row-content">
-                  <div class="row-title">Database System Concepts</div>
-                  <div class="row-meta">Silberschatz et al.</div>
-                </div>
+              <div style="display: flex; gap: 10px">
+                <button class="btn btn-secondary">Export list</button>
+                <button class="btn btn-primary">
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                  Approve all pending
+                </button>
               </div>
-              <div class="list-row">
-                <div class="row-cover v3"></div>
-                <div class="row-content">
-                  <div class="row-title">Operating System Concepts</div>
-                  <div class="row-meta">Silberschatz et al.</div>
+            </div>
+
+            <div class="stat-grid" style="margin-bottom: 28px">
+              <div class="stat gold">
+                <div class="stat-icon">
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <circle cx="12" cy="12" r="10" />
+                    <polyline points="12 6 12 12 16 14" />
+                  </svg>
                 </div>
+                <div class="stat-label">Pending Approval</div>
+                <div class="stat-value">4</div>
+                <div class="stat-meta">Awaiting librarian review</div>
               </div>
-              <a href="#" class="section-link" style="margin-top:14px;display:inline-flex;">See more →</a>
+              <div class="stat">
+                <div class="stat-icon">
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                </div>
+                <div class="stat-label">Ready for Pickup</div>
+                <div class="stat-value">12</div>
+                <div class="stat-meta">At the main desk</div>
+              </div>
+              <div class="stat">
+                <div class="stat-icon">
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <rect x="3" y="4" width="18" height="18" rx="2" />
+                    <line x1="16" y1="2" x2="16" y2="6" />
+                    <line x1="8" y1="2" x2="8" y2="6" />
+                    <line x1="3" y1="10" x2="21" y2="10" />
+                  </svg>
+                </div>
+                <div class="stat-label">Active Holds</div>
+                <div class="stat-value">22</div>
+                <div class="stat-meta">Confirmed, not yet ready</div>
+              </div>
+              <div class="stat warn">
+                <div class="stat-icon">
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path
+                      d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"
+                    />
+                    <line x1="12" y1="9" x2="12" y2="13" />
+                    <line x1="12" y1="17" x2="12.01" y2="17" />
+                  </svg>
+                </div>
+                <div class="stat-label">Expiring Today</div>
+                <div class="stat-value">3</div>
+                <div class="stat-meta">Hold released if unclaimed</div>
+              </div>
             </div>
-          </div>
-        </div>
-      </div>
 
-      <!-- Librarian dashboard -->
-      <div class="role-view" data-role="librarian" style="display:none;">
-        <div class="page-header">
-          <div>
-            <h1 class="page-title">LRC <em>Operations</em></h1>
-            <p class="page-subtitle">Today is Wednesday, November 19, 2025</p>
-          </div>
-          <div style="display:flex;gap:10px;">
-            <button class="btn btn-secondary">Export report</button>
-            <button class="btn btn-primary">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-              Add new book
-            </button>
-          </div>
-        </div>
+            <div class="notif-tabs" style="margin-bottom: 20px">
+              <button class="notif-tab active">
+                All <span class="count">38</span>
+              </button>
+              <button class="notif-tab">
+                Pending <span class="count">4</span>
+              </button>
+              <button class="notif-tab">
+                Ready for Pickup <span class="count">12</span>
+              </button>
+              <button class="notif-tab">
+                Active <span class="count">22</span>
+              </button>
+              <button class="notif-tab">
+                Expiring <span class="count">3</span>
+              </button>
+            </div>
 
-        <div class="stat-grid">
-          <div class="stat">
-            <div class="stat-icon">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-            </div>
-            <div class="stat-label">Total Collection</div>
-            <div class="stat-value">42,318</div>
-            <div class="stat-meta"><span class="up">↑ 124</span> this month</div>
-          </div>
-          <div class="stat gold">
-            <div class="stat-icon">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
-            </div>
-            <div class="stat-label">Active Borrowers</div>
-            <div class="stat-value">1,247</div>
-            <div class="stat-meta"><span class="up">↑ 8.2%</span> vs last week</div>
-          </div>
-          <div class="stat warn">
-            <div class="stat-icon">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/></svg>
-            </div>
-            <div class="stat-label">Pending Reservations</div>
-            <div class="stat-value">38</div>
-            <div class="stat-meta">12 ready for pickup</div>
-          </div>
-          <div class="stat danger">
-            <div class="stat-icon">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-            </div>
-            <div class="stat-label">Overdue</div>
-            <div class="stat-value">17</div>
-            <div class="stat-meta">3 over 7 days late</div>
-          </div>
-        </div>
-
-        <div class="two-col">
-          <div>
-            <div class="section-head">
-              <h3 class="section-title">Recent Transactions</h3>
-              <a href="#" class="section-link">View log →</a>
-            </div>
-            <div class="card" style="padding:8px;">
+            <div class="card" style="padding: 8px">
               <table class="table">
                 <thead>
                   <tr>
-                    <th>Time</th>
-                    <th>Type</th>
-                    <th>User</th>
-                    <th>Item</th>
-                    <th></th>
+                    <th>Student</th>
+                    <th>Book</th>
+                    <th>Reserved</th>
+                    <th>Pickup Window</th>
+                    <th>Status</th>
+                    <th>Actions</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td style="color:var(--ink-500);">10:42 AM</td>
-                    <td><span class="pill pill-info">Check-out</span></td>
-                    <td>Shan A. Cruz</td>
-                    <td>Clean Architecture</td>
-                    <td><button class="btn-ghost" style="padding:4px 8px;font-size:12px;">·  ·  ·</button></td>
+                    <td>
+                      <div style="font-weight: 600; font-size: 13px">
+                        Shan A. Cruz
+                      </div>
+                      <div style="font-size: 11px; color: var(--ink-500)">
+                        2022-10234
+                      </div>
+                    </td>
+                    <td>
+                      <div style="font-size: 13px; font-weight: 500">
+                        Clean Code
+                      </div>
+                      <div style="font-size: 11px; color: var(--ink-500)">
+                        QA76.76 .M37
+                      </div>
+                    </td>
+                    <td style="color: var(--ink-500); font-size: 13px">
+                      Nov 14
+                    </td>
+                    <td style="font-size: 13px">Nov 25–27</td>
+                    <td><span class="pill pill-reserved">Pending</span></td>
+                    <td>
+                      <div style="display: flex; gap: 6px">
+                        <button
+                          class="btn btn-primary"
+                          style="padding: 4px 10px; font-size: 11px"
+                        >
+                          Approve
+                        </button>
+                        <button
+                          class="btn btn-ghost"
+                          style="padding: 4px 10px; font-size: 11px"
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                    </td>
                   </tr>
                   <tr>
-                    <td style="color:var(--ink-500);">10:31 AM</td>
-                    <td><span class="pill pill-available">Return</span></td>
-                    <td>Khatrina Gonzales</td>
-                    <td>Database System Concepts</td>
-                    <td><button class="btn-ghost" style="padding:4px 8px;font-size:12px;">·  ·  ·</button></td>
+                    <td>
+                      <div style="font-weight: 600; font-size: 13px">
+                        Khatrina Gonzales
+                      </div>
+                      <div style="font-size: 11px; color: var(--ink-500)">
+                        2021-08891
+                      </div>
+                    </td>
+                    <td>
+                      <div style="font-size: 13px; font-weight: 500">
+                        AI: A Modern Approach
+                      </div>
+                      <div style="font-size: 11px; color: var(--ink-500)">
+                        Q335 .R86
+                      </div>
+                    </td>
+                    <td style="color: var(--ink-500); font-size: 13px">
+                      Nov 15
+                    </td>
+                    <td style="font-size: 13px">Nov 25–27</td>
+                    <td><span class="pill pill-reserved">Pending</span></td>
+                    <td>
+                      <div style="display: flex; gap: 6px">
+                        <button
+                          class="btn btn-primary"
+                          style="padding: 4px 10px; font-size: 11px"
+                        >
+                          Approve
+                        </button>
+                        <button
+                          class="btn btn-ghost"
+                          style="padding: 4px 10px; font-size: 11px"
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                    </td>
                   </tr>
                   <tr>
-                    <td style="color:var(--ink-500);">10:18 AM</td>
-                    <td><span class="pill pill-reserved">Reserve</span></td>
-                    <td>Jed F. Sayat</td>
-                    <td>The Pragmatic Programmer</td>
-                    <td><button class="btn-ghost" style="padding:4px 8px;font-size:12px;">·  ·  ·</button></td>
+                    <td>
+                      <div style="font-weight: 600; font-size: 13px">
+                        Jed F. Sayat
+                      </div>
+                      <div style="font-size: 11px; color: var(--ink-500)">
+                        2023-00412
+                      </div>
+                    </td>
+                    <td>
+                      <div style="font-size: 13px; font-weight: 500">
+                        The Pragmatic Programmer
+                      </div>
+                      <div style="font-size: 11px; color: var(--ink-500)">
+                        QA76.6 .T46
+                      </div>
+                    </td>
+                    <td style="color: var(--ink-500); font-size: 13px">
+                      Nov 14
+                    </td>
+                    <td style="font-size: 13px">Nov 22–24</td>
+                    <td>
+                      <span class="pill pill-available">Ready for Pickup</span>
+                    </td>
+                    <td>
+                      <div style="display: flex; gap: 6px">
+                        <button
+                          class="btn btn-secondary"
+                          style="padding: 4px 10px; font-size: 11px"
+                        >
+                          Mark Claimed
+                        </button>
+                        <button
+                          class="btn btn-ghost"
+                          style="padding: 4px 10px; font-size: 11px"
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                    </td>
                   </tr>
                   <tr>
-                    <td style="color:var(--ink-500);">09:55 AM</td>
-                    <td><span class="pill pill-info">Check-out</span></td>
-                    <td>Maria L. Reyes</td>
-                    <td>Computer Networks (6th Ed)</td>
-                    <td><button class="btn-ghost" style="padding:4px 8px;font-size:12px;">·  ·  ·</button></td>
+                    <td>
+                      <div style="font-weight: 600; font-size: 13px">
+                        Paolo M. Aguilar
+                      </div>
+                      <div style="font-size: 11px; color: var(--ink-500)">
+                        2020-15503
+                      </div>
+                    </td>
+                    <td>
+                      <div style="font-size: 13px; font-weight: 500">
+                        Refactoring
+                      </div>
+                      <div style="font-size: 11px; color: var(--ink-500)">
+                        QA76.76 .F69
+                      </div>
+                    </td>
+                    <td style="color: var(--ink-500); font-size: 13px">
+                      Nov 13
+                    </td>
+                    <td style="font-size: 13px">Nov 22–24</td>
+                    <td>
+                      <span class="pill pill-available">Ready for Pickup</span>
+                    </td>
+                    <td>
+                      <div style="display: flex; gap: 6px">
+                        <button
+                          class="btn btn-secondary"
+                          style="padding: 4px 10px; font-size: 11px"
+                        >
+                          Mark Claimed
+                        </button>
+                        <button
+                          class="btn btn-ghost"
+                          style="padding: 4px 10px; font-size: 11px"
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                    </td>
                   </tr>
                   <tr>
-                    <td style="color:var(--ink-500);">09:42 AM</td>
-                    <td><span class="pill pill-available">Return</span></td>
-                    <td>Paolo M. Aguilar</td>
-                    <td>Operating System Concepts</td>
-                    <td><button class="btn-ghost" style="padding:4px 8px;font-size:12px;">·  ·  ·</button></td>
+                    <td>
+                      <div style="font-weight: 600; font-size: 13px">
+                        Maria L. Santos
+                      </div>
+                      <div style="font-size: 11px; color: var(--ink-500)">
+                        2022-07761
+                      </div>
+                    </td>
+                    <td>
+                      <div style="font-size: 13px; font-weight: 500">
+                        Database System Concepts
+                      </div>
+                      <div style="font-size: 11px; color: var(--ink-500)">
+                        QA76.9 .D3
+                      </div>
+                    </td>
+                    <td style="color: var(--ink-500); font-size: 13px">
+                      Nov 10
+                    </td>
+                    <td style="font-size: 13px">Nov 19–21</td>
+                    <td><span class="pill pill-info">Active</span></td>
+                    <td>
+                      <div style="display: flex; gap: 6px">
+                        <button
+                          class="btn btn-secondary"
+                          style="padding: 4px 10px; font-size: 11px"
+                        >
+                          View
+                        </button>
+                        <button
+                          class="btn btn-ghost"
+                          style="padding: 4px 10px; font-size: 11px"
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div style="font-weight: 600; font-size: 13px">
+                        Ben A. Santos
+                      </div>
+                      <div style="font-size: 11px; color: var(--ink-500)">
+                        2021-11230
+                      </div>
+                    </td>
+                    <td>
+                      <div style="font-size: 13px; font-weight: 500">
+                        Operating System Concepts
+                      </div>
+                      <div style="font-size: 11px; color: var(--ink-500)">
+                        QA76.76 .O63
+                      </div>
+                    </td>
+                    <td style="color: var(--ink-500); font-size: 13px">
+                      Nov 12
+                    </td>
+                    <td
+                      style="
+                        font-size: 13px;
+                        color: var(--warn);
+                        font-weight: 600;
+                      "
+                    >
+                      Nov 19 · Today
+                    </td>
+                    <td><span class="pill pill-unavailable">Expiring</span></td>
+                    <td>
+                      <div style="display: flex; gap: 6px">
+                        <button
+                          class="btn btn-secondary"
+                          style="padding: 4px 10px; font-size: 11px"
+                        >
+                          Extend
+                        </button>
+                        <button
+                          class="btn btn-ghost"
+                          style="padding: 4px 10px; font-size: 11px"
+                        >
+                          Release
+                        </button>
+                      </div>
+                    </td>
                   </tr>
                 </tbody>
               </table>
             </div>
           </div>
+        </section>
 
-          <div>
-            <div class="section-head">
-              <h3 class="section-title">Quick Scanner</h3>
-            </div>
-            <div class="qr-card">
-              <div style="font-size:12px;text-transform:uppercase;letter-spacing:0.1em;opacity:0.7;">Process Transaction</div>
-              <div class="qr-frame">
-                <div class="qr-pattern"></div>
+        <!-- ========== CHATBOT ========== -->
+        <section class="page" id="page-chatbot">
+          <!-- Student / Faculty Chatbot -->
+          <div class="role-view" data-role="student">
+            <div class="page-header">
+              <div>
+                <h1 class="page-title">Meet <em>Lasallia</em></h1>
+                <p class="page-subtitle">
+                  Your library assistant — 24/7 help with books, policies, and
+                  reservations
+                </p>
               </div>
-              <h3 style="font-family:var(--font-display);font-size:18px;font-weight:600;margin-bottom:6px;">Scan QR code</h3>
-              <p style="font-size:13px;opacity:0.85;margin-bottom:20px;">Point camera at book or user ID</p>
-              <button class="btn btn-secondary" style="background:white;color:var(--green-800);border:none;width:100%;justify-content:center;">Activate scanner</button>
             </div>
-          </div>
-        </div>
-      </div>
 
-    </section>
-
-    <!-- ========== CATALOG ========== -->
-    <section class="page" id="page-catalog">
-      <div class="page-header">
-        <div>
-          <h1 class="page-title">Search the <em>collection</em></h1>
-          <p class="page-subtitle">42,318 titles indexed · live availability</p>
-        </div>
-      </div>
-
-      <div class="search-bar">
-        <input type="text" placeholder="Try 'algorithms', 'Tanenbaum', or 'machine learning'…" value="clean code" />
-        <button class="btn btn-primary">Search</button>
-      </div>
-
-      <div class="filters">
-        <button class="filter active">All <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
-        <button class="filter">
-          Subject: Computer Science
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-        <button class="filter">
-          Available now
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-        <button class="filter">
-          Year
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-        <button class="filter">
-          Format
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-        <button class="filter">
-          Language
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-      </div>
-
-      <div class="results-meta">
-        <span><strong style="color:var(--ink-900);">128 results</strong> for "clean code" · sorted by relevance</span>
-        <select style="border:1px solid var(--ink-200);padding:6px 10px;border-radius:8px;background:white;font-size:13px;">
-          <option>Most relevant</option>
-          <option>Newest</option>
-          <option>A–Z</option>
-        </select>
-      </div>
-
-      <div class="book-grid">
-        <div class="book-card" onclick="navigate('book-detail')">
-          <div class="book-cover var-1">
-            <div class="book-cover-deco"></div>
-            <div class="book-cover-author">Robert C. Martin</div>
-            <div class="book-cover-title">Clean Code</div>
-          </div>
-          <div class="book-info">
-            <div class="book-title">Clean Code: A Handbook of Agile Software Craftsmanship</div>
-            <div class="book-author">Robert C. Martin · 2008</div>
-            <div class="book-meta">
-              <span class="book-call">QA76.76 M37</span>
-              <span class="pill pill-available">2 of 5</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="book-card">
-          <div class="book-cover var-2">
-            <div class="book-cover-deco"></div>
-            <div class="book-cover-author">Martin · Coplien</div>
-            <div class="book-cover-title">Clean Architecture</div>
-          </div>
-          <div class="book-info">
-            <div class="book-title">Clean Architecture: A Craftsman's Guide</div>
-            <div class="book-author">Robert C. Martin · 2017</div>
-            <div class="book-meta">
-              <span class="book-call">QA76.76 M38</span>
-              <span class="pill pill-available">3 of 4</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="book-card">
-          <div class="book-cover var-3">
-            <div class="book-cover-deco"></div>
-            <div class="book-cover-author">Martin Fowler</div>
-            <div class="book-cover-title">Refactoring</div>
-          </div>
-          <div class="book-info">
-            <div class="book-title">Refactoring: Improving the Design of Existing Code</div>
-            <div class="book-author">Martin Fowler · 2018</div>
-            <div class="book-meta">
-              <span class="book-call">QA76.76 F69</span>
-              <span class="pill pill-reserved">1 of 3</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="book-card">
-          <div class="book-cover var-4">
-            <div class="book-cover-deco"></div>
-            <div class="book-cover-author">Thomas · Hunt</div>
-            <div class="book-cover-title">The Pragmatic Programmer</div>
-          </div>
-          <div class="book-info">
-            <div class="book-title">The Pragmatic Programmer, 20th Anniv.</div>
-            <div class="book-author">Thomas, Hunt · 2019</div>
-            <div class="book-meta">
-              <span class="book-call">QA76.6 T46</span>
-              <span class="pill pill-available">4 of 5</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="book-card">
-          <div class="book-cover var-5">
-            <div class="book-cover-deco"></div>
-            <div class="book-cover-author">McConnell</div>
-            <div class="book-cover-title">Code Complete</div>
-          </div>
-          <div class="book-info">
-            <div class="book-title">Code Complete: A Practical Handbook</div>
-            <div class="book-author">Steve McConnell · 2004</div>
-            <div class="book-meta">
-              <span class="book-call">QA76.76 M39</span>
-              <span class="pill pill-unavailable">0 of 2</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="book-card">
-          <div class="book-cover var-6">
-            <div class="book-cover-deco"></div>
-            <div class="book-cover-author">Kerievsky</div>
-            <div class="book-cover-title">Refactoring to Patterns</div>
-          </div>
-          <div class="book-info">
-            <div class="book-title">Refactoring to Patterns</div>
-            <div class="book-author">Joshua Kerievsky · 2004</div>
-            <div class="book-meta">
-              <span class="book-call">QA76.76 K47</span>
-              <span class="pill pill-available">1 of 1</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="book-card">
-          <div class="book-cover var-1">
-            <div class="book-cover-deco"></div>
-            <div class="book-cover-author">Brooks</div>
-            <div class="book-cover-title">The Mythical Man-Month</div>
-          </div>
-          <div class="book-info">
-            <div class="book-title">The Mythical Man-Month, Anniversary Ed</div>
-            <div class="book-author">Frederick P. Brooks · 1995</div>
-            <div class="book-meta">
-              <span class="book-call">QA76.6 B76</span>
-              <span class="pill pill-available">2 of 2</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="book-card">
-          <div class="book-cover var-3">
-            <div class="book-cover-deco"></div>
-            <div class="book-cover-author">Beck</div>
-            <div class="book-cover-title">Test Driven Development</div>
-          </div>
-          <div class="book-info">
-            <div class="book-title">Test-Driven Development: By Example</div>
-            <div class="book-author">Kent Beck · 2002</div>
-            <div class="book-meta">
-              <span class="book-call">QA76.76 B43</span>
-              <span class="pill pill-available">3 of 3</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ========== BOOK DETAILS ========== -->
-    <section class="page" id="page-book-detail">
-      <button class="btn btn-ghost" onclick="navigate('catalog')" style="margin-bottom:24px;">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
-        Back to results
-      </button>
-
-      <div class="detail-grid">
-        <div class="detail-cover">
-          <div class="book-cover var-1">
-            <div class="book-cover-deco"></div>
-            <div class="book-cover-author">Robert C. Martin</div>
-            <div class="book-cover-title">Clean Code</div>
-          </div>
-        </div>
-
-        <div>
-          <span class="pill pill-info" style="margin-bottom:12px;display:inline-flex;">Software Engineering</span>
-          <h1 class="page-title" style="margin-bottom:8px;">Clean Code</h1>
-          <p style="font-size:18px;color:var(--ink-700);margin-bottom:8px;">A Handbook of Agile Software Craftsmanship</p>
-          <p style="color:var(--ink-500);font-size:14px;">By <strong style="color:var(--ink-900);">Robert C. Martin</strong> · Prentice Hall · 2008</p>
-
-          <div class="detail-meta-list">
-            <div class="meta-item">
-              <div class="key">Call Number</div>
-              <div class="val mono">QA76.76 .M37 2008</div>
-            </div>
-            <div class="meta-item">
-              <div class="key">ISBN</div>
-              <div class="val mono">978-0-13-235088-4</div>
-            </div>
-            <div class="meta-item">
-              <div class="key">Pages</div>
-              <div class="val">464</div>
-            </div>
-            <div class="meta-item">
-              <div class="key">Edition</div>
-              <div class="val">1st Edition</div>
-            </div>
-            <div class="meta-item">
-              <div class="key">Language</div>
-              <div class="val">English</div>
-            </div>
-            <div class="meta-item">
-              <div class="key">Loan Period</div>
-              <div class="val">14 days</div>
-            </div>
-          </div>
-
-          <div class="availability-box">
-            <div class="availability-info">
-              <strong>2 of 5 copies available</strong>
-              <span>Reserve now to secure a copy. Avg wait: 2 days.</span>
-            </div>
-            <button class="btn btn-primary" onclick="navigate('reservations')">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/></svg>
-              Reserve copy
-            </button>
-          </div>
-
-          <div class="card" style="margin-bottom:16px;">
-            <h3 class="section-title" style="font-size:18px;margin-bottom:12px;">About this book</h3>
-            <p style="color:var(--ink-700);font-size:14px;line-height:1.65;">
-              Even bad code can function. But if code isn't clean, it can bring a development organization to its knees. Every year, countless hours and significant resources are lost because of poorly written code. This handbook presents a revolutionary paradigm with practical advice on writing readable, maintainable software — drawn from real-world examples by master craftsmen.
-            </p>
-          </div>
-
-          <div class="card">
-            <h3 class="section-title" style="font-size:18px;margin-bottom:4px;">Where to find it</h3>
-            <p style="color:var(--ink-500);font-size:13px;margin-bottom:16px;">2nd Floor · Computer Science Section · Aisle B</p>
-            <div class="shelf-locator">
-              <div style="display:flex;justify-content:space-between;align-items:center;">
-                <div>
-                  <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:var(--ink-500);font-weight:600;">Shelf Location</div>
-                  <div style="font-family:var(--font-mono);font-size:14px;font-weight:600;margin-top:2px;">Aisle B · Shelf 4 · Position 12</div>
+            <div class="chat-container">
+              <aside class="chat-sidebar">
+                <h4>Recent chats</h4>
+                <div class="chat-history-item active">
+                  <div class="chat-history-title">
+                    Looking for clean code book
+                  </div>
+                  <div class="chat-history-time">Just now</div>
                 </div>
-                <span class="pill pill-available">In place</span>
-              </div>
-              <div class="shelf-map">
-                <div class="shelf-cell"></div><div class="shelf-cell"></div><div class="shelf-cell"></div>
-                <div class="shelf-cell"></div><div class="shelf-cell target"></div><div class="shelf-cell"></div>
-                <div class="shelf-cell"></div><div class="shelf-cell"></div>
-                <div class="shelf-cell"></div><div class="shelf-cell"></div><div class="shelf-cell"></div>
-                <div class="shelf-cell"></div><div class="shelf-cell"></div><div class="shelf-cell"></div>
-                <div class="shelf-cell"></div><div class="shelf-cell"></div>
-              </div>
-            </div>
-          </div>
-
-          <div style="margin-top:32px;">
-            <h3 class="section-title" style="margin-bottom:16px;">Readers also borrowed</h3>
-            <div class="book-grid" style="grid-template-columns:repeat(auto-fill,minmax(160px,1fr));">
-              <div class="book-card">
-                <div class="book-cover var-2"><div class="book-cover-deco"></div><div class="book-cover-author">Martin</div><div class="book-cover-title">Clean Architecture</div></div>
-              </div>
-              <div class="book-card">
-                <div class="book-cover var-3"><div class="book-cover-deco"></div><div class="book-cover-author">Fowler</div><div class="book-cover-title">Refactoring</div></div>
-              </div>
-              <div class="book-card">
-                <div class="book-cover var-4"><div class="book-cover-deco"></div><div class="book-cover-author">Thomas · Hunt</div><div class="book-cover-title">The Pragmatic Programmer</div></div>
-              </div>
-              <div class="book-card">
-                <div class="book-cover var-5"><div class="book-cover-deco"></div><div class="book-cover-author">McConnell</div><div class="book-cover-title">Code Complete</div></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ========== RESERVATIONS ========== -->
-    <section class="page" id="page-reservations">
-
-      <!-- Student / Faculty Reservations -->
-      <div class="role-view" data-role="student">
-        <div class="page-header">
-          <div>
-            <h1 class="page-title">My <em>Reservations</em></h1>
-            <p class="page-subtitle">Active and upcoming holds</p>
-          </div>
-        </div>
-
-        <div class="card" style="margin-bottom:24px;">
-          <div style="display:flex;align-items:center;gap:14px;padding:8px 0;">
-            <div class="row-cover v3" style="width:60px;height:80px;"></div>
-            <div style="flex:1;">
-              <div style="font-weight:700;font-family:var(--font-display);font-size:18px;">Designing Data-Intensive Applications</div>
-              <div style="color:var(--ink-500);font-size:13px;margin:4px 0;">Martin Kleppmann · Reserved Nov 14</div>
-              <span class="pill pill-available">Ready for pickup</span>
-            </div>
-            <div style="text-align:right;">
-              <div style="font-size:11px;color:var(--ink-500);text-transform:uppercase;letter-spacing:0.08em;font-weight:600;">Pickup by</div>
-              <div style="font-family:var(--font-display);font-size:22px;font-weight:600;">Nov 21</div>
-              <button class="btn btn-primary" style="margin-top:8px;padding:6px 14px;font-size:12px;">View QR</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="card" style="margin-bottom:32px;">
-          <div style="display:flex;align-items:center;gap:14px;padding:8px 0;">
-            <div class="row-cover v5" style="width:60px;height:80px;"></div>
-            <div style="flex:1;">
-              <div style="font-weight:700;font-family:var(--font-display);font-size:18px;">The Pragmatic Programmer</div>
-              <div style="color:var(--ink-500);font-size:13px;margin:4px 0;">Thomas, Hunt · Reserved Nov 15</div>
-              <span class="pill pill-reserved">Pending confirmation</span>
-            </div>
-            <div style="text-align:right;">
-              <div style="font-size:11px;color:var(--ink-500);text-transform:uppercase;letter-spacing:0.08em;font-weight:600;">Pickup window</div>
-              <div style="font-family:var(--font-display);font-size:18px;font-weight:600;">Nov 22–24</div>
-              <button class="btn btn-secondary" style="margin-top:8px;padding:6px 14px;font-size:12px;">Cancel hold</button>
-            </div>
-          </div>
-        </div>
-
-        <h3 class="section-title" style="margin-bottom:16px;">Reserve a new book</h3>
-
-        <div class="stepper">
-          <div class="step done">
-            <div class="step-num">✓</div>
-            <div class="step-label">Select book</div>
-          </div>
-          <div class="step-line"></div>
-          <div class="step active">
-            <div class="step-num">2</div>
-            <div class="step-label">Pickup date</div>
-          </div>
-          <div class="step-line"></div>
-          <div class="step">
-            <div class="step-num">3</div>
-            <div class="step-label">Confirm</div>
-          </div>
-        </div>
-
-        <div class="reserve-grid">
-          <div class="date-picker">
-            <div class="calendar-head">
-              <div class="month-name">November 2025</div>
-              <div class="cal-nav">
-                <button><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg></button>
-                <button><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
-              </div>
-            </div>
-
-            <div class="cal-grid">
-              <div class="cal-day-name">Sun</div><div class="cal-day-name">Mon</div><div class="cal-day-name">Tue</div>
-              <div class="cal-day-name">Wed</div><div class="cal-day-name">Thu</div><div class="cal-day-name">Fri</div><div class="cal-day-name">Sat</div>
-
-              <div class="cal-day muted">26</div><div class="cal-day muted">27</div><div class="cal-day muted">28</div>
-              <div class="cal-day muted">29</div><div class="cal-day muted">30</div><div class="cal-day muted">31</div><div class="cal-day disabled">1</div>
-
-              <div class="cal-day disabled">2</div><div class="cal-day disabled">3</div><div class="cal-day disabled">4</div>
-              <div class="cal-day disabled">5</div><div class="cal-day disabled">6</div><div class="cal-day disabled">7</div><div class="cal-day disabled">8</div>
-
-              <div class="cal-day disabled">9</div><div class="cal-day disabled">10</div><div class="cal-day disabled">11</div>
-              <div class="cal-day disabled">12</div><div class="cal-day disabled">13</div><div class="cal-day disabled">14</div><div class="cal-day disabled">15</div>
-
-              <div class="cal-day disabled">16</div><div class="cal-day disabled">17</div><div class="cal-day disabled">18</div>
-              <div class="cal-day today">19</div><div class="cal-day">20</div><div class="cal-day">21</div><div class="cal-day">22</div>
-
-              <div class="cal-day">23</div><div class="cal-day">24</div><div class="cal-day selected">25</div>
-              <div class="cal-day">26</div><div class="cal-day">27</div><div class="cal-day">28</div><div class="cal-day">29</div>
-
-              <div class="cal-day">30</div><div class="cal-day muted">1</div><div class="cal-day muted">2</div>
-              <div class="cal-day muted">3</div><div class="cal-day muted">4</div><div class="cal-day muted">5</div><div class="cal-day muted">6</div>
-            </div>
-
-            <div style="margin-top:20px;padding-top:20px;border-top:1px solid var(--ink-100);">
-              <div style="display:flex;gap:8px;flex-wrap:wrap;">
-                <span class="pill pill-available">Available</span>
-                <span class="pill pill-reserved">Limited</span>
-                <span class="pill pill-unavailable">Closed</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="summary-box">
-            <h4 style="font-family:var(--font-display);font-size:18px;font-weight:600;margin-bottom:16px;">Reservation summary</h4>
-            <div class="summary-line"><span class="key">Title</span><span class="val">Clean Code</span></div>
-            <div class="summary-line"><span class="key">Pickup date</span><span class="val">Nov 25, 2025</span></div>
-            <div class="summary-line"><span class="key">Loan period</span><span class="val">14 days</span></div>
-            <div class="summary-line"><span class="key">Return by</span><span class="val">Dec 9, 2025</span></div>
-            <div class="summary-line"><span class="key">Pickup location</span><span class="val">Main LRC, 2nd Floor</span></div>
-            <button class="btn btn-primary btn-full" style="margin-top:20px;">Confirm reservation</button>
-            <button class="btn btn-ghost btn-full" style="margin-top:8px;">Cancel</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Librarian Reservations Management -->
-      <div class="role-view" data-role="librarian" style="display:none;">
-        <div class="page-header">
-          <div>
-            <h1 class="page-title">Manage <em>Reservations</em></h1>
-            <p class="page-subtitle">Review, approve, and process all student reservation requests</p>
-          </div>
-          <div style="display:flex;gap:10px;">
-            <button class="btn btn-secondary">Export list</button>
-            <button class="btn btn-primary">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-              Approve all pending
-            </button>
-          </div>
-        </div>
-
-        <div class="stat-grid" style="margin-bottom:28px;">
-          <div class="stat gold">
-            <div class="stat-icon">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            </div>
-            <div class="stat-label">Pending Approval</div>
-            <div class="stat-value">4</div>
-            <div class="stat-meta">Awaiting librarian review</div>
-          </div>
-          <div class="stat">
-            <div class="stat-icon">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-            </div>
-            <div class="stat-label">Ready for Pickup</div>
-            <div class="stat-value">12</div>
-            <div class="stat-meta">At the main desk</div>
-          </div>
-          <div class="stat">
-            <div class="stat-icon">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-            </div>
-            <div class="stat-label">Active Holds</div>
-            <div class="stat-value">22</div>
-            <div class="stat-meta">Confirmed, not yet ready</div>
-          </div>
-          <div class="stat warn">
-            <div class="stat-icon">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-            </div>
-            <div class="stat-label">Expiring Today</div>
-            <div class="stat-value">3</div>
-            <div class="stat-meta">Hold released if unclaimed</div>
-          </div>
-        </div>
-
-        <div class="notif-tabs" style="margin-bottom:20px;">
-          <button class="notif-tab active">All <span class="count">38</span></button>
-          <button class="notif-tab">Pending <span class="count">4</span></button>
-          <button class="notif-tab">Ready for Pickup <span class="count">12</span></button>
-          <button class="notif-tab">Active <span class="count">22</span></button>
-          <button class="notif-tab">Expiring <span class="count">3</span></button>
-        </div>
-
-        <div class="card" style="padding:8px;">
-          <table class="table">
-            <thead>
-              <tr>
-                <th>Student</th>
-                <th>Book</th>
-                <th>Reserved</th>
-                <th>Pickup Window</th>
-                <th>Status</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  <div style="font-weight:600;font-size:13px;">Shan A. Cruz</div>
-                  <div style="font-size:11px;color:var(--ink-500);">2022-10234</div>
-                </td>
-                <td>
-                  <div style="font-size:13px;font-weight:500;">Clean Code</div>
-                  <div style="font-size:11px;color:var(--ink-500);">QA76.76 .M37</div>
-                </td>
-                <td style="color:var(--ink-500);font-size:13px;">Nov 14</td>
-                <td style="font-size:13px;">Nov 25–27</td>
-                <td><span class="pill pill-reserved">Pending</span></td>
-                <td>
-                  <div style="display:flex;gap:6px;">
-                    <button class="btn btn-primary" style="padding:4px 10px;font-size:11px;">Approve</button>
-                    <button class="btn btn-ghost" style="padding:4px 10px;font-size:11px;">Cancel</button>
+                <div class="chat-history-item">
+                  <div class="chat-history-title">Renewal policy questions</div>
+                  <div class="chat-history-time">Yesterday</div>
+                </div>
+                <div class="chat-history-item">
+                  <div class="chat-history-title">
+                    Reserving for thesis research
                   </div>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <div style="font-weight:600;font-size:13px;">Khatrina Gonzales</div>
-                  <div style="font-size:11px;color:var(--ink-500);">2021-08891</div>
-                </td>
-                <td>
-                  <div style="font-size:13px;font-weight:500;">AI: A Modern Approach</div>
-                  <div style="font-size:11px;color:var(--ink-500);">Q335 .R86</div>
-                </td>
-                <td style="color:var(--ink-500);font-size:13px;">Nov 15</td>
-                <td style="font-size:13px;">Nov 25–27</td>
-                <td><span class="pill pill-reserved">Pending</span></td>
-                <td>
-                  <div style="display:flex;gap:6px;">
-                    <button class="btn btn-primary" style="padding:4px 10px;font-size:11px;">Approve</button>
-                    <button class="btn btn-ghost" style="padding:4px 10px;font-size:11px;">Cancel</button>
+                  <div class="chat-history-time">Nov 14</div>
+                </div>
+                <div class="chat-history-item">
+                  <div class="chat-history-title">How to access e-journals</div>
+                  <div class="chat-history-time">Nov 11</div>
+                </div>
+
+                <h4 style="margin-top: 24px">Suggestions</h4>
+                <div class="chat-history-item">
+                  <div class="chat-history-title">Find a book by topic</div>
+                </div>
+                <div class="chat-history-item">
+                  <div class="chat-history-title">Check overdue fines</div>
+                </div>
+                <div class="chat-history-item">
+                  <div class="chat-history-title">Library hours today</div>
+                </div>
+              </aside>
+
+              <div class="chat-main">
+                <div class="chat-header">
+                  <div class="chat-bot-avatar">
+                    <svg
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <rect x="3" y="11" width="18" height="10" rx="2" />
+                      <circle cx="12" cy="5" r="2" />
+                      <path d="M12 7v4" />
+                      <line x1="8" y1="16" x2="8" y2="16" />
+                      <line x1="16" y1="16" x2="16" y2="16" />
+                    </svg>
                   </div>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <div style="font-weight:600;font-size:13px;">Jed F. Sayat</div>
-                  <div style="font-size:11px;color:var(--ink-500);">2023-00412</div>
-                </td>
-                <td>
-                  <div style="font-size:13px;font-weight:500;">The Pragmatic Programmer</div>
-                  <div style="font-size:11px;color:var(--ink-500);">QA76.6 .T46</div>
-                </td>
-                <td style="color:var(--ink-500);font-size:13px;">Nov 14</td>
-                <td style="font-size:13px;">Nov 22–24</td>
-                <td><span class="pill pill-available">Ready for Pickup</span></td>
-                <td>
-                  <div style="display:flex;gap:6px;">
-                    <button class="btn btn-secondary" style="padding:4px 10px;font-size:11px;">Mark Claimed</button>
-                    <button class="btn btn-ghost" style="padding:4px 10px;font-size:11px;">Cancel</button>
+                  <div class="chat-bot-info">
+                    <h4>Lasallia</h4>
+                    <p>● Online · Hybrid AI + librarian support</p>
                   </div>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <div style="font-weight:600;font-size:13px;">Paolo M. Aguilar</div>
-                  <div style="font-size:11px;color:var(--ink-500);">2020-15503</div>
-                </td>
-                <td>
-                  <div style="font-size:13px;font-weight:500;">Refactoring</div>
-                  <div style="font-size:11px;color:var(--ink-500);">QA76.76 .F69</div>
-                </td>
-                <td style="color:var(--ink-500);font-size:13px;">Nov 13</td>
-                <td style="font-size:13px;">Nov 22–24</td>
-                <td><span class="pill pill-available">Ready for Pickup</span></td>
-                <td>
-                  <div style="display:flex;gap:6px;">
-                    <button class="btn btn-secondary" style="padding:4px 10px;font-size:11px;">Mark Claimed</button>
-                    <button class="btn btn-ghost" style="padding:4px 10px;font-size:11px;">Cancel</button>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <div style="font-weight:600;font-size:13px;">Maria L. Santos</div>
-                  <div style="font-size:11px;color:var(--ink-500);">2022-07761</div>
-                </td>
-                <td>
-                  <div style="font-size:13px;font-weight:500;">Database System Concepts</div>
-                  <div style="font-size:11px;color:var(--ink-500);">QA76.9 .D3</div>
-                </td>
-                <td style="color:var(--ink-500);font-size:13px;">Nov 10</td>
-                <td style="font-size:13px;">Nov 19–21</td>
-                <td><span class="pill pill-info">Active</span></td>
-                <td>
-                  <div style="display:flex;gap:6px;">
-                    <button class="btn btn-secondary" style="padding:4px 10px;font-size:11px;">View</button>
-                    <button class="btn btn-ghost" style="padding:4px 10px;font-size:11px;">Cancel</button>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <div style="font-weight:600;font-size:13px;">Ben A. Santos</div>
-                  <div style="font-size:11px;color:var(--ink-500);">2021-11230</div>
-                </td>
-                <td>
-                  <div style="font-size:13px;font-weight:500;">Operating System Concepts</div>
-                  <div style="font-size:11px;color:var(--ink-500);">QA76.76 .O63</div>
-                </td>
-                <td style="color:var(--ink-500);font-size:13px;">Nov 12</td>
-                <td style="font-size:13px;color:var(--warn);font-weight:600;">Nov 19 · Today</td>
-                <td><span class="pill pill-unavailable">Expiring</span></td>
-                <td>
-                  <div style="display:flex;gap:6px;">
-                    <button class="btn btn-secondary" style="padding:4px 10px;font-size:11px;">Extend</button>
-                    <button class="btn btn-ghost" style="padding:4px 10px;font-size:11px;">Release</button>
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
+                </div>
 
-    </section>
-
-    <!-- ========== CHATBOT ========== -->
-    <section class="page" id="page-chatbot">
-      <!-- Student / Faculty Chatbot -->
-      <div class="role-view" data-role="student">
-        <div class="page-header">
-          <div>
-            <h1 class="page-title">Meet <em>Lasallia</em></h1>
-            <p class="page-subtitle">Your library assistant — 24/7 help with books, policies, and reservations</p>
-          </div>
-        </div>
-
-      <div class="chat-container">
-        <aside class="chat-sidebar">
-          <h4>Recent chats</h4>
-          <div class="chat-history-item active">
-            <div class="chat-history-title">Looking for clean code book</div>
-            <div class="chat-history-time">Just now</div>
-          </div>
-          <div class="chat-history-item">
-            <div class="chat-history-title">Renewal policy questions</div>
-            <div class="chat-history-time">Yesterday</div>
-          </div>
-          <div class="chat-history-item">
-            <div class="chat-history-title">Reserving for thesis research</div>
-            <div class="chat-history-time">Nov 14</div>
-          </div>
-          <div class="chat-history-item">
-            <div class="chat-history-title">How to access e-journals</div>
-            <div class="chat-history-time">Nov 11</div>
-          </div>
-
-          <h4 style="margin-top:24px;">Suggestions</h4>
-          <div class="chat-history-item"><div class="chat-history-title">Find a book by topic</div></div>
-          <div class="chat-history-item"><div class="chat-history-title">Check overdue fines</div></div>
-          <div class="chat-history-item"><div class="chat-history-title">Library hours today</div></div>
-        </aside>
-
-        <div class="chat-main">
-          <div class="chat-header">
-            <div class="chat-bot-avatar">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4"/><line x1="8" y1="16" x2="8" y2="16"/><line x1="16" y1="16" x2="16" y2="16"/></svg>
-            </div>
-            <div class="chat-bot-info">
-              <h4>Lasallia</h4>
-              <p>● Online · Hybrid AI + librarian support</p>
-            </div>
-          </div>
-
-          <div class="chat-messages">
-            <div class="msg bot">
-              <div class="msg-bubble">
-                Hi Shan! I'm Lasallia, the LRC's library assistant. I can help you find books, check availability, reserve titles, or answer questions about library policies. What are you looking for today?
-              </div>
-              <div class="msg-time">10:32 AM</div>
-            </div>
-            <div class="msg user">
-              <div class="msg-bubble">Do you have Robert Martin's Clean Code? I need it for my software engineering class.</div>
-              <div class="msg-time">10:33 AM</div>
-            </div>
-            <div class="msg bot">
-              <div class="msg-bubble">
-                Yes! We have <strong>5 copies</strong> of <em>Clean Code</em> by Robert C. Martin. <strong>2 are currently available</strong> on the 2nd Floor, Aisle B.
-                <div class="msg-cards">
-                  <div class="msg-book-card" onclick="navigate('book-detail')">
-                    <div class="row-cover v1"></div>
-                    <div class="row-content">
-                      <div class="row-title">Clean Code (2008)</div>
-                      <div class="row-meta">QA76.76 .M37 · 2 of 5 available</div>
+                <div class="chat-messages">
+                  <div class="msg bot">
+                    <div class="msg-bubble">
+                      Hi Shan! I'm Lasallia, the LRC's library assistant. I can
+                      help you find books, check availability, reserve titles,
+                      or answer questions about library policies. What are you
+                      looking for today?
                     </div>
-                    <span class="pill pill-available">Available</span>
+                    <div class="msg-time">10:32 AM</div>
+                  </div>
+                  <div class="msg user">
+                    <div class="msg-bubble">
+                      Do you have Robert Martin's Clean Code? I need it for my
+                      software engineering class.
+                    </div>
+                    <div class="msg-time">10:33 AM</div>
+                  </div>
+                  <div class="msg bot">
+                    <div class="msg-bubble">
+                      Yes! We have <strong>5 copies</strong> of
+                      <em>Clean Code</em> by Robert C. Martin.
+                      <strong>2 are currently available</strong> on the 2nd
+                      Floor, Aisle B.
+                      <div class="msg-cards">
+                        <div
+                          class="msg-book-card"
+                          onclick="navigate('book-detail')"
+                        >
+                          <div class="row-cover v1"></div>
+                          <div class="row-content">
+                            <div class="row-title">Clean Code (2008)</div>
+                            <div class="row-meta">
+                              QA76.76 .M37 · 2 of 5 available
+                            </div>
+                          </div>
+                          <span class="pill pill-available">Available</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="msg-time">10:33 AM</div>
+                  </div>
+                  <div class="msg user">
+                    <div class="msg-bubble">
+                      Can I reserve one for tomorrow?
+                    </div>
+                    <div class="msg-time">10:34 AM</div>
+                  </div>
+                  <div class="msg bot">
+                    <div class="msg-bubble">
+                      Absolutely. I can hold a copy for pickup tomorrow (Nov 20)
+                      at the Main LRC desk. The reservation will be valid until
+                      end of day. Want me to set it up?
+                    </div>
+                    <div class="msg-time">10:34 AM</div>
                   </div>
                 </div>
+
+                <div class="quick-replies">
+                  <button class="quick-reply">Yes, reserve it</button>
+                  <button class="quick-reply">Pick a different date</button>
+                  <button class="quick-reply">Show similar books</button>
+                  <button class="quick-reply">No thanks</button>
+                </div>
+
+                <div class="chat-input">
+                  <input type="text" placeholder="Ask Lasallia anything…" />
+                  <button class="chat-send">
+                    <svg
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <line x1="22" y1="2" x2="11" y2="13" />
+                      <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                    </svg>
+                  </button>
+                </div>
               </div>
-              <div class="msg-time">10:33 AM</div>
             </div>
-            <div class="msg user">
-              <div class="msg-bubble">Can I reserve one for tomorrow?</div>
-              <div class="msg-time">10:34 AM</div>
-            </div>
-            <div class="msg bot">
-              <div class="msg-bubble">
-                Absolutely. I can hold a copy for pickup tomorrow (Nov 20) at the Main LRC desk. The reservation will be valid until end of day. Want me to set it up?
+          </div>
+        </section>
+
+        <!-- ========== NOTIFICATIONS ========== -->
+        <section class="page" id="page-notifications">
+          <!-- Student / Faculty Notifications -->
+          <div class="role-view" data-role="student">
+            <div class="page-header">
+              <div>
+                <h1 class="page-title">Notifications</h1>
+                <p class="page-subtitle">
+                  Updates on your reservations, due dates, and recommendations
+                </p>
               </div>
-              <div class="msg-time">10:34 AM</div>
+              <button class="btn btn-secondary">Mark all as read</button>
+            </div>
+
+            <div class="notif-tabs">
+              <button class="notif-tab active">
+                All <span class="count">5</span>
+              </button>
+              <button class="notif-tab">
+                Due dates <span class="count">2</span>
+              </button>
+              <button class="notif-tab">
+                Reservations <span class="count">2</span>
+              </button>
+              <button class="notif-tab">
+                Recommendations <span class="count">1</span>
+              </button>
+            </div>
+
+            <div class="notif-group">
+              <div class="notif-date">Today · November 19</div>
+              <div class="notif-item unread">
+                <div class="notif-icon avail">
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                </div>
+                <div class="notif-body">
+                  <div class="notif-title">
+                    Your reserved book is ready for pickup
+                  </div>
+                  <div class="notif-text">
+                    "Designing Data-Intensive Applications" by Martin Kleppmann
+                    is waiting at the Main LRC desk. Pick up by Nov 21.
+                  </div>
+                </div>
+                <div class="notif-time">10:42 AM</div>
+                <div class="notif-unread-dot"></div>
+              </div>
+              <div class="notif-item unread">
+                <div class="notif-icon due">
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <circle cx="12" cy="12" r="10" />
+                    <polyline points="12 6 12 12 16 14" />
+                  </svg>
+                </div>
+                <div class="notif-body">
+                  <div class="notif-title">Book due in 2 days</div>
+                  <div class="notif-text">
+                    "Clean Code" — return by Nov 21 to avoid late fees. Renew
+                    online if you need more time.
+                  </div>
+                </div>
+                <div class="notif-time">8:00 AM</div>
+                <div class="notif-unread-dot"></div>
+              </div>
+            </div>
+
+            <div class="notif-group">
+              <div class="notif-date">Yesterday · November 18</div>
+              <div class="notif-item unread">
+                <div class="notif-icon reserve">
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <rect x="3" y="4" width="18" height="18" rx="2" />
+                    <line x1="16" y1="2" x2="16" y2="6" />
+                    <line x1="8" y1="2" x2="8" y2="6" />
+                  </svg>
+                </div>
+                <div class="notif-body">
+                  <div class="notif-title">Reservation confirmed</div>
+                  <div class="notif-text">
+                    Your reservation for "The Pragmatic Programmer" has been
+                    confirmed. Pickup window: Nov 22–24.
+                  </div>
+                </div>
+                <div class="notif-time">3:20 PM</div>
+                <div class="notif-unread-dot"></div>
+              </div>
+              <div class="notif-item">
+                <div class="notif-icon">
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <polygon
+                      points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                    />
+                  </svg>
+                </div>
+                <div class="notif-body">
+                  <div class="notif-title">
+                    3 new books match your interests
+                  </div>
+                  <div class="notif-text">
+                    Based on your borrowing history, you might enjoy: "Building
+                    Microservices", "System Design Interview Vol. 2", and
+                    "Software Engineering at Google".
+                  </div>
+                </div>
+                <div class="notif-time">11:15 AM</div>
+              </div>
+            </div>
+
+            <div class="notif-group">
+              <div class="notif-date">November 14</div>
+              <div class="notif-item">
+                <div class="notif-icon avail">
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                </div>
+                <div class="notif-body">
+                  <div class="notif-title">
+                    A book on your watchlist is now available
+                  </div>
+                  <div class="notif-text">
+                    "Computer Networks" (6th Edition) by Andrew Tanenbaum is
+                    back on the shelf. Reserve it before it's borrowed again.
+                  </div>
+                </div>
+                <div class="notif-time">2:08 PM</div>
+              </div>
             </div>
           </div>
 
-          <div class="quick-replies">
-            <button class="quick-reply">Yes, reserve it</button>
-            <button class="quick-reply">Pick a different date</button>
-            <button class="quick-reply">Show similar books</button>
-            <button class="quick-reply">No thanks</button>
+          <!-- Librarian Notifications -->
+          <div class="role-view" data-role="librarian" style="display: none">
+            <div class="page-header">
+              <div>
+                <h1 class="page-title">Notifications</h1>
+                <p class="page-subtitle">
+                  Operational alerts — overdue items, reservations, and system
+                  activity
+                </p>
+              </div>
+              <button class="btn btn-secondary">Mark all as read</button>
+            </div>
+
+            <div class="notif-tabs">
+              <button class="notif-tab active">
+                All <span class="count">12</span>
+              </button>
+              <button class="notif-tab">
+                Overdue <span class="count">5</span>
+              </button>
+              <button class="notif-tab">
+                Reservations <span class="count">4</span>
+              </button>
+              <button class="notif-tab">
+                Returns <span class="count">2</span>
+              </button>
+              <button class="notif-tab">
+                System <span class="count">1</span>
+              </button>
+            </div>
+
+            <div class="notif-group">
+              <div class="notif-date">Today · November 19</div>
+              <div class="notif-item unread">
+                <div class="notif-icon over">
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <circle cx="12" cy="12" r="10" />
+                    <line x1="12" y1="8" x2="12" y2="12" />
+                    <line x1="12" y1="16" x2="12.01" y2="16" />
+                  </svg>
+                </div>
+                <div class="notif-body">
+                  <div class="notif-title">
+                    3 borrowers are over 7 days overdue
+                  </div>
+                  <div class="notif-text">
+                    Paolo Aguilar (2 books), Khatrina Gonzales (1 book), and Jed
+                    Sayat (1 book) have items past their due date by 7+ days.
+                    Consider sending a follow-up notice.
+                  </div>
+                </div>
+                <div class="notif-time">9:00 AM</div>
+                <div class="notif-unread-dot"></div>
+              </div>
+              <div class="notif-item unread">
+                <div class="notif-icon reserve">
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <rect x="3" y="4" width="18" height="18" rx="2" />
+                    <line x1="16" y1="2" x2="16" y2="6" />
+                    <line x1="8" y1="2" x2="8" y2="6" />
+                    <line x1="3" y1="10" x2="21" y2="10" />
+                  </svg>
+                </div>
+                <div class="notif-body">
+                  <div class="notif-title">
+                    4 new reservation requests pending approval
+                  </div>
+                  <div class="notif-text">
+                    Students have requested: "Clean Code" (×2), "Operating
+                    System Concepts" (×1), and "Artificial Intelligence: A
+                    Modern Approach" (×1). Review and confirm pickups.
+                  </div>
+                </div>
+                <div class="notif-time">8:45 AM</div>
+                <div class="notif-unread-dot"></div>
+              </div>
+              <div class="notif-item unread">
+                <div class="notif-icon avail">
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                </div>
+                <div class="notif-body">
+                  <div class="notif-title">
+                    Batch return processed — 8 books checked in
+                  </div>
+                  <div class="notif-text">
+                    8 books were returned this morning via the drop box. Titles
+                    include: "Database System Concepts", "Operating System
+                    Concepts", and 6 others. Shelf re-shelving needed.
+                  </div>
+                </div>
+                <div class="notif-time">8:12 AM</div>
+                <div class="notif-unread-dot"></div>
+              </div>
+            </div>
+
+            <div class="notif-group">
+              <div class="notif-date">Yesterday · November 18</div>
+              <div class="notif-item unread">
+                <div class="notif-icon over">
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <circle cx="12" cy="12" r="10" />
+                    <line x1="12" y1="8" x2="12" y2="12" />
+                    <line x1="12" y1="16" x2="12.01" y2="16" />
+                  </svg>
+                </div>
+                <div class="notif-body">
+                  <div class="notif-title">
+                    Overdue reminder sent — Maria Santos
+                  </div>
+                  <div class="notif-text">
+                    An automated reminder was sent to Maria L. Santos for
+                    "Computer Networks" (6th Ed.) and "The Pragmatic
+                    Programmer", both 5 days past due.
+                  </div>
+                </div>
+                <div class="notif-time">4:00 PM</div>
+                <div class="notif-unread-dot"></div>
+              </div>
+              <div class="notif-item unread">
+                <div class="notif-icon reserve">
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <rect x="3" y="4" width="18" height="18" rx="2" />
+                    <line x1="16" y1="2" x2="16" y2="6" />
+                    <line x1="8" y1="2" x2="8" y2="6" />
+                    <line x1="3" y1="10" x2="21" y2="10" />
+                  </svg>
+                </div>
+                <div class="notif-body">
+                  <div class="notif-title">
+                    Pickup window expiring tomorrow — 2 holds
+                  </div>
+                  <div class="notif-text">
+                    "Designing Data-Intensive Applications" (Shan Cruz) and
+                    "Refactoring" (Paolo Aguilar) must be picked up by Nov 21 or
+                    the hold will be released.
+                  </div>
+                </div>
+                <div class="notif-time">2:30 PM</div>
+                <div class="notif-unread-dot"></div>
+              </div>
+              <div class="notif-item">
+                <div class="notif-icon avail">
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                </div>
+                <div class="notif-body">
+                  <div class="notif-title">
+                    Return confirmed — Khatrina Gonzales
+                  </div>
+                  <div class="notif-text">
+                    "Database System Concepts" returned in good condition. No
+                    fines applied. Item is now back in circulation.
+                  </div>
+                </div>
+                <div class="notif-time">10:31 AM</div>
+              </div>
+            </div>
+
+            <div class="notif-group">
+              <div class="notif-date">November 15</div>
+              <div class="notif-item">
+                <div class="notif-icon">
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+                    <path
+                      d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"
+                    />
+                  </svg>
+                </div>
+                <div class="notif-body">
+                  <div class="notif-title">24 new books added to catalog</div>
+                  <div class="notif-text">
+                    New acquisitions have been catalogued: 24 titles across
+                    Computer Science, Engineering, and Business. AI-generated
+                    subject tags and call numbers have been applied.
+                  </div>
+                </div>
+                <div class="notif-time">3:15 PM</div>
+              </div>
+            </div>
           </div>
+        </section>
+      </main>
+    </div>
 
-          <div class="chat-input">
-            <input type="text" placeholder="Ask Lasallia anything…" />
-            <button class="chat-send">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-            </button>
-          </div>
-        </div>
-      </div>
-      </div>
-    </section>
+    <!-- Floating chat bubble -->
+    <button
+      class="chat-fab"
+      onclick="navigate('chatbot')"
+      title="Chat with Lasallia"
+    >
+      <svg
+        width="22"
+        height="22"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <path
+          d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
+        />
+      </svg>
+    </button>
 
-    <!-- ========== NOTIFICATIONS ========== -->
-    <section class="page" id="page-notifications">
-
-      <!-- Student / Faculty Notifications -->
-      <div class="role-view" data-role="student">
-        <div class="page-header">
-          <div>
-            <h1 class="page-title">Notifications</h1>
-            <p class="page-subtitle">Updates on your reservations, due dates, and recommendations</p>
-          </div>
-          <button class="btn btn-secondary">Mark all as read</button>
-        </div>
-
-        <div class="notif-tabs">
-          <button class="notif-tab active">All <span class="count">5</span></button>
-          <button class="notif-tab">Due dates <span class="count">2</span></button>
-          <button class="notif-tab">Reservations <span class="count">2</span></button>
-          <button class="notif-tab">Recommendations <span class="count">1</span></button>
-        </div>
-
-        <div class="notif-group">
-          <div class="notif-date">Today · November 19</div>
-          <div class="notif-item unread">
-            <div class="notif-icon avail">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-            </div>
-            <div class="notif-body">
-              <div class="notif-title">Your reserved book is ready for pickup</div>
-              <div class="notif-text">"Designing Data-Intensive Applications" by Martin Kleppmann is waiting at the Main LRC desk. Pick up by Nov 21.</div>
-            </div>
-            <div class="notif-time">10:42 AM</div>
-            <div class="notif-unread-dot"></div>
-          </div>
-          <div class="notif-item unread">
-            <div class="notif-icon due">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            </div>
-            <div class="notif-body">
-              <div class="notif-title">Book due in 2 days</div>
-              <div class="notif-text">"Clean Code" — return by Nov 21 to avoid late fees. Renew online if you need more time.</div>
-            </div>
-            <div class="notif-time">8:00 AM</div>
-            <div class="notif-unread-dot"></div>
-          </div>
-        </div>
-
-        <div class="notif-group">
-          <div class="notif-date">Yesterday · November 18</div>
-          <div class="notif-item unread">
-            <div class="notif-icon reserve">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/></svg>
-            </div>
-            <div class="notif-body">
-              <div class="notif-title">Reservation confirmed</div>
-              <div class="notif-text">Your reservation for "The Pragmatic Programmer" has been confirmed. Pickup window: Nov 22–24.</div>
-            </div>
-            <div class="notif-time">3:20 PM</div>
-            <div class="notif-unread-dot"></div>
-          </div>
-          <div class="notif-item">
-            <div class="notif-icon">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            </div>
-            <div class="notif-body">
-              <div class="notif-title">3 new books match your interests</div>
-              <div class="notif-text">Based on your borrowing history, you might enjoy: "Building Microservices", "System Design Interview Vol. 2", and "Software Engineering at Google".</div>
-            </div>
-            <div class="notif-time">11:15 AM</div>
-          </div>
-        </div>
-
-        <div class="notif-group">
-          <div class="notif-date">November 14</div>
-          <div class="notif-item">
-            <div class="notif-icon avail">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-            </div>
-            <div class="notif-body">
-              <div class="notif-title">A book on your watchlist is now available</div>
-              <div class="notif-text">"Computer Networks" (6th Edition) by Andrew Tanenbaum is back on the shelf. Reserve it before it's borrowed again.</div>
-            </div>
-            <div class="notif-time">2:08 PM</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Librarian Notifications -->
-      <div class="role-view" data-role="librarian" style="display:none;">
-        <div class="page-header">
-          <div>
-            <h1 class="page-title">Notifications</h1>
-            <p class="page-subtitle">Operational alerts — overdue items, reservations, and system activity</p>
-          </div>
-          <button class="btn btn-secondary">Mark all as read</button>
-        </div>
-
-        <div class="notif-tabs">
-          <button class="notif-tab active">All <span class="count">12</span></button>
-          <button class="notif-tab">Overdue <span class="count">5</span></button>
-          <button class="notif-tab">Reservations <span class="count">4</span></button>
-          <button class="notif-tab">Returns <span class="count">2</span></button>
-          <button class="notif-tab">System <span class="count">1</span></button>
-        </div>
-
-        <div class="notif-group">
-          <div class="notif-date">Today · November 19</div>
-          <div class="notif-item unread">
-            <div class="notif-icon over">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-            </div>
-            <div class="notif-body">
-              <div class="notif-title">3 borrowers are over 7 days overdue</div>
-              <div class="notif-text">Paolo Aguilar (2 books), Khatrina Gonzales (1 book), and Jed Sayat (1 book) have items past their due date by 7+ days. Consider sending a follow-up notice.</div>
-            </div>
-            <div class="notif-time">9:00 AM</div>
-            <div class="notif-unread-dot"></div>
-          </div>
-          <div class="notif-item unread">
-            <div class="notif-icon reserve">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-            </div>
-            <div class="notif-body">
-              <div class="notif-title">4 new reservation requests pending approval</div>
-              <div class="notif-text">Students have requested: "Clean Code" (×2), "Operating System Concepts" (×1), and "Artificial Intelligence: A Modern Approach" (×1). Review and confirm pickups.</div>
-            </div>
-            <div class="notif-time">8:45 AM</div>
-            <div class="notif-unread-dot"></div>
-          </div>
-          <div class="notif-item unread">
-            <div class="notif-icon avail">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-            </div>
-            <div class="notif-body">
-              <div class="notif-title">Batch return processed — 8 books checked in</div>
-              <div class="notif-text">8 books were returned this morning via the drop box. Titles include: "Database System Concepts", "Operating System Concepts", and 6 others. Shelf re-shelving needed.</div>
-            </div>
-            <div class="notif-time">8:12 AM</div>
-            <div class="notif-unread-dot"></div>
-          </div>
-        </div>
-
-        <div class="notif-group">
-          <div class="notif-date">Yesterday · November 18</div>
-          <div class="notif-item unread">
-            <div class="notif-icon over">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-            </div>
-            <div class="notif-body">
-              <div class="notif-title">Overdue reminder sent — Maria Santos</div>
-              <div class="notif-text">An automated reminder was sent to Maria L. Santos for "Computer Networks" (6th Ed.) and "The Pragmatic Programmer", both 5 days past due.</div>
-            </div>
-            <div class="notif-time">4:00 PM</div>
-            <div class="notif-unread-dot"></div>
-          </div>
-          <div class="notif-item unread">
-            <div class="notif-icon reserve">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-            </div>
-            <div class="notif-body">
-              <div class="notif-title">Pickup window expiring tomorrow — 2 holds</div>
-              <div class="notif-text">"Designing Data-Intensive Applications" (Shan Cruz) and "Refactoring" (Paolo Aguilar) must be picked up by Nov 21 or the hold will be released.</div>
-            </div>
-            <div class="notif-time">2:30 PM</div>
-            <div class="notif-unread-dot"></div>
-          </div>
-          <div class="notif-item">
-            <div class="notif-icon avail">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-            </div>
-            <div class="notif-body">
-              <div class="notif-title">Return confirmed — Khatrina Gonzales</div>
-              <div class="notif-text">"Database System Concepts" returned in good condition. No fines applied. Item is now back in circulation.</div>
-            </div>
-            <div class="notif-time">10:31 AM</div>
-          </div>
-        </div>
-
-        <div class="notif-group">
-          <div class="notif-date">November 15</div>
-          <div class="notif-item">
-            <div class="notif-icon">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-            </div>
-            <div class="notif-body">
-              <div class="notif-title">24 new books added to catalog</div>
-              <div class="notif-text">New acquisitions have been catalogued: 24 titles across Computer Science, Engineering, and Business. AI-generated subject tags and call numbers have been applied.</div>
-            </div>
-            <div class="notif-time">3:15 PM</div>
-          </div>
-        </div>
-      </div>
-
-    </section>
-
-  </main>
-</div>
-
-<!-- Floating chat bubble -->
-<button class="chat-fab" onclick="navigate('chatbot')" title="Chat with Lasallia">
-  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-</button>
-
-<!-- JS: load order matters — app.js defines navigate() used by roles.js and interactions.js -->
-<script src="js/app.js"></script>
-<script src="js/roles.js"></script>
-<script src="js/interactions.js"></script>
-
-</body>
+    <!-- JS: load order matters — app.js defines navigate() used by roles.js and interactions.js -->
+    <script src="js/app.js"></script>
+    <script src="js/roles.js"></script>
+    <script src="js/interactions.js"></script>
+  </body>
 </html>
