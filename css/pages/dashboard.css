@@ -1,0 +1,54 @@
+/* ============================================
+   DASHBOARD — QR SCANNER (Librarian)
+   ============================================ */
+.qr-card {
+  background: linear-gradient(135deg, var(--green-800), var(--green-900));
+  color: white;
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.qr-card::before {
+  content: '';
+  position: absolute;
+  top: -40px; right: -40px;
+  width: 120px; height: 120px;
+  background: var(--gold-500);
+  opacity: 0.15;
+  border-radius: 50%;
+}
+.qr-frame {
+  width: 200px; height: 200px;
+  background: white;
+  border-radius: var(--radius);
+  margin: 16px auto 24px;
+  position: relative;
+  display: grid; place-items: center;
+}
+.qr-pattern {
+  width: 160px; height: 160px;
+  background-image:
+    linear-gradient(45deg, var(--ink-900) 25%, transparent 25%),
+    linear-gradient(-45deg, var(--ink-900) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, var(--ink-900) 75%),
+    linear-gradient(-45deg, transparent 75%, var(--ink-900) 75%);
+  background-size: 20px 20px;
+  background-position: 0 0, 0 10px, 10px -10px, -10px 0;
+  border-radius: 4px;
+  opacity: 0.85;
+}
+.qr-corners {
+  position: absolute;
+  inset: 12px;
+  border: 2px solid var(--gold-500);
+  border-radius: 8px;
+  pointer-events: none;
+  background-image:
+    linear-gradient(to right, var(--gold-500) 30%, transparent 30%, transparent 70%, var(--gold-500) 70%),
+    linear-gradient(to bottom, var(--gold-500) 30%, transparent 30%, transparent 70%, var(--gold-500) 70%);
+  background-size: 100% 4px, 4px 100%;
+  background-position: center center;
+  background-repeat: no-repeat;
+}

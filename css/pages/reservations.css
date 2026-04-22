@@ -1,0 +1,124 @@
+/* ============================================
+   RESERVATIONS PAGE
+   ============================================ */
+.stepper {
+  display: flex;
+  align-items: center;
+  margin-bottom: 32px;
+  max-width: 700px;
+}
+.step {
+  flex: 1;
+  display: flex; align-items: center; gap: 10px;
+}
+.step-num {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: var(--ink-100);
+  color: var(--ink-500);
+  display: grid; place-items: center;
+  font-weight: 600;
+  font-size: 13px;
+  flex-shrink: 0;
+}
+.step.active .step-num {
+  background: var(--green-700);
+  color: white;
+}
+.step.done .step-num {
+  background: var(--green-100);
+  color: var(--green-700);
+}
+.step-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink-500);
+}
+.step.active .step-label { color: var(--ink-900); font-weight: 600; }
+.step.done .step-label { color: var(--ink-700); }
+.step-line {
+  flex: 0 0 40px;
+  height: 1px;
+  background: var(--ink-200);
+  margin: 0 4px;
+}
+.step.done + .step-line { background: var(--green-700); }
+
+.reserve-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 32px;
+  align-items: start;
+}
+
+/* Calendar / Date Picker */
+.date-picker {
+  background: var(--white);
+  border: 1px solid var(--ink-100);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+}
+.calendar-head {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 16px;
+}
+.month-name {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 600;
+}
+.cal-nav { display: flex; gap: 6px; }
+.cal-nav button {
+  width: 32px; height: 32px;
+  border-radius: 8px;
+  color: var(--ink-700);
+  display: grid; place-items: center;
+  border: 1px solid var(--ink-200);
+}
+.cal-nav button:hover { background: var(--ink-50); }
+.cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+.cal-day-name {
+  font-size: 11px;
+  color: var(--ink-500);
+  text-align: center;
+  font-weight: 600;
+  padding: 6px 0;
+}
+.cal-day {
+  aspect-ratio: 1;
+  display: grid; place-items: center;
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.12s;
+}
+.cal-day:hover { background: var(--ink-100); }
+.cal-day.muted { color: var(--ink-300); }
+.cal-day.today { color: var(--green-700); font-weight: 700; }
+.cal-day.selected {
+  background: var(--green-700);
+  color: white;
+}
+.cal-day.disabled { color: var(--ink-300); cursor: not-allowed; }
+
+/* Summary box */
+.summary-box {
+  background: var(--white);
+  border: 1px solid var(--ink-100);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+}
+.summary-line {
+  display: flex; justify-content: space-between;
+  padding: 10px 0;
+  font-size: 14px;
+  border-bottom: 1px solid var(--ink-100);
+}
+.summary-line:last-of-type { border-bottom: none; }
+.summary-line .key { color: var(--ink-500); }
+.summary-line .val { font-weight: 600; }

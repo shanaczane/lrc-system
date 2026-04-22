@@ -1,0 +1,94 @@
+/* ============================================
+   BOOK DETAIL PAGE
+   ============================================ */
+.detail-grid {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 40px;
+  align-items: start;
+}
+.detail-cover {
+  aspect-ratio: 3 / 4;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  position: sticky;
+  top: calc(var(--nav-h) + 24px);
+}
+.detail-cover .book-cover {
+  border-radius: 0;
+  height: 100%;
+}
+.detail-cover .book-cover-title { font-size: 28px; }
+.detail-cover .book-cover-author { font-size: 13px; }
+
+.detail-meta-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px 32px;
+  padding: 24px 0;
+  border-top: 1px solid var(--ink-100);
+  border-bottom: 1px solid var(--ink-100);
+  margin: 24px 0;
+}
+.meta-item .key {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-500);
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+.meta-item .val { font-size: 14px; font-weight: 500; }
+.meta-item .val.mono { font-family: var(--font-mono); font-size: 13px; }
+
+.availability-box {
+  background: var(--green-50);
+  border: 1px solid var(--green-100);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  margin-bottom: 24px;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 16px;
+}
+.availability-info {
+  font-size: 13px;
+  color: var(--ink-700);
+}
+.availability-info strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 18px;
+  color: var(--green-800);
+  margin-bottom: 2px;
+}
+
+.shelf-locator {
+  background: var(--ink-50);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-top: 16px;
+}
+.shelf-map {
+  background: white;
+  border-radius: var(--radius-sm);
+  padding: 14px;
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 4px;
+}
+.shelf-cell {
+  aspect-ratio: 1;
+  background: var(--ink-100);
+  border-radius: 2px;
+}
+.shelf-cell.target {
+  background: var(--green-700);
+  box-shadow: 0 0 0 3px var(--green-100);
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 3px var(--green-100); }
+  50% { box-shadow: 0 0 0 6px var(--green-100); }
+}

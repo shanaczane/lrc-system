@@ -1,0 +1,49 @@
+// ============================================
+// CATALOG FILTERS
+// ============================================
+document.querySelectorAll('.filter').forEach(f => {
+  f.addEventListener('click', () => {
+    if (f.classList.contains('active') && f.textContent.trim().startsWith('All')) return;
+    if (!f.querySelector('svg[viewBox*="9 18"]')) {
+      f.classList.toggle('active');
+    }
+  });
+});
+
+// ============================================
+// NOTIFICATION TABS
+// ============================================
+document.querySelectorAll('.notif-tab').forEach(t => {
+  t.addEventListener('click', () => {
+    document.querySelectorAll('.notif-tab').forEach(x => x.classList.remove('active'));
+    t.classList.add('active');
+  });
+});
+
+// ============================================
+// RESERVATION CALENDAR
+// ============================================
+document.querySelectorAll('.cal-day:not(.muted):not(.disabled)').forEach(d => {
+  d.addEventListener('click', () => {
+    document.querySelectorAll('.cal-day').forEach(x => x.classList.remove('selected'));
+    d.classList.add('selected');
+  });
+});
+
+// ============================================
+// CHATBOT QUICK REPLIES
+// ============================================
+document.querySelectorAll('.quick-reply').forEach(q => {
+  q.addEventListener('click', () => {
+    const messages = document.querySelector('.chat-messages');
+    if (!messages) return;
+    const msg = document.createElement('div');
+    msg.className = 'msg user';
+    msg.innerHTML = `
+      <div class="msg-bubble">${q.textContent}</div>
+      <div class="msg-time">Just now</div>
+    `;
+    messages.appendChild(msg);
+    messages.scrollTop = messages.scrollHeight;
+  });
+});

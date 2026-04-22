@@ -1,0 +1,52 @@
+/* ============================================
+   CATALOG PAGE
+   ============================================ */
+.search-bar {
+  background: var(--white);
+  border: 1px solid var(--ink-100);
+  border-radius: var(--radius-lg);
+  padding: 6px;
+  display: flex;
+  margin-bottom: 24px;
+  box-shadow: var(--shadow-sm);
+}
+.search-bar input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  padding: 12px 18px;
+  font-size: 15px;
+}
+.search-bar input:focus { outline: none; }
+.search-bar .btn { margin: 0; }
+
+.filters {
+  display: flex; gap: 10px; flex-wrap: wrap;
+  margin-bottom: 28px;
+}
+.filter {
+  background: var(--white);
+  border: 1px solid var(--ink-200);
+  border-radius: 999px;
+  padding: 7px 14px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink-700);
+  display: inline-flex; align-items: center; gap: 6px;
+  transition: all 0.15s;
+}
+.filter:hover { border-color: var(--ink-700); }
+.filter.active {
+  background: var(--green-700);
+  color: white;
+  border-color: var(--green-700);
+}
+.filter svg { opacity: 0.6; }
+
+.results-meta {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 16px;
+  padding: 0 4px;
+  font-size: 13px;
+  color: var(--ink-500);
+}
