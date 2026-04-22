@@ -26,6 +26,9 @@ document.getElementById('roleSwitcher').addEventListener('click', (e) => {
     v.style.display = v.dataset.role === role ? '' : 'none';
   });
 
+  const fab = document.querySelector('.chat-fab');
+  if (fab) fab.style.display = role === 'librarian' ? 'none' : '';
+
   navigate('dashboard');
 });
 
