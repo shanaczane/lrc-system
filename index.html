@@ -335,7 +335,7 @@
               </svg>
               Manage Users
             </button>
-            <button class="side-link" onclick="navigate('overdue')" data-nav="overdue">
+            <button class="side-link" onclick="navigate('transaction-log')" data-nav="transaction-log">
               <svg
                 width="16"
                 height="16"
@@ -344,31 +344,14 @@
                 stroke="currentColor"
                 stroke-width="2"
               >
-                <circle cx="12" cy="12" r="10" />
-                <line x1="12" y1="8" x2="12" y2="12" />
-                <line x1="12" y1="16" x2="12.01" y2="16" />
+                <line x1="8" y1="6" x2="21" y2="6" />
+                <line x1="8" y1="12" x2="21" y2="12" />
+                <line x1="8" y1="18" x2="21" y2="18" />
+                <line x1="3" y1="6" x2="3.01" y2="6" />
+                <line x1="3" y1="12" x2="3.01" y2="12" />
+                <line x1="3" y1="18" x2="3.01" y2="18" />
               </svg>
-              Overdue Books
-              <span
-                class="count"
-                style="background: var(--danger-bg); color: var(--danger)"
-                >17</span
-              >
-            </button>
-            <button class="side-link" onclick="navigate('reports')" data-nav="reports">
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <line x1="18" y1="20" x2="18" y2="10" />
-                <line x1="12" y1="20" x2="12" y2="4" />
-                <line x1="6" y1="20" x2="6" y2="14" />
-              </svg>
-              Reports
+              Transaction Log
             </button>
           </div>
 
@@ -862,7 +845,7 @@
               <div>
                 <div class="section-head">
                   <h3 class="section-title">Recent Transactions</h3>
-                  <a href="#" class="section-link">View log →</a>
+                  <a href="#" class="section-link" onclick="event.preventDefault();navigate('transaction-log')">View log →</a>
                 </div>
                 <div class="card" style="padding: 8px">
                   <table class="table">
@@ -3386,6 +3369,140 @@
               </tbody>
             </table>
           </div>
+        </div>
+      </section>
+
+      <!-- ========== TRANSACTION LOG ========== -->
+      <section class="page" id="page-transaction-log">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Transaction <em>Log</em></h1>
+            <p class="page-subtitle">Full circulation history — check-outs, returns, and renewals</p>
+          </div>
+          <button class="btn btn-secondary">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Export CSV
+          </button>
+        </div>
+
+        <div class="borrow-tabs" style="margin-bottom:16px;">
+          <button class="borrow-tab active" data-filter="all">All <span class="count">12</span></button>
+          <button class="borrow-tab" data-filter="checkout">Check-out <span class="count">5</span></button>
+          <button class="borrow-tab" data-filter="return">Return <span class="count">5</span></button>
+          <button class="borrow-tab" data-filter="renewal">Renewal <span class="count">2</span></button>
+        </div>
+
+        <div class="card" style="padding:0;overflow:hidden;">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Date &amp; Time</th>
+                <th>Type</th>
+                <th>Book</th>
+                <th>Borrower</th>
+                <th>ID</th>
+                <th>Processed By</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr data-borrow-type="checkout">
+                <td style="font-size:12px;color:var(--ink-500);white-space:nowrap;">Nov 19, 2025 · 9:14 AM</td>
+                <td><span class="pill pill-available" style="font-size:11px;padding:2px 8px;">Check-out</span></td>
+                <td style="font-weight:600;font-size:13px;">Computer Networks, 6th Ed.</td>
+                <td style="font-size:13px;">Andrew Reyes</td>
+                <td style="font-size:12px;font-family:monospace;color:var(--ink-500);">20230112</td>
+                <td style="font-size:12px;color:var(--ink-500);">Librarian</td>
+              </tr>
+              <tr data-borrow-type="return">
+                <td style="font-size:12px;color:var(--ink-500);white-space:nowrap;">Nov 19, 2025 · 8:52 AM</td>
+                <td><span class="pill pill-info" style="font-size:11px;padding:2px 8px;">Return</span></td>
+                <td style="font-weight:600;font-size:13px;">Clean Architecture</td>
+                <td style="font-size:13px;">Khatrina Gonzales</td>
+                <td style="font-size:12px;font-family:monospace;color:var(--ink-500);">20220045</td>
+                <td style="font-size:12px;color:var(--ink-500);">Librarian</td>
+              </tr>
+              <tr data-borrow-type="renewal">
+                <td style="font-size:12px;color:var(--ink-500);white-space:nowrap;">Nov 19, 2025 · 8:30 AM</td>
+                <td><span class="pill pill-reserved" style="font-size:11px;padding:2px 8px;">Renewal</span></td>
+                <td style="font-weight:600;font-size:13px;">Clean Code</td>
+                <td style="font-size:13px;">Shan A. Cruz</td>
+                <td style="font-size:12px;font-family:monospace;color:var(--ink-500);">20220001</td>
+                <td style="font-size:12px;color:var(--ink-500);">System</td>
+              </tr>
+              <tr data-borrow-type="checkout">
+                <td style="font-size:12px;color:var(--ink-500);white-space:nowrap;">Nov 18, 2025 · 3:45 PM</td>
+                <td><span class="pill pill-available" style="font-size:11px;padding:2px 8px;">Check-out</span></td>
+                <td style="font-weight:600;font-size:13px;">Refactoring</td>
+                <td style="font-size:13px;">Maria Santos</td>
+                <td style="font-size:12px;font-family:monospace;color:var(--ink-500);">20230055</td>
+                <td style="font-size:12px;color:var(--ink-500);">Librarian</td>
+              </tr>
+              <tr data-borrow-type="return">
+                <td style="font-size:12px;color:var(--ink-500);white-space:nowrap;">Nov 18, 2025 · 2:10 PM</td>
+                <td><span class="pill pill-info" style="font-size:11px;padding:2px 8px;">Return</span></td>
+                <td style="font-weight:600;font-size:13px;">The Pragmatic Programmer</td>
+                <td style="font-size:13px;">Jed F. Sayat</td>
+                <td style="font-size:12px;font-family:monospace;color:var(--ink-500);">20210088</td>
+                <td style="font-size:12px;color:var(--ink-500);">Librarian</td>
+              </tr>
+              <tr data-borrow-type="checkout">
+                <td style="font-size:12px;color:var(--ink-500);white-space:nowrap;">Nov 18, 2025 · 11:20 AM</td>
+                <td><span class="pill pill-available" style="font-size:11px;padding:2px 8px;">Check-out</span></td>
+                <td style="font-weight:600;font-size:13px;">Designing Data-Intensive Apps</td>
+                <td style="font-size:13px;">Leo Manalo</td>
+                <td style="font-size:12px;font-family:monospace;color:var(--ink-500);">20220178</td>
+                <td style="font-size:12px;color:var(--ink-500);">Librarian</td>
+              </tr>
+              <tr data-borrow-type="return">
+                <td style="font-size:12px;color:var(--ink-500);white-space:nowrap;">Nov 17, 2025 · 4:05 PM</td>
+                <td><span class="pill pill-info" style="font-size:11px;padding:2px 8px;">Return</span></td>
+                <td style="font-weight:600;font-size:13px;">Code Complete</td>
+                <td style="font-size:13px;">Ana Reyes</td>
+                <td style="font-size:12px;font-family:monospace;color:var(--ink-500);">FAC-0021</td>
+                <td style="font-size:12px;color:var(--ink-500);">Librarian</td>
+              </tr>
+              <tr data-borrow-type="renewal">
+                <td style="font-size:12px;color:var(--ink-500);white-space:nowrap;">Nov 17, 2025 · 9:00 AM</td>
+                <td><span class="pill pill-reserved" style="font-size:11px;padding:2px 8px;">Renewal</span></td>
+                <td style="font-weight:600;font-size:13px;">Refactoring to Patterns</td>
+                <td style="font-size:13px;">Prof. Maria Reyes</td>
+                <td style="font-size:12px;font-family:monospace;color:var(--ink-500);">FAC-0012</td>
+                <td style="font-size:12px;color:var(--ink-500);">System</td>
+              </tr>
+              <tr data-borrow-type="return">
+                <td style="font-size:12px;color:var(--ink-500);white-space:nowrap;">Nov 16, 2025 · 1:30 PM</td>
+                <td><span class="pill pill-info" style="font-size:11px;padding:2px 8px;">Return</span></td>
+                <td style="font-weight:600;font-size:13px;">Clean Code</td>
+                <td style="font-size:13px;">Ronan Lim</td>
+                <td style="font-size:12px;font-family:monospace;color:var(--ink-500);">20190034</td>
+                <td style="font-size:12px;color:var(--ink-500);">Librarian</td>
+              </tr>
+              <tr data-borrow-type="checkout">
+                <td style="font-size:12px;color:var(--ink-500);white-space:nowrap;">Nov 16, 2025 · 10:15 AM</td>
+                <td><span class="pill pill-available" style="font-size:11px;padding:2px 8px;">Check-out</span></td>
+                <td style="font-weight:600;font-size:13px;">Clean Architecture</td>
+                <td style="font-size:13px;">Shan A. Cruz</td>
+                <td style="font-size:12px;font-family:monospace;color:var(--ink-500);">20220001</td>
+                <td style="font-size:12px;color:var(--ink-500);">Librarian</td>
+              </tr>
+              <tr data-borrow-type="return">
+                <td style="font-size:12px;color:var(--ink-500);white-space:nowrap;">Nov 15, 2025 · 3:20 PM</td>
+                <td><span class="pill pill-info" style="font-size:11px;padding:2px 8px;">Return</span></td>
+                <td style="font-weight:600;font-size:13px;">Computer Networks, 6th Ed.</td>
+                <td style="font-size:13px;">Khatrina Gonzales</td>
+                <td style="font-size:12px;font-family:monospace;color:var(--ink-500);">20220045</td>
+                <td style="font-size:12px;color:var(--ink-500);">Librarian</td>
+              </tr>
+              <tr data-borrow-type="checkout">
+                <td style="font-size:12px;color:var(--ink-500);white-space:nowrap;">Nov 15, 2025 · 9:45 AM</td>
+                <td><span class="pill pill-available" style="font-size:11px;padding:2px 8px;">Check-out</span></td>
+                <td style="font-weight:600;font-size:13px;">Code Complete</td>
+                <td style="font-size:13px;">Jed F. Sayat</td>
+                <td style="font-size:12px;font-family:monospace;color:var(--ink-500);">20210088</td>
+                <td style="font-size:12px;color:var(--ink-500);">Librarian</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </section>
 
