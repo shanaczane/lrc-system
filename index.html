@@ -2511,26 +2511,26 @@
             </div>
 
             <div class="notif-tabs">
-              <button class="notif-tab active">
+              <button class="notif-tab active" data-filter="all">
                 All <span class="count">12</span>
               </button>
-              <button class="notif-tab">
+              <button class="notif-tab" data-filter="over">
                 Overdue <span class="count">5</span>
               </button>
-              <button class="notif-tab">
+              <button class="notif-tab" data-filter="reserve">
                 Reservations <span class="count">4</span>
               </button>
-              <button class="notif-tab">
+              <button class="notif-tab" data-filter="return">
                 Returns <span class="count">2</span>
               </button>
-              <button class="notif-tab">
+              <button class="notif-tab" data-filter="system">
                 System <span class="count">1</span>
               </button>
             </div>
 
             <div class="notif-group">
               <div class="notif-date">Today · November 19</div>
-              <div class="notif-item unread">
+              <div class="notif-item unread" data-type="over">
                 <div class="notif-icon over">
                   <svg
                     width="18"
@@ -2558,7 +2558,7 @@
                 <div class="notif-time">9:00 AM</div>
                 <div class="notif-unread-dot"></div>
               </div>
-              <div class="notif-item unread">
+              <div class="notif-item unread" data-type="reserve">
                 <div class="notif-icon reserve">
                   <svg
                     width="18"
@@ -2587,7 +2587,7 @@
                 <div class="notif-time">8:45 AM</div>
                 <div class="notif-unread-dot"></div>
               </div>
-              <div class="notif-item unread">
+              <div class="notif-item unread" data-type="return">
                 <div class="notif-icon avail">
                   <svg
                     width="18"
@@ -2617,7 +2617,7 @@
 
             <div class="notif-group">
               <div class="notif-date">Yesterday · November 18</div>
-              <div class="notif-item unread">
+              <div class="notif-item unread" data-type="over">
                 <div class="notif-icon over">
                   <svg
                     width="18"
@@ -2645,7 +2645,7 @@
                 <div class="notif-time">4:00 PM</div>
                 <div class="notif-unread-dot"></div>
               </div>
-              <div class="notif-item unread">
+              <div class="notif-item unread" data-type="reserve">
                 <div class="notif-icon reserve">
                   <svg
                     width="18"
@@ -2674,7 +2674,7 @@
                 <div class="notif-time">2:30 PM</div>
                 <div class="notif-unread-dot"></div>
               </div>
-              <div class="notif-item">
+              <div class="notif-item" data-type="return">
                 <div class="notif-icon avail">
                   <svg
                     width="18"
@@ -2702,7 +2702,7 @@
 
             <div class="notif-group">
               <div class="notif-date">November 15</div>
-              <div class="notif-item">
+              <div class="notif-item" data-type="system">
                 <div class="notif-icon">
                   <svg
                     width="18"
