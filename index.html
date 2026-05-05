@@ -216,33 +216,12 @@
               Borrowed Books
               <span class="count">4</span>
             </button>
-            <button class="side-link">
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <polygon
-                  points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
-                />
-              </svg>
+            <button class="side-link" onclick="navigate('saved')" data-nav="saved">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
               Saved
             </button>
-            <button class="side-link">
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <circle cx="12" cy="12" r="10" />
-                <polyline points="12 6 12 12 16 14" />
-              </svg>
+            <button class="side-link" onclick="navigate('history')" data-nav="history">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
               History
             </button>
           </div>
@@ -1441,76 +1420,6 @@
                   maintainable software — drawn from real-world examples by
                   master craftsmen.
                 </p>
-              </div>
-
-              <div class="card">
-                <h3
-                  class="section-title"
-                  style="font-size: 18px; margin-bottom: 4px"
-                >
-                  Where to find it
-                </h3>
-                <p
-                  style="
-                    color: var(--ink-500);
-                    font-size: 13px;
-                    margin-bottom: 16px;
-                  "
-                >
-                  2nd Floor · Computer Science Section · Aisle B
-                </p>
-                <div class="shelf-locator">
-                  <div
-                    style="
-                      display: flex;
-                      justify-content: space-between;
-                      align-items: center;
-                    "
-                  >
-                    <div>
-                      <div
-                        style="
-                          font-size: 11px;
-                          text-transform: uppercase;
-                          letter-spacing: 0.08em;
-                          color: var(--ink-500);
-                          font-weight: 600;
-                        "
-                      >
-                        Shelf Location
-                      </div>
-                      <div
-                        style="
-                          font-family: var(--font-mono);
-                          font-size: 14px;
-                          font-weight: 600;
-                          margin-top: 2px;
-                        "
-                      >
-                        Aisle B · Shelf 4 · Position 12
-                      </div>
-                    </div>
-                    <span class="pill pill-available">In place</span>
-                  </div>
-                  <div class="shelf-map">
-                    <div class="shelf-cell"></div>
-                    <div class="shelf-cell"></div>
-                    <div class="shelf-cell"></div>
-                    <div class="shelf-cell"></div>
-                    <div class="shelf-cell target"></div>
-                    <div class="shelf-cell"></div>
-                    <div class="shelf-cell"></div>
-                    <div class="shelf-cell"></div>
-                    <div class="shelf-cell"></div>
-                    <div class="shelf-cell"></div>
-                    <div class="shelf-cell"></div>
-                    <div class="shelf-cell"></div>
-                    <div class="shelf-cell"></div>
-                    <div class="shelf-cell"></div>
-                    <div class="shelf-cell"></div>
-                    <div class="shelf-cell"></div>
-                  </div>
-                </div>
               </div>
 
               <div style="margin-top: 32px">
@@ -2822,6 +2731,246 @@
             </div>
           </div>
         </section>
+      <!-- ========== SAVED ========== -->
+      <section class="page" id="page-saved">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Saved <em>Books</em></h1>
+            <p class="page-subtitle">Books you've bookmarked for later</p>
+          </div>
+          <button class="btn btn-secondary">Clear all</button>
+        </div>
+
+        <div class="book-grid">
+          <div class="book-card" onclick="navigate('book-detail')">
+            <div class="book-cover var-5">
+              <div class="book-cover-deco"></div>
+              <div class="book-cover-author">Russell · Norvig</div>
+              <div class="book-cover-title">Artificial Intelligence</div>
+            </div>
+            <div class="book-info">
+              <div class="book-title">Artificial Intelligence: A Modern Approach</div>
+              <div class="book-author">Russell, Norvig · 2020</div>
+              <div class="book-meta">
+                <span class="book-call">Q335 .R86</span>
+                <span class="pill pill-available">3 of 4</span>
+              </div>
+              <div style="display:flex;gap:8px;margin-top:10px;">
+                <button class="btn btn-primary" style="flex:1;justify-content:center;padding:7px 10px;font-size:12px;" onclick="event.stopPropagation();navigate('reservations')">Reserve</button>
+                <button class="btn btn-ghost" style="padding:7px 10px;font-size:12px;" onclick="event.stopPropagation()">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="book-card" onclick="navigate('book-detail')">
+            <div class="book-cover var-6">
+              <div class="book-cover-deco"></div>
+              <div class="book-cover-author">Silberschatz et al.</div>
+              <div class="book-cover-title">Database System Concepts</div>
+            </div>
+            <div class="book-info">
+              <div class="book-title">Database System Concepts, 7th Ed.</div>
+              <div class="book-author">Silberschatz et al. · 2019</div>
+              <div class="book-meta">
+                <span class="book-call">QA76.9 .D3</span>
+                <span class="pill pill-available">2 of 3</span>
+              </div>
+              <div style="display:flex;gap:8px;margin-top:10px;">
+                <button class="btn btn-primary" style="flex:1;justify-content:center;padding:7px 10px;font-size:12px;" onclick="event.stopPropagation();navigate('reservations')">Reserve</button>
+                <button class="btn btn-ghost" style="padding:7px 10px;font-size:12px;" onclick="event.stopPropagation()">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="book-card" onclick="navigate('book-detail')">
+            <div class="book-cover var-2">
+              <div class="book-cover-deco"></div>
+              <div class="book-cover-author">Kleppmann</div>
+              <div class="book-cover-title">Designing Data-Intensive Apps</div>
+            </div>
+            <div class="book-info">
+              <div class="book-title">Designing Data-Intensive Applications</div>
+              <div class="book-author">Martin Kleppmann · 2017</div>
+              <div class="book-meta">
+                <span class="book-call">QA76.9 .D32</span>
+                <span class="pill pill-reserved">1 of 2</span>
+              </div>
+              <div style="display:flex;gap:8px;margin-top:10px;">
+                <button class="btn btn-primary" style="flex:1;justify-content:center;padding:7px 10px;font-size:12px;" onclick="event.stopPropagation();navigate('reservations')">Reserve</button>
+                <button class="btn btn-ghost" style="padding:7px 10px;font-size:12px;" onclick="event.stopPropagation()">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="book-card" onclick="navigate('book-detail')">
+            <div class="book-cover var-4">
+              <div class="book-cover-deco"></div>
+              <div class="book-cover-author">Grokking</div>
+              <div class="book-cover-title">System Design Interview</div>
+            </div>
+            <div class="book-info">
+              <div class="book-title">System Design Interview Vol. 2</div>
+              <div class="book-author">Alex Xu · 2022</div>
+              <div class="book-meta">
+                <span class="book-call">QA76.9 .S88</span>
+                <span class="pill pill-unavailable">0 of 1</span>
+              </div>
+              <div style="display:flex;gap:8px;margin-top:10px;">
+                <button class="btn btn-secondary" style="flex:1;justify-content:center;padding:7px 10px;font-size:12px;" onclick="event.stopPropagation()">Notify me</button>
+                <button class="btn btn-ghost" style="padding:7px 10px;font-size:12px;" onclick="event.stopPropagation()">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== HISTORY ========== -->
+      <section class="page" id="page-history">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Borrowing <em>History</em></h1>
+            <p class="page-subtitle">Your complete checkout and return record</p>
+          </div>
+          <button class="btn btn-secondary">Export</button>
+        </div>
+
+        <div class="notif-tabs" style="margin-bottom:24px;">
+          <button class="notif-tab active">All <span class="count">18</span></button>
+          <button class="notif-tab">Returned <span class="count">13</span></button>
+          <button class="notif-tab">Currently out <span class="count">4</span></button>
+          <button class="notif-tab">Overdue <span class="count">1</span></button>
+        </div>
+
+        <div class="card" style="padding:8px;">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Book</th>
+                <th>Borrowed</th>
+                <th>Returned</th>
+                <th>Duration</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <div style="display:flex;align-items:center;gap:12px;">
+                    <div class="row-cover v1" style="width:32px;height:42px;flex-shrink:0;"></div>
+                    <div>
+                      <div style="font-weight:600;font-size:13px;">Clean Code</div>
+                      <div style="font-size:11px;color:var(--ink-500);">Robert C. Martin</div>
+                    </div>
+                  </div>
+                </td>
+                <td style="font-size:13px;color:var(--ink-700);">Nov 7, 2025</td>
+                <td style="font-size:13px;color:var(--warn);font-weight:600;">Not yet</td>
+                <td style="font-size:13px;color:var(--ink-500);">12 days so far</td>
+                <td><span class="pill pill-reserved">Due Nov 21</span></td>
+              </tr>
+              <tr>
+                <td>
+                  <div style="display:flex;align-items:center;gap:12px;">
+                    <div class="row-cover v3" style="width:32px;height:42px;flex-shrink:0;"></div>
+                    <div>
+                      <div style="font-weight:600;font-size:13px;">Designing Data-Intensive Applications</div>
+                      <div style="font-size:11px;color:var(--ink-500);">Martin Kleppmann</div>
+                    </div>
+                  </div>
+                </td>
+                <td style="font-size:13px;color:var(--ink-700);">Nov 11, 2025</td>
+                <td style="font-size:13px;color:var(--ink-500);">—</td>
+                <td style="font-size:13px;color:var(--ink-500);">8 days so far</td>
+                <td><span class="pill pill-info">Active</span></td>
+              </tr>
+              <tr>
+                <td>
+                  <div style="display:flex;align-items:center;gap:12px;">
+                    <div class="row-cover v2" style="width:32px;height:42px;flex-shrink:0;"></div>
+                    <div>
+                      <div style="font-weight:600;font-size:13px;">The Pragmatic Programmer</div>
+                      <div style="font-size:11px;color:var(--ink-500);">Thomas · Hunt</div>
+                    </div>
+                  </div>
+                </td>
+                <td style="font-size:13px;color:var(--ink-700);">Oct 15, 2025</td>
+                <td style="font-size:13px;color:var(--ink-700);">Oct 29, 2025</td>
+                <td style="font-size:13px;color:var(--ink-500);">14 days</td>
+                <td><span class="pill pill-available">Returned</span></td>
+              </tr>
+              <tr>
+                <td>
+                  <div style="display:flex;align-items:center;gap:12px;">
+                    <div class="row-cover v4" style="width:32px;height:42px;flex-shrink:0;"></div>
+                    <div>
+                      <div style="font-weight:600;font-size:13px;">Computer Networks, 6th Ed.</div>
+                      <div style="font-size:11px;color:var(--ink-500);">Andrew Tanenbaum</div>
+                    </div>
+                  </div>
+                </td>
+                <td style="font-size:13px;color:var(--ink-700);">Oct 1, 2025</td>
+                <td style="font-size:13px;color:var(--ink-700);">Oct 15, 2025</td>
+                <td style="font-size:13px;color:var(--ink-500);">14 days</td>
+                <td><span class="pill pill-available">Returned</span></td>
+              </tr>
+              <tr>
+                <td>
+                  <div style="display:flex;align-items:center;gap:12px;">
+                    <div class="row-cover v5" style="width:32px;height:42px;flex-shrink:0;"></div>
+                    <div>
+                      <div style="font-weight:600;font-size:13px;">Operating System Concepts</div>
+                      <div style="font-size:11px;color:var(--ink-500);">Silberschatz et al.</div>
+                    </div>
+                  </div>
+                </td>
+                <td style="font-size:13px;color:var(--ink-700);">Sep 10, 2025</td>
+                <td style="font-size:13px;color:var(--ink-700);">Sep 24, 2025</td>
+                <td style="font-size:13px;color:var(--ink-500);">14 days</td>
+                <td><span class="pill pill-available">Returned</span></td>
+              </tr>
+              <tr>
+                <td>
+                  <div style="display:flex;align-items:center;gap:12px;">
+                    <div class="row-cover v6" style="width:32px;height:42px;flex-shrink:0;"></div>
+                    <div>
+                      <div style="font-weight:600;font-size:13px;">Database System Concepts</div>
+                      <div style="font-size:11px;color:var(--ink-500);">Silberschatz et al.</div>
+                    </div>
+                  </div>
+                </td>
+                <td style="font-size:13px;color:var(--ink-700);">Aug 20, 2025</td>
+                <td style="font-size:13px;color:var(--danger);font-weight:600;">Sep 8, 2025</td>
+                <td style="font-size:13px;color:var(--ink-500);">19 days</td>
+                <td><span class="pill pill-unavailable">Returned late</span></td>
+              </tr>
+              <tr>
+                <td>
+                  <div style="display:flex;align-items:center;gap:12px;">
+                    <div class="row-cover v1" style="width:32px;height:42px;flex-shrink:0;"></div>
+                    <div>
+                      <div style="font-weight:600;font-size:13px;">Clean Architecture</div>
+                      <div style="font-size:11px;color:var(--ink-500);">Robert C. Martin</div>
+                    </div>
+                  </div>
+                </td>
+                <td style="font-size:13px;color:var(--ink-700);">Jul 5, 2025</td>
+                <td style="font-size:13px;color:var(--ink-700);">Jul 19, 2025</td>
+                <td style="font-size:13px;color:var(--ink-500);">14 days</td>
+                <td><span class="pill pill-available">Returned</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
       </main>
     </div>
 
