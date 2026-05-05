@@ -11,12 +11,25 @@ document.querySelectorAll('.filter').forEach(f => {
 });
 
 // ============================================
-// NOTIFICATION TABS
+// NOTIFICATION TABS WITH FILTERING
 // ============================================
 document.querySelectorAll('.notif-tab').forEach(t => {
   t.addEventListener('click', () => {
-    document.querySelectorAll('.notif-tab').forEach(x => x.classList.remove('active'));
+    const container = t.closest('.role-view') || t.closest('#page-notifications');
+
+    container.querySelectorAll('.notif-tab').forEach(x => x.classList.remove('active'));
     t.classList.add('active');
+
+    const filter = t.dataset.filter || 'all';
+
+    container.querySelectorAll('.notif-item').forEach(item => {
+      item.classList.toggle('notif-hidden', filter !== 'all' && item.dataset.type !== filter);
+    });
+
+    container.querySelectorAll('.notif-group').forEach(group => {
+      const hasVisible = group.querySelector('.notif-item:not(.notif-hidden)');
+      group.classList.toggle('notif-hidden', !hasVisible);
+    });
   });
 });
 
