@@ -1264,19 +1264,7 @@
               </button>
             </div>
 
-            <div class="catalog-tab-bar">
-              <button class="catalog-tab active" data-panel="books">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-                Books
-              </button>
-              <button class="catalog-tab" data-panel="students">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
-                Students
-              </button>
-            </div>
-
-            <!-- Books panel -->
-            <div class="catalog-panel" data-panel="books">
+            <div>
               <div class="search-bar" style="margin-top:20px;">
                 <input type="text" placeholder="Search by title, author, call number, or ISBN…" value="clean code" />
                 <button class="btn btn-primary">Search</button>
@@ -1346,119 +1334,7 @@
                   </div>
                 </div>
               </div>
-            </div><!-- end books panel -->
-
-            <!-- Students panel -->
-            <div class="catalog-panel" data-panel="students" style="display:none;">
-              <div class="search-bar" style="margin-top:20px;">
-                <input type="text" placeholder="Search by student ID or name… e.g. 2022-10234 or 'Cruz'" />
-                <button class="btn btn-primary">Search</button>
-              </div>
-
-              <div class="results-meta" style="margin-bottom:20px;">
-                <span><strong style="color:var(--ink-900);">4 students</strong> found · showing borrowing records</span>
-              </div>
-
-              <div style="display:flex;flex-direction:column;gap:16px;">
-
-                <div class="card">
-                  <div style="display:flex;align-items:center;gap:16px;margin-bottom:16px;">
-                    <div class="avatar" style="width:44px;height:44px;font-size:14px;flex-shrink:0;background:linear-gradient(135deg,var(--green-700),var(--green-900));">SC</div>
-                    <div style="flex:1;">
-                      <div style="font-weight:700;font-size:16px;font-family:var(--font-display);">Shan A. Cruz</div>
-                      <div style="font-size:12px;color:var(--ink-500);">2022-10234 · BS Computer Science · 3rd Year</div>
-                    </div>
-                    <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;">
-                      <span class="pill pill-info">4 books out</span>
-                      <span class="pill" style="background:var(--warn-bg);color:var(--warn);">1 due soon</span>
-                      <span class="pill pill-available">₱0.00 fines</span>
-                    </div>
-                  </div>
-                  <div style="border-top:1px solid var(--ink-100);padding-top:14px;">
-                    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--ink-400);margin-bottom:10px;">Currently Borrowed</div>
-                    <div class="list-row">
-                      <div class="row-cover v1"></div>
-                      <div class="row-content"><div class="row-title">Clean Code</div><div class="row-meta">Borrowed Nov 7 · <span style="color:var(--warn);font-weight:600;">Due Nov 21</span></div></div>
-                    </div>
-                    <div class="list-row">
-                      <div class="row-cover v3"></div>
-                      <div class="row-content"><div class="row-title">Designing Data-Intensive Applications</div><div class="row-meta">Borrowed Nov 11 · Due Nov 25</div></div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="card">
-                  <div style="display:flex;align-items:center;gap:16px;margin-bottom:16px;">
-                    <div class="avatar" style="width:44px;height:44px;font-size:14px;flex-shrink:0;background:linear-gradient(135deg,#1D4ED8,#1e3a8a);">KG</div>
-                    <div style="flex:1;">
-                      <div style="font-weight:700;font-size:16px;font-family:var(--font-display);">Khatrina B. Gonzales</div>
-                      <div style="font-size:12px;color:var(--ink-500);">2021-08891 · BS Information Technology · 4th Year</div>
-                    </div>
-                    <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;">
-                      <span class="pill pill-info">2 books out</span>
-                      <span class="pill pill-available">No overdue</span>
-                      <span class="pill pill-available">₱0.00 fines</span>
-                    </div>
-                  </div>
-                  <div style="border-top:1px solid var(--ink-100);padding-top:14px;">
-                    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--ink-400);margin-bottom:10px;">Currently Borrowed</div>
-                    <div class="list-row">
-                      <div class="row-cover v6"></div>
-                      <div class="row-content"><div class="row-title">Database System Concepts</div><div class="row-meta">Borrowed Nov 10 · Due Nov 24</div></div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="card">
-                  <div style="display:flex;align-items:center;gap:16px;margin-bottom:16px;">
-                    <div class="avatar" style="width:44px;height:44px;font-size:14px;flex-shrink:0;background:linear-gradient(135deg,var(--gold-600),#7A5E26);">JS</div>
-                    <div style="flex:1;">
-                      <div style="font-weight:700;font-size:16px;font-family:var(--font-display);">Jed F. Sayat</div>
-                      <div style="font-size:12px;color:var(--ink-500);">2023-00412 · BS Computer Science · 2nd Year</div>
-                    </div>
-                    <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;">
-                      <span class="pill pill-info">3 books out</span>
-                      <span class="pill" style="background:var(--danger-bg);color:var(--danger);">1 overdue</span>
-                      <span class="pill" style="background:var(--danger-bg);color:var(--danger);">₱30.00 fines</span>
-                    </div>
-                  </div>
-                  <div style="border-top:1px solid var(--ink-100);padding-top:14px;">
-                    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--ink-400);margin-bottom:10px;">Currently Borrowed</div>
-                    <div class="list-row">
-                      <div class="row-cover v4"></div>
-                      <div class="row-content"><div class="row-title">The Pragmatic Programmer</div><div class="row-meta">Borrowed Oct 28 · <span style="color:var(--danger);font-weight:600;">Overdue since Nov 11</span></div></div>
-                    </div>
-                    <div class="list-row">
-                      <div class="row-cover v5"></div>
-                      <div class="row-content"><div class="row-title">Operating System Concepts</div><div class="row-meta">Borrowed Nov 12 · Due Nov 26</div></div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="card">
-                  <div style="display:flex;align-items:center;gap:16px;margin-bottom:16px;">
-                    <div class="avatar" style="width:44px;height:44px;font-size:14px;flex-shrink:0;background:linear-gradient(135deg,#7C3AED,#4C1D95);">PA</div>
-                    <div style="flex:1;">
-                      <div style="font-weight:700;font-size:16px;font-family:var(--font-display);">Paolo M. Aguilar</div>
-                      <div style="font-size:12px;color:var(--ink-500);">2020-15503 · BS Computer Engineering · 4th Year</div>
-                    </div>
-                    <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;">
-                      <span class="pill pill-info">1 book out</span>
-                      <span class="pill pill-available">No overdue</span>
-                      <span class="pill pill-available">₱0.00 fines</span>
-                    </div>
-                  </div>
-                  <div style="border-top:1px solid var(--ink-100);padding-top:14px;">
-                    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--ink-400);margin-bottom:10px;">Currently Borrowed</div>
-                    <div class="list-row">
-                      <div class="row-cover v2"></div>
-                      <div class="row-content"><div class="row-title">Computer Networks, 6th Edition</div><div class="row-meta">Borrowed Nov 14 · Due Nov 28</div></div>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-            </div><!-- end students panel -->
+            </div>
 
           </div><!-- end librarian role-view -->
 
@@ -2940,7 +2816,7 @@
                 <td style="font-size:13px;text-align:center;">4</td>
                 <td style="font-size:13px;text-align:center;color:var(--danger);font-weight:600;">1</td>
                 <td><span class="pill pill-available" style="font-size:11px;padding:2px 8px;">Active</span></td>
-                <td><button class="btn btn-secondary" style="padding:4px 10px;font-size:11px;">View</button></td>
+                <td><button class="btn btn-secondary" style="padding:4px 10px;font-size:11px;" onclick="navigate('user-detail')">View</button></td>
               </tr>
               <tr>
                 <td>
@@ -2957,7 +2833,7 @@
                 <td style="font-size:13px;text-align:center;">2</td>
                 <td style="font-size:13px;text-align:center;">—</td>
                 <td><span class="pill pill-available" style="font-size:11px;padding:2px 8px;">Active</span></td>
-                <td><button class="btn btn-secondary" style="padding:4px 10px;font-size:11px;">View</button></td>
+                <td><button class="btn btn-secondary" style="padding:4px 10px;font-size:11px;" onclick="navigate('user-detail')">View</button></td>
               </tr>
               <tr>
                 <td>
@@ -2974,7 +2850,7 @@
                 <td style="font-size:13px;text-align:center;">1</td>
                 <td style="font-size:13px;text-align:center;color:var(--danger);font-weight:600;">1</td>
                 <td><span class="pill pill-available" style="font-size:11px;padding:2px 8px;">Active</span></td>
-                <td><button class="btn btn-secondary" style="padding:4px 10px;font-size:11px;">View</button></td>
+                <td><button class="btn btn-secondary" style="padding:4px 10px;font-size:11px;" onclick="navigate('user-detail')">View</button></td>
               </tr>
               <tr>
                 <td>
@@ -2991,7 +2867,7 @@
                 <td style="font-size:13px;text-align:center;">3</td>
                 <td style="font-size:13px;text-align:center;">—</td>
                 <td><span class="pill pill-available" style="font-size:11px;padding:2px 8px;">Active</span></td>
-                <td><button class="btn btn-secondary" style="padding:4px 10px;font-size:11px;">View</button></td>
+                <td><button class="btn btn-secondary" style="padding:4px 10px;font-size:11px;" onclick="navigate('user-detail')">View</button></td>
               </tr>
               <tr>
                 <td>
@@ -3008,10 +2884,142 @@
                 <td style="font-size:13px;text-align:center;">0</td>
                 <td style="font-size:13px;text-align:center;">—</td>
                 <td><span class="pill" style="font-size:11px;padding:2px 8px;background:var(--ink-100);color:var(--ink-500);">Suspended</span></td>
-                <td><button class="btn btn-secondary" style="padding:4px 10px;font-size:11px;">View</button></td>
+                <td><button class="btn btn-secondary" style="padding:4px 10px;font-size:11px;" onclick="navigate('user-detail')">View</button></td>
               </tr>
             </tbody>
           </table>
+        </div>
+      </section>
+
+      <!-- ========== USER DETAIL ========== -->
+      <section class="page" id="page-user-detail">
+        <button class="btn btn-ghost" onclick="navigate('manage-users')" style="margin-bottom:24px;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+          Back to users
+        </button>
+
+        <!-- Profile header -->
+        <div class="card" style="margin-bottom:20px;">
+          <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap;">
+            <div class="avatar" style="width:64px;height:64px;font-size:20px;flex-shrink:0;background:linear-gradient(135deg,var(--green-700),var(--green-900));">SC</div>
+            <div style="flex:1;min-width:200px;">
+              <div style="font-family:var(--font-display);font-size:24px;font-weight:600;color:var(--ink-900);">Shan A. Cruz</div>
+              <div style="font-size:13px;color:var(--ink-500);margin-top:3px;">2022-10234 · BS Computer Science · 3rd Year</div>
+              <div style="font-size:13px;color:var(--ink-500);">shanaczanecruzat@gmail.com</div>
+            </div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+              <span class="pill pill-info">Student</span>
+              <span class="pill pill-available">Active</span>
+              <button class="btn btn-ghost" style="font-size:13px;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                Edit
+              </button>
+              <button class="btn btn-ghost" style="font-size:13px;color:var(--danger);">Suspend</button>
+            </div>
+          </div>
+
+          <!-- Quick stats -->
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:16px;margin-top:20px;padding-top:20px;border-top:1px solid var(--ink-100);">
+            <div style="text-align:center;">
+              <div style="font-family:var(--font-display);font-size:28px;font-weight:600;color:var(--ink-900);">4</div>
+              <div style="font-size:12px;color:var(--ink-500);margin-top:2px;">Active Loans</div>
+            </div>
+            <div style="text-align:center;">
+              <div style="font-family:var(--font-display);font-size:28px;font-weight:600;color:var(--warn);">1</div>
+              <div style="font-size:12px;color:var(--ink-500);margin-top:2px;">Due Soon</div>
+            </div>
+            <div style="text-align:center;">
+              <div style="font-family:var(--font-display);font-size:28px;font-weight:600;color:var(--ink-900);">0</div>
+              <div style="font-size:12px;color:var(--ink-500);margin-top:2px;">Overdue</div>
+            </div>
+            <div style="text-align:center;">
+              <div style="font-family:var(--font-display);font-size:28px;font-weight:600;color:var(--green-700);">₱0.00</div>
+              <div style="font-size:12px;color:var(--ink-500);margin-top:2px;">Outstanding Fines</div>
+            </div>
+            <div style="text-align:center;">
+              <div style="font-family:var(--font-display);font-size:28px;font-weight:600;color:var(--ink-900);">17</div>
+              <div style="font-size:12px;color:var(--ink-500);margin-top:2px;">Total Borrowed</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start;">
+          <!-- Currently Borrowed -->
+          <div>
+            <h3 class="section-title" style="margin-bottom:12px;">Currently Borrowed</h3>
+            <div class="card" style="padding:0;overflow:hidden;">
+              <table class="table">
+                <thead>
+                  <tr><th>Book</th><th>Borrowed</th><th>Due</th><th></th></tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td style="font-size:13px;font-weight:600;">Clean Code</td>
+                    <td style="font-size:12px;color:var(--ink-500);">Nov 7</td>
+                    <td><span style="color:var(--warn);font-weight:600;font-size:12px;">Nov 21</span></td>
+                    <td><button class="btn btn-ghost" style="font-size:11px;padding:3px 8px;">Mark Returned</button></td>
+                  </tr>
+                  <tr>
+                    <td style="font-size:13px;font-weight:600;">Designing Data-Intensive Apps</td>
+                    <td style="font-size:12px;color:var(--ink-500);">Nov 11</td>
+                    <td style="font-size:12px;color:var(--ink-500);">Nov 25</td>
+                    <td><button class="btn btn-ghost" style="font-size:11px;padding:3px 8px;">Mark Returned</button></td>
+                  </tr>
+                  <tr>
+                    <td style="font-size:13px;font-weight:600;">The Pragmatic Programmer</td>
+                    <td style="font-size:12px;color:var(--ink-500);">Nov 12</td>
+                    <td style="font-size:12px;color:var(--ink-500);">Nov 26</td>
+                    <td><button class="btn btn-ghost" style="font-size:11px;padding:3px 8px;">Mark Returned</button></td>
+                  </tr>
+                  <tr>
+                    <td style="font-size:13px;font-weight:600;">Clean Architecture</td>
+                    <td style="font-size:12px;color:var(--ink-500);">Nov 14</td>
+                    <td style="font-size:12px;color:var(--ink-500);">Nov 28</td>
+                    <td><button class="btn btn-ghost" style="font-size:11px;padding:3px 8px;">Mark Returned</button></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Borrowing History -->
+          <div>
+            <h3 class="section-title" style="margin-bottom:12px;">Borrowing History</h3>
+            <div class="card" style="padding:0;overflow:hidden;">
+              <table class="table">
+                <thead>
+                  <tr><th>Book</th><th>Returned</th><th>Fine</th></tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td style="font-size:13px;font-weight:600;">Refactoring</td>
+                    <td style="font-size:12px;color:var(--ink-500);">Nov 1</td>
+                    <td style="font-size:12px;color:var(--green-700);">—</td>
+                  </tr>
+                  <tr>
+                    <td style="font-size:13px;font-weight:600;">Code Complete</td>
+                    <td style="font-size:12px;color:var(--ink-500);">Oct 24</td>
+                    <td style="font-size:12px;color:var(--green-700);">—</td>
+                  </tr>
+                  <tr>
+                    <td style="font-size:13px;font-weight:600;">Operating System Concepts</td>
+                    <td style="font-size:12px;color:var(--ink-500);">Oct 10</td>
+                    <td style="font-size:12px;color:var(--danger);">₱10.00</td>
+                  </tr>
+                  <tr>
+                    <td style="font-size:13px;font-weight:600;">Database System Concepts</td>
+                    <td style="font-size:12px;color:var(--ink-500);">Sep 30</td>
+                    <td style="font-size:12px;color:var(--green-700);">—</td>
+                  </tr>
+                  <tr>
+                    <td style="font-size:13px;font-weight:600;">Computer Networks</td>
+                    <td style="font-size:12px;color:var(--ink-500);">Sep 15</td>
+                    <td style="font-size:12px;color:var(--green-700);">—</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </section>
 
