@@ -199,7 +199,7 @@
 
           <div class="side-section">
             <div class="side-label">My Library</div>
-            <button class="side-link" onclick="navigate('book-detail')">
+            <button class="side-link" onclick="navigate('borrowed')" data-nav="borrowed">
               <svg
                 width="16"
                 height="16"
@@ -659,78 +659,66 @@
                   <h3 class="section-title">Currently Borrowed</h3>
                   <a href="#" class="section-link">See all →</a>
                 </div>
-                <div class="card">
-                  <div class="list-row">
-                    <div class="row-cover v1"></div>
-                    <div class="row-content">
-                      <div class="row-title">
-                        Clean Code: A Handbook of Agile Software Craftsmanship
-                      </div>
-                      <div class="row-meta">
-                        Robert C. Martin · Borrowed Nov 7 ·
-                        <span style="color: var(--warn); font-weight: 600"
-                          >Due in 2 days</span
-                        >
-                      </div>
-                    </div>
-                    <button
-                      class="btn btn-secondary"
-                      style="padding: 6px 12px; font-size: 12px"
-                    >
-                      Renew
-                    </button>
-                  </div>
-                  <div class="list-row">
-                    <div class="row-cover v3"></div>
-                    <div class="row-content">
-                      <div class="row-title">
-                        Designing Data-Intensive Applications
-                      </div>
-                      <div class="row-meta">
-                        Martin Kleppmann · Borrowed Nov 11 · Due Nov 25
-                      </div>
-                    </div>
-                    <button
-                      class="btn btn-secondary"
-                      style="padding: 6px 12px; font-size: 12px"
-                    >
-                      Renew
-                    </button>
-                  </div>
-                  <div class="list-row">
-                    <div class="row-cover v2"></div>
-                    <div class="row-content">
-                      <div class="row-title">
-                        The Pragmatic Programmer, 20th Anniversary Edition
-                      </div>
-                      <div class="row-meta">
-                        David Thomas, Andrew Hunt · Borrowed Nov 13 · Due Nov 27
-                      </div>
-                    </div>
-                    <button
-                      class="btn btn-secondary"
-                      style="padding: 6px 12px; font-size: 12px"
-                    >
-                      Renew
-                    </button>
-                  </div>
-                  <div class="list-row">
-                    <div class="row-cover v4"></div>
-                    <div class="row-content">
-                      <div class="row-title">
-                        Computer Networks, 6th Edition
-                      </div>
-                      <div class="row-meta">
-                        Andrew Tanenbaum · Borrowed Nov 14 · Due Nov 28
-                      </div>
-                    </div>
-                    <button
-                      class="btn btn-secondary"
-                      style="padding: 6px 12px; font-size: 12px"
-                    >
-                      Renew
-                    </button>
-                  </div>
+                <div class="borrow-tabs">
+                  <button class="borrow-tab active" data-filter="all">All <span class="count">4</span></button>
+                  <button class="borrow-tab" data-filter="due-soon">Due Soon <span class="count">1</span></button>
+                  <button class="borrow-tab" data-filter="overdue">Overdue <span class="count">1</span></button>
+                  <button class="borrow-tab" data-filter="active">Active <span class="count">2</span></button>
+                </div>
+                <div class="card" style="padding:0;overflow:hidden;">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th>Book</th>
+                        <th>Borrowed</th>
+                        <th>Due Date</th>
+                        <th>Status</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr data-borrow-type="due-soon">
+                        <td>
+                          <div style="font-weight:600;font-size:13px;">Clean Code</div>
+                          <div style="font-size:12px;color:var(--ink-500);">Robert C. Martin</div>
+                        </td>
+                        <td style="font-size:13px;color:var(--ink-500);">Nov 7</td>
+                        <td style="font-size:13px;font-weight:600;color:var(--warn);">Nov 21</td>
+                        <td><span class="pill pill-reserved" style="font-size:11px;padding:2px 8px;">Due Soon</span></td>
+                        <td><button class="btn btn-secondary" style="padding:4px 10px;font-size:11px;">Renew</button></td>
+                      </tr>
+                      <tr data-borrow-type="overdue">
+                        <td>
+                          <div style="font-weight:600;font-size:13px;">Designing Data-Intensive Applications</div>
+                          <div style="font-size:12px;color:var(--ink-500);">Martin Kleppmann</div>
+                        </td>
+                        <td style="font-size:13px;color:var(--ink-500);">Nov 3</td>
+                        <td style="font-size:13px;font-weight:600;color:var(--danger);">Nov 17</td>
+                        <td><span class="pill pill-unavailable" style="font-size:11px;padding:2px 8px;">Overdue</span></td>
+                        <td><button class="btn btn-secondary" style="padding:4px 10px;font-size:11px;">Renew</button></td>
+                      </tr>
+                      <tr data-borrow-type="active">
+                        <td>
+                          <div style="font-weight:600;font-size:13px;">The Pragmatic Programmer</div>
+                          <div style="font-size:12px;color:var(--ink-500);">Thomas, Hunt</div>
+                        </td>
+                        <td style="font-size:13px;color:var(--ink-500);">Nov 13</td>
+                        <td style="font-size:13px;color:var(--ink-700);">Nov 27</td>
+                        <td><span class="pill pill-available" style="font-size:11px;padding:2px 8px;">Active</span></td>
+                        <td><button class="btn btn-secondary" style="padding:4px 10px;font-size:11px;">Renew</button></td>
+                      </tr>
+                      <tr data-borrow-type="active">
+                        <td>
+                          <div style="font-weight:600;font-size:13px;">Computer Networks, 6th Ed.</div>
+                          <div style="font-size:12px;color:var(--ink-500);">Andrew Tanenbaum</div>
+                        </td>
+                        <td style="font-size:13px;color:var(--ink-500);">Nov 14</td>
+                        <td style="font-size:13px;color:var(--ink-700);">Nov 28</td>
+                        <td><span class="pill pill-available" style="font-size:11px;padding:2px 8px;">Active</span></td>
+                        <td><button class="btn btn-secondary" style="padding:4px 10px;font-size:11px;">Renew</button></td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
               </div>
 
@@ -2962,6 +2950,80 @@
             </div>
           </div>
         </section>
+      <!-- ========== BORROWED BOOKS ========== -->
+      <section class="page" id="page-borrowed">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Borrowed <em>Books</em></h1>
+            <p class="page-subtitle">4 books currently checked out</p>
+          </div>
+        </div>
+
+        <div class="borrow-tabs" style="margin-bottom:16px;">
+          <button class="borrow-tab active" data-filter="all">All <span class="count">4</span></button>
+          <button class="borrow-tab" data-filter="due-soon">Due Soon <span class="count">1</span></button>
+          <button class="borrow-tab" data-filter="overdue">Overdue <span class="count">1</span></button>
+          <button class="borrow-tab" data-filter="active">Active <span class="count">2</span></button>
+        </div>
+
+        <div class="card" style="padding:0;overflow:hidden;">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Book</th>
+                <th>Author</th>
+                <th>Borrowed</th>
+                <th>Due Date</th>
+                <th>Status</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr data-borrow-type="due-soon">
+                <td style="font-weight:600;font-size:13px;">Clean Code</td>
+                <td style="font-size:13px;color:var(--ink-500);">Robert C. Martin</td>
+                <td style="font-size:13px;color:var(--ink-500);">Nov 7, 2025</td>
+                <td style="font-size:13px;font-weight:600;color:var(--warn);">Nov 21, 2025</td>
+                <td><span class="pill pill-reserved" style="font-size:11px;padding:2px 8px;">Due Soon</span></td>
+                <td style="display:flex;gap:6px;">
+                  <button class="btn btn-secondary" style="padding:4px 10px;font-size:11px;">Renew</button>
+                </td>
+              </tr>
+              <tr data-borrow-type="overdue">
+                <td style="font-weight:600;font-size:13px;">Designing Data-Intensive Applications</td>
+                <td style="font-size:13px;color:var(--ink-500);">Martin Kleppmann</td>
+                <td style="font-size:13px;color:var(--ink-500);">Nov 3, 2025</td>
+                <td style="font-size:13px;font-weight:600;color:var(--danger);">Nov 17, 2025</td>
+                <td><span class="pill pill-unavailable" style="font-size:11px;padding:2px 8px;">Overdue</span></td>
+                <td style="display:flex;gap:6px;">
+                  <button class="btn btn-secondary" style="padding:4px 10px;font-size:11px;">Renew</button>
+                </td>
+              </tr>
+              <tr data-borrow-type="active">
+                <td style="font-weight:600;font-size:13px;">The Pragmatic Programmer</td>
+                <td style="font-size:13px;color:var(--ink-500);">Thomas, Hunt</td>
+                <td style="font-size:13px;color:var(--ink-500);">Nov 13, 2025</td>
+                <td style="font-size:13px;color:var(--ink-700);">Nov 27, 2025</td>
+                <td><span class="pill pill-available" style="font-size:11px;padding:2px 8px;">Active</span></td>
+                <td style="display:flex;gap:6px;">
+                  <button class="btn btn-secondary" style="padding:4px 10px;font-size:11px;">Renew</button>
+                </td>
+              </tr>
+              <tr data-borrow-type="active">
+                <td style="font-weight:600;font-size:13px;">Computer Networks, 6th Edition</td>
+                <td style="font-size:13px;color:var(--ink-500);">Andrew Tanenbaum</td>
+                <td style="font-size:13px;color:var(--ink-500);">Nov 14, 2025</td>
+                <td style="font-size:13px;color:var(--ink-700);">Nov 28, 2025</td>
+                <td><span class="pill pill-available" style="font-size:11px;padding:2px 8px;">Active</span></td>
+                <td style="display:flex;gap:6px;">
+                  <button class="btn btn-secondary" style="padding:4px 10px;font-size:11px;">Renew</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
       <!-- ========== SAVED ========== -->
       <section class="page" id="page-saved">
         <div class="page-header">

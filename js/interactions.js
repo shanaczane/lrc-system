@@ -51,6 +51,23 @@ document.querySelectorAll('.catalog-tab').forEach(t => {
 });
 
 // ============================================
+// BORROWED BOOKS FILTER TABS
+// ============================================
+document.querySelectorAll('.borrow-tab').forEach(t => {
+  t.addEventListener('click', () => {
+    const group = t.closest('.borrow-tabs');
+    group.querySelectorAll('.borrow-tab').forEach(x => x.classList.remove('active'));
+    t.classList.add('active');
+
+    const filter = t.dataset.filter || 'all';
+    const tbody = group.nextElementSibling.querySelector('tbody');
+    tbody.querySelectorAll('tr').forEach(row => {
+      row.classList.toggle('borrow-row-hidden', filter !== 'all' && row.dataset.borrowType !== filter);
+    });
+  });
+});
+
+// ============================================
 // RESERVATION CALENDAR
 // ============================================
 document.querySelectorAll('.cal-day:not(.muted):not(.disabled)').forEach(d => {

@@ -1,4 +1,44 @@
 /* ============================================
+   BORROWED BOOKS FILTER TABS
+   ============================================ */
+.borrow-tabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 10px;
+}
+.borrow-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ink-500);
+  border: 1px solid var(--ink-200);
+  border-radius: 999px;
+  background: var(--white);
+  transition: all 0.15s;
+}
+.borrow-tab:hover { border-color: var(--ink-700); color: var(--ink-900); }
+.borrow-tab.active {
+  background: var(--green-700);
+  color: white;
+  border-color: var(--green-700);
+}
+.borrow-tab .count {
+  background: rgba(0,0,0,0.12);
+  padding: 1px 6px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 700;
+}
+.borrow-tab:not(.active) .count {
+  background: var(--ink-100);
+  color: var(--ink-700);
+}
+.borrow-row-hidden { display: none; }
+
+/* ============================================
    DASHBOARD — QR SCANNER (Librarian)
    ============================================ */
 .qr-card {
