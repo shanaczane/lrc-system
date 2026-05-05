@@ -298,7 +298,7 @@ body.on-landing .main {
   margin-top: 0;
 }
 body.on-landing #page-landing {
-  margin-top: var(--nav-h);
+  margin-top: 0;
   min-height: calc(100vh - var(--nav-h));
 }
 body.on-landing .role-switcher { display: none; }
