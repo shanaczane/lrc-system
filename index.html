@@ -1522,16 +1522,101 @@
                   <div class="meta-item"><div class="key">Loan Period</div><div class="val">14 days</div></div>
                 </div>
 
-                <!-- Availability + Reserve -->
-                <div class="availability-box">
+                <!-- Demo toggle -->
+                <div style="display:inline-flex;align-items:center;gap:8px;margin-bottom:12px;background:var(--ink-100);border-radius:999px;padding:4px 6px;">
+                  <span style="font-size:11px;font-weight:600;color:var(--ink-500);padding:0 6px;">Demo:</span>
+                  <button id="demoAvailBtn" onclick="document.getElementById('availStateAvailable').style.display='';document.getElementById('availStateUnavailable').style.display='none';document.getElementById('reserveInline').style.display='none';this.style.background='var(--green-700)';this.style.color='white';document.getElementById('demoUnavailBtn').style.background='';document.getElementById('demoUnavailBtn').style.color='';" style="padding:4px 12px;font-size:11px;font-weight:600;border-radius:999px;background:var(--green-700);color:white;border:none;cursor:pointer;">Available</button>
+                  <button id="demoUnavailBtn" onclick="document.getElementById('availStateAvailable').style.display='none';document.getElementById('availStateUnavailable').style.display='';document.getElementById('reserveInline').style.display='none';this.style.background='var(--warn)';this.style.color='white';document.getElementById('demoAvailBtn').style.background='';document.getElementById('demoAvailBtn').style.color='';" style="padding:4px 12px;font-size:11px;font-weight:600;border-radius:999px;border:none;cursor:pointer;">Checked Out</button>
+                </div>
+
+                <!-- Availability: AVAILABLE state -->
+                <div class="availability-box" id="availStateAvailable">
                   <div class="availability-info">
                     <strong>Available for borrowing</strong>
                     <span>This book is on the shelf and ready to reserve.</span>
                   </div>
-                  <button class="btn btn-primary" onclick="document.getElementById('reserveModal').style.display='flex'">
+                  <button class="btn btn-primary" onclick="document.getElementById('reserveInline').style.display=document.getElementById('reserveInline').style.display==='none'?'block':'none'">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/></svg>
                     Reserve
                   </button>
+                </div>
+
+                <!-- Availability: NOT AVAILABLE state (shown when book is checked out / reserved) -->
+                <div id="availStateUnavailable" style="display:none;margin-bottom:24px;">
+                  <div class="availability-box" style="background:var(--warn-bg);border-color:var(--warn);margin-bottom:12px;">
+                    <div class="availability-info">
+                      <strong style="color:var(--warn);">Currently checked out</strong>
+                      <span>Expected back by <strong>Nov 28, 2025</strong> · Loan period: 14 days</span>
+                    </div>
+                    <span class="pill pill-reserved" style="white-space:nowrap;flex-shrink:0;">Due Nov 28</span>
+                  </div>
+                  <div class="card" style="padding:16px 20px;">
+                    <p style="font-size:13px;font-weight:600;color:var(--ink-700);margin-bottom:12px;">What would you like to do?</p>
+                    <div style="display:flex;gap:10px;flex-wrap:wrap;">
+                      <button class="btn btn-secondary" onclick="document.getElementById('notifyInline').style.display=document.getElementById('notifyInline').style.display==='none'?'block':'none';document.getElementById('reserveInline').style.display='none';">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                        Notify me when available
+                      </button>
+                      <button class="btn btn-primary" onclick="document.getElementById('reserveInline').style.display=document.getElementById('reserveInline').style.display==='none'?'block':'none';document.getElementById('notifyInline').style.display='none';">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/></svg>
+                        Book for a date after Nov 28
+                      </button>
+                    </div>
+
+                    <!-- Notify me form -->
+                    <div id="notifyInline" style="display:none;margin-top:14px;padding-top:14px;border-top:1px solid var(--ink-100);">
+                      <p style="font-size:13px;color:var(--ink-600);margin-bottom:10px;">We'll send you a notification as soon as this book is returned and available for borrowing.</p>
+                      <div style="display:flex;gap:10px;align-items:center;">
+                        <input type="text" value="shanaczanecruzat@gmail.com" style="flex:1;padding:9px 12px;border:1px solid var(--ink-200);border-radius:var(--radius);font-size:13px;background:var(--ink-50);">
+                        <button class="btn btn-primary" style="white-space:nowrap;" onclick="document.getElementById('notifyInline').style.display='none';document.getElementById('notifyConfirm').style.display='flex'">
+                          Notify me
+                        </button>
+                      </div>
+                    </div>
+
+                    <!-- Notify confirmation -->
+                    <div id="notifyConfirm" style="display:none;margin-top:14px;padding-top:14px;border-top:1px solid var(--ink-100);align-items:center;gap:8px;">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                      <span style="font-size:13px;color:var(--success);font-weight:600;">You'll be notified when this book becomes available.</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Inline reservation form — shown on Reserve click -->
+                <div id="reserveInline" style="display:none;margin-bottom:24px;">
+                  <div class="card" style="border:1.5px solid var(--green-200);background:var(--green-50);">
+                    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+                      <h3 style="font-family:var(--font-display);font-size:17px;font-weight:600;color:var(--green-900);">Reserve this Book</h3>
+                      <button onclick="document.getElementById('reserveInline').style.display='none'" style="color:var(--ink-400);font-size:18px;line-height:1;background:none;border:none;cursor:pointer;">✕</button>
+                    </div>
+                    <p style="font-size:12px;color:var(--ink-500);margin-bottom:16px;">Pickup date must be on or after <strong>Nov 29</strong> — the day after the current loan period ends.</p>
+                    <div style="display:grid;gap:12px;">
+                      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+                        <div>
+                          <label style="font-size:12px;font-weight:600;color:var(--ink-500);display:block;margin-bottom:5px;">Full Name</label>
+                          <input type="text" value="Shan A. Cruz" style="width:100%;padding:9px 12px;border:1px solid var(--ink-200);border-radius:var(--radius);font-size:13px;background:var(--white);">
+                        </div>
+                        <div>
+                          <label style="font-size:12px;font-weight:600;color:var(--ink-500);display:block;margin-bottom:5px;">Student / Faculty ID</label>
+                          <input type="text" value="20220001" style="width:100%;padding:9px 12px;border:1px solid var(--ink-200);border-radius:var(--radius);font-size:13px;background:var(--white);">
+                        </div>
+                      </div>
+                      <div>
+                        <label style="font-size:12px;font-weight:600;color:var(--ink-500);display:block;margin-bottom:5px;">Pickup Date</label>
+                        <input type="date" style="width:100%;padding:9px 12px;border:1px solid var(--ink-200);border-radius:var(--radius);font-size:13px;background:var(--white);">
+                      </div>
+                      <div>
+                        <label style="font-size:12px;font-weight:600;color:var(--ink-500);display:block;margin-bottom:5px;">Purpose / Notes <span style="font-weight:400;color:var(--ink-400);">(optional)</span></label>
+                        <textarea rows="2" placeholder="e.g. for thesis research, class requirement…" style="width:100%;padding:9px 12px;border:1px solid var(--ink-200);border-radius:var(--radius);font-size:13px;background:var(--white);resize:none;font-family:inherit;"></textarea>
+                      </div>
+                    </div>
+                    <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:16px;">
+                      <button class="btn btn-ghost" onclick="document.getElementById('reserveInline').style.display='none'">Cancel</button>
+                      <button class="btn btn-primary" onclick="document.getElementById('reserveInline').style.display='none';navigate('reservations')">
+                        Confirm Reservation
+                      </button>
+                    </div>
+                  </div>
                 </div>
 
                 <div class="card" style="margin-bottom:16px;">
@@ -1547,51 +1632,6 @@
                     <div class="book-card"><div class="book-cover var-5"><div class="book-cover-deco"></div><div class="book-cover-author">McConnell</div><div class="book-cover-title">Code Complete</div></div></div>
                   </div>
                 </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Reserve Modal -->
-          <div id="reserveModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:200;align-items:center;justify-content:center;padding:24px;">
-            <div class="card" style="width:100%;max-width:480px;padding:28px;position:relative;">
-              <button onclick="document.getElementById('reserveModal').style.display='none'" style="position:absolute;top:16px;right:16px;color:var(--ink-400);font-size:20px;line-height:1;background:none;border:none;cursor:pointer;">✕</button>
-              <h3 style="font-family:var(--font-display);font-size:20px;font-weight:600;margin-bottom:4px;">Reserve Book</h3>
-              <p style="font-size:13px;color:var(--ink-500);margin-bottom:20px;">Clean Code · Robert C. Martin</p>
-
-              <div style="background:var(--green-50);border:1px solid var(--green-100);border-radius:var(--radius);padding:12px 14px;margin-bottom:20px;font-size:13px;color:var(--green-800);">
-                <strong>Book is available</strong> — your reservation will be confirmed immediately.
-              </div>
-
-              <div style="display:grid;gap:14px;">
-                <div>
-                  <label style="font-size:12px;font-weight:600;color:var(--ink-500);display:block;margin-bottom:6px;">Full Name</label>
-                  <input type="text" value="Shan A. Cruz" style="width:100%;padding:10px 14px;border:1px solid var(--ink-200);border-radius:var(--radius);font-size:14px;background:var(--ink-50);">
-                </div>
-                <div>
-                  <label style="font-size:12px;font-weight:600;color:var(--ink-500);display:block;margin-bottom:6px;">Student / Faculty ID</label>
-                  <input type="text" value="20220001" style="width:100%;padding:10px 14px;border:1px solid var(--ink-200);border-radius:var(--radius);font-size:14px;background:var(--ink-50);">
-                </div>
-                <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
-                  <div>
-                    <label style="font-size:12px;font-weight:600;color:var(--ink-500);display:block;margin-bottom:6px;">Pickup Date</label>
-                    <input type="date" style="width:100%;padding:10px 14px;border:1px solid var(--ink-200);border-radius:var(--radius);font-size:14px;background:var(--ink-50);">
-                  </div>
-                  <div>
-                    <label style="font-size:12px;font-weight:600;color:var(--ink-500);display:block;margin-bottom:6px;">Return By</label>
-                    <input type="date" style="width:100%;padding:10px 14px;border:1px solid var(--ink-200);border-radius:var(--radius);font-size:14px;background:var(--ink-50);">
-                  </div>
-                </div>
-                <div>
-                  <label style="font-size:12px;font-weight:600;color:var(--ink-500);display:block;margin-bottom:6px;">Purpose / Notes <span style="font-weight:400;color:var(--ink-400);">(optional)</span></label>
-                  <textarea rows="2" placeholder="e.g. for thesis research, class requirement…" style="width:100%;padding:10px 14px;border:1px solid var(--ink-200);border-radius:var(--radius);font-size:14px;background:var(--ink-50);resize:none;font-family:inherit;"></textarea>
-                </div>
-              </div>
-
-              <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:20px;">
-                <button class="btn btn-ghost" onclick="document.getElementById('reserveModal').style.display='none'">Cancel</button>
-                <button class="btn btn-primary" onclick="document.getElementById('reserveModal').style.display='none';navigate('reservations')">
-                  Confirm Reservation
-                </button>
               </div>
             </div>
           </div>
@@ -1687,312 +1727,78 @@
 
         <!-- ========== RESERVATIONS ========== -->
         <section class="page" id="page-reservations">
-          <!-- Student / Faculty Reservations -->
+          <!-- Student / Faculty Reservations — MY RESERVATIONS list -->
           <div class="role-view" data-role="student">
             <div class="page-header">
               <div>
                 <h1 class="page-title">My <em>Reservations</em></h1>
-                <p class="page-subtitle">Active and upcoming holds</p>
+                <p class="page-subtitle">3 active holds — reserve books from the catalog</p>
               </div>
             </div>
 
-            <div class="card" style="margin-bottom: 24px">
-              <div
-                style="
-                  display: flex;
-                  align-items: center;
-                  gap: 14px;
-                  padding: 8px 0;
-                "
-              >
-                <div
-                  class="row-cover v3"
-                  style="width: 60px; height: 80px"
-                ></div>
-                <div style="flex: 1">
-                  <div
-                    style="
-                      font-weight: 700;
-                      font-family: var(--font-display);
-                      font-size: 18px;
-                    "
-                  >
-                    Designing Data-Intensive Applications
-                  </div>
-                  <div
-                    style="
-                      color: var(--ink-500);
-                      font-size: 13px;
-                      margin: 4px 0;
-                    "
-                  >
-                    Martin Kleppmann · Reserved Nov 14
-                  </div>
-                  <span class="pill pill-available">Ready for pickup</span>
-                </div>
-                <div style="text-align: right">
-                  <div
-                    style="
-                      font-size: 11px;
-                      color: var(--ink-500);
-                      text-transform: uppercase;
-                      letter-spacing: 0.08em;
-                      font-weight: 600;
-                    "
-                  >
-                    Pickup by
-                  </div>
-                  <div
-                    style="
-                      font-family: var(--font-display);
-                      font-size: 22px;
-                      font-weight: 600;
-                    "
-                  >
-                    Nov 21
-                  </div>
-                  <button
-                    class="btn btn-primary"
-                    style="margin-top: 8px; padding: 6px 14px; font-size: 12px"
-                  >
-                    View QR
-                  </button>
-                </div>
-              </div>
+            <div class="borrow-tabs" style="margin-bottom:16px;">
+              <button class="borrow-tab active" data-filter="all">All <span class="count">3</span></button>
+              <button class="borrow-tab" data-filter="pending">Pending <span class="count">1</span></button>
+              <button class="borrow-tab" data-filter="ready">Ready for Pickup <span class="count">1</span></button>
+              <button class="borrow-tab" data-filter="active">Active <span class="count">1</span></button>
             </div>
 
-            <div class="card" style="margin-bottom: 32px">
-              <div
-                style="
-                  display: flex;
-                  align-items: center;
-                  gap: 14px;
-                  padding: 8px 0;
-                "
-              >
-                <div
-                  class="row-cover v5"
-                  style="width: 60px; height: 80px"
-                ></div>
-                <div style="flex: 1">
-                  <div
-                    style="
-                      font-weight: 700;
-                      font-family: var(--font-display);
-                      font-size: 18px;
-                    "
-                  >
-                    The Pragmatic Programmer
-                  </div>
-                  <div
-                    style="
-                      color: var(--ink-500);
-                      font-size: 13px;
-                      margin: 4px 0;
-                    "
-                  >
-                    Thomas, Hunt · Reserved Nov 15
-                  </div>
-                  <span class="pill pill-reserved">Pending confirmation</span>
-                </div>
-                <div style="text-align: right">
-                  <div
-                    style="
-                      font-size: 11px;
-                      color: var(--ink-500);
-                      text-transform: uppercase;
-                      letter-spacing: 0.08em;
-                      font-weight: 600;
-                    "
-                  >
-                    Pickup window
-                  </div>
-                  <div
-                    style="
-                      font-family: var(--font-display);
-                      font-size: 18px;
-                      font-weight: 600;
-                    "
-                  >
-                    Nov 22–24
-                  </div>
-                  <button
-                    class="btn btn-secondary"
-                    style="margin-top: 8px; padding: 6px 14px; font-size: 12px"
-                  >
-                    Cancel hold
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <h3 class="section-title" style="margin-bottom: 16px">
-              Reserve a new book
-            </h3>
-
-            <div class="stepper">
-              <div class="step done">
-                <div class="step-num">✓</div>
-                <div class="step-label">Select book</div>
-              </div>
-              <div class="step-line"></div>
-              <div class="step active">
-                <div class="step-num">2</div>
-                <div class="step-label">Pickup date</div>
-              </div>
-              <div class="step-line"></div>
-              <div class="step">
-                <div class="step-num">3</div>
-                <div class="step-label">Confirm</div>
-              </div>
-            </div>
-
-            <div class="reserve-grid">
-              <div class="date-picker">
-                <div class="calendar-head">
-                  <div class="month-name">November 2025</div>
-                  <div class="cal-nav">
-                    <button>
-                      <svg
-                        width="14"
-                        height="14"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                      >
-                        <polyline points="15 18 9 12 15 6" />
-                      </svg>
-                    </button>
-                    <button>
-                      <svg
-                        width="14"
-                        height="14"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                      >
-                        <polyline points="9 18 15 12 9 6" />
-                      </svg>
-                    </button>
-                  </div>
-                </div>
-
-                <div class="cal-grid">
-                  <div class="cal-day-name">Sun</div>
-                  <div class="cal-day-name">Mon</div>
-                  <div class="cal-day-name">Tue</div>
-                  <div class="cal-day-name">Wed</div>
-                  <div class="cal-day-name">Thu</div>
-                  <div class="cal-day-name">Fri</div>
-                  <div class="cal-day-name">Sat</div>
-
-                  <div class="cal-day muted">26</div>
-                  <div class="cal-day muted">27</div>
-                  <div class="cal-day muted">28</div>
-                  <div class="cal-day muted">29</div>
-                  <div class="cal-day muted">30</div>
-                  <div class="cal-day muted">31</div>
-                  <div class="cal-day disabled">1</div>
-
-                  <div class="cal-day disabled">2</div>
-                  <div class="cal-day disabled">3</div>
-                  <div class="cal-day disabled">4</div>
-                  <div class="cal-day disabled">5</div>
-                  <div class="cal-day disabled">6</div>
-                  <div class="cal-day disabled">7</div>
-                  <div class="cal-day disabled">8</div>
-
-                  <div class="cal-day disabled">9</div>
-                  <div class="cal-day disabled">10</div>
-                  <div class="cal-day disabled">11</div>
-                  <div class="cal-day disabled">12</div>
-                  <div class="cal-day disabled">13</div>
-                  <div class="cal-day disabled">14</div>
-                  <div class="cal-day disabled">15</div>
-
-                  <div class="cal-day disabled">16</div>
-                  <div class="cal-day disabled">17</div>
-                  <div class="cal-day disabled">18</div>
-                  <div class="cal-day today">19</div>
-                  <div class="cal-day">20</div>
-                  <div class="cal-day">21</div>
-                  <div class="cal-day">22</div>
-
-                  <div class="cal-day">23</div>
-                  <div class="cal-day">24</div>
-                  <div class="cal-day selected">25</div>
-                  <div class="cal-day">26</div>
-                  <div class="cal-day">27</div>
-                  <div class="cal-day">28</div>
-                  <div class="cal-day">29</div>
-
-                  <div class="cal-day">30</div>
-                  <div class="cal-day muted">1</div>
-                  <div class="cal-day muted">2</div>
-                  <div class="cal-day muted">3</div>
-                  <div class="cal-day muted">4</div>
-                  <div class="cal-day muted">5</div>
-                  <div class="cal-day muted">6</div>
-                </div>
-
-                <div
-                  style="
-                    margin-top: 20px;
-                    padding-top: 20px;
-                    border-top: 1px solid var(--ink-100);
-                  "
-                >
-                  <div style="display: flex; gap: 8px; flex-wrap: wrap">
-                    <span class="pill pill-available">Available</span>
-                    <span class="pill pill-reserved">Limited</span>
-                    <span class="pill pill-unavailable">Closed</span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="summary-box">
-                <h4
-                  style="
-                    font-family: var(--font-display);
-                    font-size: 18px;
-                    font-weight: 600;
-                    margin-bottom: 16px;
-                  "
-                >
-                  Reservation summary
-                </h4>
-                <div class="summary-line">
-                  <span class="key">Title</span
-                  ><span class="val">Clean Code</span>
-                </div>
-                <div class="summary-line">
-                  <span class="key">Pickup date</span
-                  ><span class="val">Nov 25, 2025</span>
-                </div>
-                <div class="summary-line">
-                  <span class="key">Loan period</span
-                  ><span class="val">14 days</span>
-                </div>
-                <div class="summary-line">
-                  <span class="key">Return by</span
-                  ><span class="val">Dec 9, 2025</span>
-                </div>
-                <div class="summary-line">
-                  <span class="key">Pickup location</span
-                  ><span class="val">Main LRC, 2nd Floor</span>
-                </div>
-                <button
-                  class="btn btn-primary btn-full"
-                  style="margin-top: 20px"
-                >
-                  Confirm reservation
-                </button>
-                <button class="btn btn-ghost btn-full" style="margin-top: 8px">
-                  Cancel
-                </button>
-              </div>
+            <div class="card" style="padding:0;overflow:hidden;">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Book</th>
+                    <th>Reserved On</th>
+                    <th>Pickup Date</th>
+                    <th>Return By</th>
+                    <th>Status</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr data-borrow-type="ready">
+                    <td>
+                      <div style="font-weight:600;font-size:13px;">Designing Data-Intensive Applications</div>
+                      <div style="font-size:12px;color:var(--ink-500);">Martin Kleppmann</div>
+                    </td>
+                    <td style="font-size:13px;color:var(--ink-500);">Nov 14, 2025</td>
+                    <td style="font-size:13px;font-weight:600;color:var(--success);">Nov 21, 2025</td>
+                    <td style="font-size:13px;color:var(--ink-700);">Dec 5, 2025</td>
+                    <td><span class="pill pill-available" style="font-size:11px;padding:2px 8px;">Ready for Pickup</span></td>
+                    <td style="display:flex;gap:6px;">
+                      <button class="btn btn-primary" style="padding:4px 10px;font-size:11px;">View QR</button>
+                      <button class="btn btn-ghost" style="padding:4px 10px;font-size:11px;">Cancel</button>
+                    </td>
+                  </tr>
+                  <tr data-borrow-type="pending">
+                    <td>
+                      <div style="font-weight:600;font-size:13px;">The Pragmatic Programmer</div>
+                      <div style="font-size:12px;color:var(--ink-500);">Thomas, Hunt</div>
+                    </td>
+                    <td style="font-size:13px;color:var(--ink-500);">Nov 15, 2025</td>
+                    <td style="font-size:13px;color:var(--ink-700);">Nov 25, 2025</td>
+                    <td style="font-size:13px;color:var(--ink-700);">Dec 9, 2025</td>
+                    <td><span class="pill pill-reserved" style="font-size:11px;padding:2px 8px;">Pending</span></td>
+                    <td style="display:flex;gap:6px;">
+                      <button class="btn btn-ghost" style="padding:4px 10px;font-size:11px;">Cancel</button>
+                    </td>
+                  </tr>
+                  <tr data-borrow-type="active">
+                    <td>
+                      <div style="font-weight:600;font-size:13px;">Clean Code</div>
+                      <div style="font-size:12px;color:var(--ink-500);">Robert C. Martin</div>
+                    </td>
+                    <td style="font-size:13px;color:var(--ink-500);">Nov 7, 2025</td>
+                    <td style="font-size:13px;color:var(--ink-700);">Nov 7, 2025</td>
+                    <td style="font-size:13px;color:var(--warn);font-weight:600;">Nov 21, 2025</td>
+                    <td><span class="pill pill-info" style="font-size:11px;padding:2px 8px;">Active</span></td>
+                    <td style="display:flex;gap:6px;">
+                      <button class="btn btn-secondary" style="padding:4px 10px;font-size:11px;">Renew</button>
+                      <button class="btn btn-ghost" style="padding:4px 10px;font-size:11px;">Cancel</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
 
