@@ -273,7 +273,7 @@
                 <circle cx="11" cy="11" r="8" />
                 <path d="m21 21-4.3-4.3" />
               </svg>
-              Book Catalog
+              Catalog &amp; Students
             </button>
             <button
               class="side-link"
@@ -1030,12 +1030,13 @@
 
         <!-- ========== CATALOG ========== -->
         <section class="page" id="page-catalog">
+
+          <!-- Student / Faculty Catalog -->
+          <div class="role-view" data-role="student">
           <div class="page-header">
             <div>
               <h1 class="page-title">Search the <em>collection</em></h1>
-              <p class="page-subtitle">
-                42,318 titles indexed · live availability
-              </p>
+              <p class="page-subtitle">42,318 titles indexed · live availability</p>
             </div>
           </div>
 
@@ -1282,9 +1283,7 @@
                 <div class="book-cover-title">Test Driven Development</div>
               </div>
               <div class="book-info">
-                <div class="book-title">
-                  Test-Driven Development: By Example
-                </div>
+                <div class="book-title">Test-Driven Development: By Example</div>
                 <div class="book-author">Kent Beck · 2002</div>
                 <div class="book-meta">
                   <span class="book-call">QA76.76 B43</span>
@@ -1293,6 +1292,255 @@
               </div>
             </div>
           </div>
+          </div><!-- end student role-view -->
+
+          <!-- Librarian Catalog & Students -->
+          <div class="role-view" data-role="librarian" style="display:none;">
+            <div class="page-header">
+              <div>
+                <h1 class="page-title">Catalog <em>&amp; Students</em></h1>
+                <p class="page-subtitle">Search the collection or look up a student's borrowing record</p>
+              </div>
+              <button class="btn btn-primary">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                Add new book
+              </button>
+            </div>
+
+            <div class="catalog-tab-bar">
+              <button class="catalog-tab active" data-panel="books">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                Books
+              </button>
+              <button class="catalog-tab" data-panel="students">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+                Students
+              </button>
+            </div>
+
+            <!-- Books panel -->
+            <div class="catalog-panel" data-panel="books">
+              <div class="search-bar" style="margin-top:20px;">
+                <input type="text" placeholder="Search by title, author, call number, or ISBN…" value="clean code" />
+                <button class="btn btn-primary">Search</button>
+              </div>
+
+              <div class="filters">
+                <button class="filter active">All <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+                <button class="filter">Subject: Computer Science <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
+                <button class="filter">Available now <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
+                <button class="filter">Condition <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
+                <button class="filter">Year <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
+              </div>
+
+              <div class="results-meta">
+                <span><strong style="color:var(--ink-900);">128 results</strong> for "clean code" · sorted by relevance</span>
+                <select style="border:1px solid var(--ink-200);padding:6px 10px;border-radius:8px;background:white;font-size:13px;">
+                  <option>Most relevant</option><option>Newest</option><option>A–Z</option>
+                </select>
+              </div>
+
+              <div class="book-grid">
+                <div class="book-card" onclick="navigate('book-detail')">
+                  <div class="book-cover var-1"><div class="book-cover-deco"></div><div class="book-cover-author">Robert C. Martin</div><div class="book-cover-title">Clean Code</div></div>
+                  <div class="book-info">
+                    <div class="book-title">Clean Code: A Handbook of Agile Software Craftsmanship</div>
+                    <div class="book-author">Robert C. Martin · 2008</div>
+                    <div class="book-meta"><span class="book-call">QA76.76 M37</span><span class="pill pill-available">2 of 5</span></div>
+                    <div class="book-manage-stats">2 available · 3 checked out · 38× this sem</div>
+                    <div style="display:flex;gap:6px;margin-top:8px;">
+                      <button class="btn btn-secondary" style="padding:5px 10px;font-size:11px;" onclick="event.stopPropagation()">Edit record</button>
+                      <button class="btn btn-ghost" style="padding:5px 10px;font-size:11px;" onclick="event.stopPropagation()">+ Copy</button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="book-card">
+                  <div class="book-cover var-2"><div class="book-cover-deco"></div><div class="book-cover-author">Martin · Coplien</div><div class="book-cover-title">Clean Architecture</div></div>
+                  <div class="book-info">
+                    <div class="book-title">Clean Architecture: A Craftsman's Guide</div>
+                    <div class="book-author">Robert C. Martin · 2017</div>
+                    <div class="book-meta"><span class="book-call">QA76.76 M38</span><span class="pill pill-available">3 of 4</span></div>
+                    <div class="book-manage-stats">3 available · 1 checked out · 21× this sem</div>
+                    <div style="display:flex;gap:6px;margin-top:8px;">
+                      <button class="btn btn-secondary" style="padding:5px 10px;font-size:11px;" onclick="event.stopPropagation()">Edit record</button>
+                      <button class="btn btn-ghost" style="padding:5px 10px;font-size:11px;" onclick="event.stopPropagation()">+ Copy</button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="book-card">
+                  <div class="book-cover var-3"><div class="book-cover-deco"></div><div class="book-cover-author">Martin Fowler</div><div class="book-cover-title">Refactoring</div></div>
+                  <div class="book-info">
+                    <div class="book-title">Refactoring: Improving the Design of Existing Code</div>
+                    <div class="book-author">Martin Fowler · 2018</div>
+                    <div class="book-meta"><span class="book-call">QA76.76 F69</span><span class="pill pill-reserved">1 of 3</span></div>
+                    <div class="book-manage-stats">1 available · 1 checked out · <span style="color:var(--danger);">1 damaged</span> · 14× this sem</div>
+                    <div style="display:flex;gap:6px;margin-top:8px;">
+                      <button class="btn btn-secondary" style="padding:5px 10px;font-size:11px;" onclick="event.stopPropagation()">Edit record</button>
+                      <button class="btn btn-ghost" style="padding:5px 10px;font-size:11px;" onclick="event.stopPropagation()">+ Copy</button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="book-card">
+                  <div class="book-cover var-4"><div class="book-cover-deco"></div><div class="book-cover-author">Thomas · Hunt</div><div class="book-cover-title">The Pragmatic Programmer</div></div>
+                  <div class="book-info">
+                    <div class="book-title">The Pragmatic Programmer, 20th Anniv.</div>
+                    <div class="book-author">Thomas, Hunt · 2019</div>
+                    <div class="book-meta"><span class="book-call">QA76.6 T46</span><span class="pill pill-available">4 of 5</span></div>
+                    <div class="book-manage-stats">4 available · 1 checked out · 29× this sem</div>
+                    <div style="display:flex;gap:6px;margin-top:8px;">
+                      <button class="btn btn-secondary" style="padding:5px 10px;font-size:11px;" onclick="event.stopPropagation()">Edit record</button>
+                      <button class="btn btn-ghost" style="padding:5px 10px;font-size:11px;" onclick="event.stopPropagation()">+ Copy</button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="book-card">
+                  <div class="book-cover var-5"><div class="book-cover-deco"></div><div class="book-cover-author">McConnell</div><div class="book-cover-title">Code Complete</div></div>
+                  <div class="book-info">
+                    <div class="book-title">Code Complete: A Practical Handbook</div>
+                    <div class="book-author">Steve McConnell · 2004</div>
+                    <div class="book-meta"><span class="book-call">QA76.76 M39</span><span class="pill pill-unavailable">0 of 2</span></div>
+                    <div class="book-manage-stats" style="color:var(--danger);">0 available · 2 checked out · 11× this sem</div>
+                    <div style="display:flex;gap:6px;margin-top:8px;">
+                      <button class="btn btn-secondary" style="padding:5px 10px;font-size:11px;" onclick="event.stopPropagation()">Edit record</button>
+                      <button class="btn btn-ghost" style="padding:5px 10px;font-size:11px;" onclick="event.stopPropagation()">+ Copy</button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="book-card">
+                  <div class="book-cover var-6"><div class="book-cover-deco"></div><div class="book-cover-author">Kerievsky</div><div class="book-cover-title">Refactoring to Patterns</div></div>
+                  <div class="book-info">
+                    <div class="book-title">Refactoring to Patterns</div>
+                    <div class="book-author">Joshua Kerievsky · 2004</div>
+                    <div class="book-meta"><span class="book-call">QA76.76 K47</span><span class="pill pill-available">1 of 1</span></div>
+                    <div class="book-manage-stats">1 available · 0 checked out · 6× this sem</div>
+                    <div style="display:flex;gap:6px;margin-top:8px;">
+                      <button class="btn btn-secondary" style="padding:5px 10px;font-size:11px;" onclick="event.stopPropagation()">Edit record</button>
+                      <button class="btn btn-ghost" style="padding:5px 10px;font-size:11px;" onclick="event.stopPropagation()">+ Copy</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div><!-- end books panel -->
+
+            <!-- Students panel -->
+            <div class="catalog-panel" data-panel="students" style="display:none;">
+              <div class="search-bar" style="margin-top:20px;">
+                <input type="text" placeholder="Search by student ID or name… e.g. 2022-10234 or 'Cruz'" />
+                <button class="btn btn-primary">Search</button>
+              </div>
+
+              <div class="results-meta" style="margin-bottom:20px;">
+                <span><strong style="color:var(--ink-900);">4 students</strong> found · showing borrowing records</span>
+              </div>
+
+              <div style="display:flex;flex-direction:column;gap:16px;">
+
+                <div class="card">
+                  <div style="display:flex;align-items:center;gap:16px;margin-bottom:16px;">
+                    <div class="avatar" style="width:44px;height:44px;font-size:14px;flex-shrink:0;background:linear-gradient(135deg,var(--green-700),var(--green-900));">SC</div>
+                    <div style="flex:1;">
+                      <div style="font-weight:700;font-size:16px;font-family:var(--font-display);">Shan A. Cruz</div>
+                      <div style="font-size:12px;color:var(--ink-500);">2022-10234 · BS Computer Science · 3rd Year</div>
+                    </div>
+                    <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;">
+                      <span class="pill pill-info">4 books out</span>
+                      <span class="pill" style="background:var(--warn-bg);color:var(--warn);">1 due soon</span>
+                      <span class="pill pill-available">₱0.00 fines</span>
+                    </div>
+                  </div>
+                  <div style="border-top:1px solid var(--ink-100);padding-top:14px;">
+                    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--ink-400);margin-bottom:10px;">Currently Borrowed</div>
+                    <div class="list-row">
+                      <div class="row-cover v1"></div>
+                      <div class="row-content"><div class="row-title">Clean Code</div><div class="row-meta">Borrowed Nov 7 · <span style="color:var(--warn);font-weight:600;">Due Nov 21</span></div></div>
+                    </div>
+                    <div class="list-row">
+                      <div class="row-cover v3"></div>
+                      <div class="row-content"><div class="row-title">Designing Data-Intensive Applications</div><div class="row-meta">Borrowed Nov 11 · Due Nov 25</div></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="card">
+                  <div style="display:flex;align-items:center;gap:16px;margin-bottom:16px;">
+                    <div class="avatar" style="width:44px;height:44px;font-size:14px;flex-shrink:0;background:linear-gradient(135deg,#1D4ED8,#1e3a8a);">KG</div>
+                    <div style="flex:1;">
+                      <div style="font-weight:700;font-size:16px;font-family:var(--font-display);">Khatrina B. Gonzales</div>
+                      <div style="font-size:12px;color:var(--ink-500);">2021-08891 · BS Information Technology · 4th Year</div>
+                    </div>
+                    <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;">
+                      <span class="pill pill-info">2 books out</span>
+                      <span class="pill pill-available">No overdue</span>
+                      <span class="pill pill-available">₱0.00 fines</span>
+                    </div>
+                  </div>
+                  <div style="border-top:1px solid var(--ink-100);padding-top:14px;">
+                    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--ink-400);margin-bottom:10px;">Currently Borrowed</div>
+                    <div class="list-row">
+                      <div class="row-cover v6"></div>
+                      <div class="row-content"><div class="row-title">Database System Concepts</div><div class="row-meta">Borrowed Nov 10 · Due Nov 24</div></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="card">
+                  <div style="display:flex;align-items:center;gap:16px;margin-bottom:16px;">
+                    <div class="avatar" style="width:44px;height:44px;font-size:14px;flex-shrink:0;background:linear-gradient(135deg,var(--gold-600),#7A5E26);">JS</div>
+                    <div style="flex:1;">
+                      <div style="font-weight:700;font-size:16px;font-family:var(--font-display);">Jed F. Sayat</div>
+                      <div style="font-size:12px;color:var(--ink-500);">2023-00412 · BS Computer Science · 2nd Year</div>
+                    </div>
+                    <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;">
+                      <span class="pill pill-info">3 books out</span>
+                      <span class="pill" style="background:var(--danger-bg);color:var(--danger);">1 overdue</span>
+                      <span class="pill" style="background:var(--danger-bg);color:var(--danger);">₱30.00 fines</span>
+                    </div>
+                  </div>
+                  <div style="border-top:1px solid var(--ink-100);padding-top:14px;">
+                    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--ink-400);margin-bottom:10px;">Currently Borrowed</div>
+                    <div class="list-row">
+                      <div class="row-cover v4"></div>
+                      <div class="row-content"><div class="row-title">The Pragmatic Programmer</div><div class="row-meta">Borrowed Oct 28 · <span style="color:var(--danger);font-weight:600;">Overdue since Nov 11</span></div></div>
+                    </div>
+                    <div class="list-row">
+                      <div class="row-cover v5"></div>
+                      <div class="row-content"><div class="row-title">Operating System Concepts</div><div class="row-meta">Borrowed Nov 12 · Due Nov 26</div></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="card">
+                  <div style="display:flex;align-items:center;gap:16px;margin-bottom:16px;">
+                    <div class="avatar" style="width:44px;height:44px;font-size:14px;flex-shrink:0;background:linear-gradient(135deg,#7C3AED,#4C1D95);">PA</div>
+                    <div style="flex:1;">
+                      <div style="font-weight:700;font-size:16px;font-family:var(--font-display);">Paolo M. Aguilar</div>
+                      <div style="font-size:12px;color:var(--ink-500);">2020-15503 · BS Computer Engineering · 4th Year</div>
+                    </div>
+                    <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;">
+                      <span class="pill pill-info">1 book out</span>
+                      <span class="pill pill-available">No overdue</span>
+                      <span class="pill pill-available">₱0.00 fines</span>
+                    </div>
+                  </div>
+                  <div style="border-top:1px solid var(--ink-100);padding-top:14px;">
+                    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--ink-400);margin-bottom:10px;">Currently Borrowed</div>
+                    <div class="list-row">
+                      <div class="row-cover v2"></div>
+                      <div class="row-content"><div class="row-title">Computer Networks, 6th Edition</div><div class="row-meta">Borrowed Nov 14 · Due Nov 28</div></div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div><!-- end students panel -->
+
+          </div><!-- end librarian role-view -->
+
         </section>
 
         <!-- ========== BOOK DETAILS ========== -->

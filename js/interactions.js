@@ -34,6 +34,23 @@ document.querySelectorAll('.notif-tab').forEach(t => {
 });
 
 // ============================================
+// CATALOG TABS (librarian: Books / Students)
+// ============================================
+document.querySelectorAll('.catalog-tab').forEach(t => {
+  t.addEventListener('click', () => {
+    const bar = t.closest('.catalog-tab-bar');
+    bar.querySelectorAll('.catalog-tab').forEach(x => x.classList.remove('active'));
+    t.classList.add('active');
+
+    const panel = t.dataset.panel;
+    const container = t.closest('.role-view');
+    container.querySelectorAll('.catalog-panel').forEach(p => {
+      p.style.display = p.dataset.panel === panel ? '' : 'none';
+    });
+  });
+});
+
+// ============================================
 // RESERVATION CALENDAR
 // ============================================
 document.querySelectorAll('.cal-day:not(.muted):not(.disabled)').forEach(d => {
