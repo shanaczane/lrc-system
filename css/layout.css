@@ -269,7 +269,7 @@
    ============================================ */
 @media (max-width: 1024px) {
   .two-col, .reserve-grid, .detail-grid { grid-template-columns: 1fr; }
-  .detail-cover { position: static; max-width: 280px; }
+  .detail-cover-col { position: static; max-width: 280px; }
   .landing { grid-template-columns: 1fr; }
   .landing-hero { padding: 48px 32px; }
   .landing-form { padding: 48px 32px; }

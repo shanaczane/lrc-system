@@ -7,13 +7,15 @@
   gap: 40px;
   align-items: start;
 }
+.detail-cover-col {
+  position: sticky;
+  top: calc(var(--nav-h) + 24px);
+}
 .detail-cover {
   aspect-ratio: 3 / 4;
   border-radius: var(--radius-lg);
   overflow: hidden;
   box-shadow: var(--shadow-lg);
-  position: sticky;
-  top: calc(var(--nav-h) + 24px);
 }
 .detail-cover .book-cover {
   border-radius: 0;
