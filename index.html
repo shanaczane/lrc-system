@@ -319,7 +319,7 @@
 
           <div class="side-section">
             <div class="side-label">Manage</div>
-            <button class="side-link">
+            <button class="side-link" onclick="navigate('add-book')" data-nav="add-book">
               <svg
                 width="16"
                 height="16"
@@ -333,7 +333,7 @@
               </svg>
               Add New Book
             </button>
-            <button class="side-link">
+            <button class="side-link" onclick="navigate('manage-users')" data-nav="manage-users">
               <svg
                 width="16"
                 height="16"
@@ -349,7 +349,7 @@
               </svg>
               Manage Users
             </button>
-            <button class="side-link">
+            <button class="side-link" onclick="navigate('overdue')" data-nav="overdue">
               <svg
                 width="16"
                 height="16"
@@ -369,7 +369,7 @@
                 >17</span
               >
             </button>
-            <button class="side-link">
+            <button class="side-link" onclick="navigate('reports')" data-nav="reports">
               <svg
                 width="16"
                 height="16"
@@ -2950,6 +2950,459 @@
             </div>
           </div>
         </section>
+      <!-- ========== ADD NEW BOOK ========== -->
+      <section class="page" id="page-add-book">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Add New <em>Book</em></h1>
+            <p class="page-subtitle">Register a new title or add copies to an existing record</p>
+          </div>
+        </div>
+        <div class="two-col" style="gap:24px;align-items:start;">
+          <div>
+            <div class="card" style="margin-bottom:16px;">
+              <h3 class="section-title" style="margin-bottom:20px;">Book Information</h3>
+              <div style="display:grid;gap:14px;">
+                <div>
+                  <label style="font-size:12px;font-weight:600;color:var(--ink-500);display:block;margin-bottom:6px;">Title <span style="color:var(--danger);">*</span></label>
+                  <input type="text" placeholder="Enter full book title" style="width:100%;padding:10px 14px;border:1px solid var(--ink-200);border-radius:var(--radius);font-size:14px;background:var(--ink-50);">
+                </div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+                  <div>
+                    <label style="font-size:12px;font-weight:600;color:var(--ink-500);display:block;margin-bottom:6px;">Author <span style="color:var(--danger);">*</span></label>
+                    <input type="text" placeholder="Last name, First name" style="width:100%;padding:10px 14px;border:1px solid var(--ink-200);border-radius:var(--radius);font-size:14px;background:var(--ink-50);">
+                  </div>
+                  <div>
+                    <label style="font-size:12px;font-weight:600;color:var(--ink-500);display:block;margin-bottom:6px;">Publisher</label>
+                    <input type="text" placeholder="Publisher name" style="width:100%;padding:10px 14px;border:1px solid var(--ink-200);border-radius:var(--radius);font-size:14px;background:var(--ink-50);">
+                  </div>
+                </div>
+                <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;">
+                  <div>
+                    <label style="font-size:12px;font-weight:600;color:var(--ink-500);display:block;margin-bottom:6px;">Year</label>
+                    <input type="text" placeholder="2024" style="width:100%;padding:10px 14px;border:1px solid var(--ink-200);border-radius:var(--radius);font-size:14px;background:var(--ink-50);">
+                  </div>
+                  <div>
+                    <label style="font-size:12px;font-weight:600;color:var(--ink-500);display:block;margin-bottom:6px;">Edition</label>
+                    <input type="text" placeholder="1st" style="width:100%;padding:10px 14px;border:1px solid var(--ink-200);border-radius:var(--radius);font-size:14px;background:var(--ink-50);">
+                  </div>
+                  <div>
+                    <label style="font-size:12px;font-weight:600;color:var(--ink-500);display:block;margin-bottom:6px;">Pages</label>
+                    <input type="text" placeholder="000" style="width:100%;padding:10px 14px;border:1px solid var(--ink-200);border-radius:var(--radius);font-size:14px;background:var(--ink-50);">
+                  </div>
+                </div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+                  <div>
+                    <label style="font-size:12px;font-weight:600;color:var(--ink-500);display:block;margin-bottom:6px;">ISBN</label>
+                    <input type="text" placeholder="978-X-XXXXX-XXX-X" style="width:100%;padding:10px 14px;border:1px solid var(--ink-200);border-radius:var(--radius);font-size:14px;background:var(--ink-50);">
+                  </div>
+                  <div>
+                    <label style="font-size:12px;font-weight:600;color:var(--ink-500);display:block;margin-bottom:6px;">Call Number</label>
+                    <input type="text" placeholder="e.g. QA76.76 .M37" style="width:100%;padding:10px 14px;border:1px solid var(--ink-200);border-radius:var(--radius);font-size:14px;background:var(--ink-50);">
+                  </div>
+                </div>
+                <div>
+                  <label style="font-size:12px;font-weight:600;color:var(--ink-500);display:block;margin-bottom:6px;">Subject / Category</label>
+                  <select style="width:100%;padding:10px 14px;border:1px solid var(--ink-200);border-radius:var(--radius);font-size:14px;background:var(--ink-50);">
+                    <option value="">Select subject</option>
+                    <option>Computer Science</option>
+                    <option>Software Engineering</option>
+                    <option>Mathematics</option>
+                    <option>Business</option>
+                    <option>Science</option>
+                    <option>Literature</option>
+                    <option>History</option>
+                  </select>
+                </div>
+                <div>
+                  <label style="font-size:12px;font-weight:600;color:var(--ink-500);display:block;margin-bottom:6px;">Description</label>
+                  <textarea placeholder="Brief description of the book..." rows="3" style="width:100%;padding:10px 14px;border:1px solid var(--ink-200);border-radius:var(--radius);font-size:14px;background:var(--ink-50);resize:vertical;font-family:inherit;"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="card" style="margin-bottom:16px;">
+              <h3 class="section-title" style="margin-bottom:20px;">Copy Details</h3>
+              <div style="display:grid;gap:14px;">
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+                  <div>
+                    <label style="font-size:12px;font-weight:600;color:var(--ink-500);display:block;margin-bottom:6px;">Number of Copies</label>
+                    <input type="number" value="1" min="1" style="width:100%;padding:10px 14px;border:1px solid var(--ink-200);border-radius:var(--radius);font-size:14px;background:var(--ink-50);">
+                  </div>
+                  <div>
+                    <label style="font-size:12px;font-weight:600;color:var(--ink-500);display:block;margin-bottom:6px;">Loan Period (days)</label>
+                    <input type="number" value="14" style="width:100%;padding:10px 14px;border:1px solid var(--ink-200);border-radius:var(--radius);font-size:14px;background:var(--ink-50);">
+                  </div>
+                </div>
+                <div>
+                  <label style="font-size:12px;font-weight:600;color:var(--ink-500);display:block;margin-bottom:6px;">Starting Barcode</label>
+                  <input type="text" placeholder="LRC-00XXX" style="width:100%;padding:10px 14px;border:1px solid var(--ink-200);border-radius:var(--radius);font-size:14px;background:var(--ink-50);">
+                </div>
+                <div>
+                  <label style="font-size:12px;font-weight:600;color:var(--ink-500);display:block;margin-bottom:6px;">Condition</label>
+                  <select style="width:100%;padding:10px 14px;border:1px solid var(--ink-200);border-radius:var(--radius);font-size:14px;background:var(--ink-50);">
+                    <option>Good</option>
+                    <option>Fair</option>
+                    <option>Damaged</option>
+                  </select>
+                </div>
+                <div>
+                  <label style="font-size:12px;font-weight:600;color:var(--ink-500);display:block;margin-bottom:6px;">Date Acquired</label>
+                  <input type="date" style="width:100%;padding:10px 14px;border:1px solid var(--ink-200);border-radius:var(--radius);font-size:14px;background:var(--ink-50);">
+                </div>
+              </div>
+            </div>
+            <div style="display:flex;gap:10px;justify-content:flex-end;">
+              <button class="btn btn-ghost" onclick="navigate('catalog')">Cancel</button>
+              <button class="btn btn-primary">Save Book</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== MANAGE USERS ========== -->
+      <section class="page" id="page-manage-users">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Manage <em>Users</em></h1>
+            <p class="page-subtitle">Search and manage student and faculty borrower accounts</p>
+          </div>
+          <button class="btn btn-primary">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Add User
+          </button>
+        </div>
+        <div class="search-bar" style="max-width:480px;margin-bottom:20px;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-left:12px;color:var(--ink-400);flex-shrink:0;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" placeholder="Search by name or student ID…">
+        </div>
+        <div class="card" style="padding:0;overflow:hidden;">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>ID Number</th>
+                <th>Role</th>
+                <th>Active Loans</th>
+                <th>Overdue</th>
+                <th>Status</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <div style="display:flex;align-items:center;gap:10px;">
+                    <div class="avatar" style="width:32px;height:32px;font-size:11px;">SC</div>
+                    <div>
+                      <div style="font-weight:600;font-size:13px;">Shan A. Cruz</div>
+                      <div style="font-size:12px;color:var(--ink-500);">shanaczanecruzat@gmail.com</div>
+                    </div>
+                  </div>
+                </td>
+                <td style="font-size:13px;font-family:monospace;">20220001</td>
+                <td><span class="pill pill-info" style="font-size:11px;padding:2px 8px;">Student</span></td>
+                <td style="font-size:13px;text-align:center;">4</td>
+                <td style="font-size:13px;text-align:center;color:var(--danger);font-weight:600;">1</td>
+                <td><span class="pill pill-available" style="font-size:11px;padding:2px 8px;">Active</span></td>
+                <td><button class="btn btn-secondary" style="padding:4px 10px;font-size:11px;">View</button></td>
+              </tr>
+              <tr>
+                <td>
+                  <div style="display:flex;align-items:center;gap:10px;">
+                    <div class="avatar" style="width:32px;height:32px;font-size:11px;">KG</div>
+                    <div>
+                      <div style="font-weight:600;font-size:13px;">Khatrina Gonzales</div>
+                      <div style="font-size:12px;color:var(--ink-500);">kgonzales@dlsl.edu.ph</div>
+                    </div>
+                  </div>
+                </td>
+                <td style="font-size:13px;font-family:monospace;">20220045</td>
+                <td><span class="pill pill-info" style="font-size:11px;padding:2px 8px;">Student</span></td>
+                <td style="font-size:13px;text-align:center;">2</td>
+                <td style="font-size:13px;text-align:center;">—</td>
+                <td><span class="pill pill-available" style="font-size:11px;padding:2px 8px;">Active</span></td>
+                <td><button class="btn btn-secondary" style="padding:4px 10px;font-size:11px;">View</button></td>
+              </tr>
+              <tr>
+                <td>
+                  <div style="display:flex;align-items:center;gap:10px;">
+                    <div class="avatar" style="width:32px;height:32px;font-size:11px;">JS</div>
+                    <div>
+                      <div style="font-weight:600;font-size:13px;">Jed F. Sayat</div>
+                      <div style="font-size:12px;color:var(--ink-500);">jfsayat@dlsl.edu.ph</div>
+                    </div>
+                  </div>
+                </td>
+                <td style="font-size:13px;font-family:monospace;">20210088</td>
+                <td><span class="pill pill-info" style="font-size:11px;padding:2px 8px;">Student</span></td>
+                <td style="font-size:13px;text-align:center;">1</td>
+                <td style="font-size:13px;text-align:center;color:var(--danger);font-weight:600;">1</td>
+                <td><span class="pill pill-available" style="font-size:11px;padding:2px 8px;">Active</span></td>
+                <td><button class="btn btn-secondary" style="padding:4px 10px;font-size:11px;">View</button></td>
+              </tr>
+              <tr>
+                <td>
+                  <div style="display:flex;align-items:center;gap:10px;">
+                    <div class="avatar" style="width:32px;height:32px;font-size:11px;">MR</div>
+                    <div>
+                      <div style="font-weight:600;font-size:13px;">Prof. Maria Reyes</div>
+                      <div style="font-size:12px;color:var(--ink-500);">mreyes@dlsl.edu.ph</div>
+                    </div>
+                  </div>
+                </td>
+                <td style="font-size:13px;font-family:monospace;">FAC-0012</td>
+                <td><span class="pill pill-reserved" style="font-size:11px;padding:2px 8px;">Faculty</span></td>
+                <td style="font-size:13px;text-align:center;">3</td>
+                <td style="font-size:13px;text-align:center;">—</td>
+                <td><span class="pill pill-available" style="font-size:11px;padding:2px 8px;">Active</span></td>
+                <td><button class="btn btn-secondary" style="padding:4px 10px;font-size:11px;">View</button></td>
+              </tr>
+              <tr>
+                <td>
+                  <div style="display:flex;align-items:center;gap:10px;">
+                    <div class="avatar" style="width:32px;height:32px;font-size:11px;background:var(--ink-300);">RL</div>
+                    <div>
+                      <div style="font-weight:600;font-size:13px;">Ronan Lim</div>
+                      <div style="font-size:12px;color:var(--ink-500);">rlim@dlsl.edu.ph</div>
+                    </div>
+                  </div>
+                </td>
+                <td style="font-size:13px;font-family:monospace;">20190034</td>
+                <td><span class="pill pill-info" style="font-size:11px;padding:2px 8px;">Student</span></td>
+                <td style="font-size:13px;text-align:center;">0</td>
+                <td style="font-size:13px;text-align:center;">—</td>
+                <td><span class="pill" style="font-size:11px;padding:2px 8px;background:var(--ink-100);color:var(--ink-500);">Suspended</span></td>
+                <td><button class="btn btn-secondary" style="padding:4px 10px;font-size:11px;">View</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ========== OVERDUE BOOKS ========== -->
+      <section class="page" id="page-overdue">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Overdue <em>Books</em></h1>
+            <p class="page-subtitle">17 books currently overdue — sorted by days overdue</p>
+          </div>
+        </div>
+        <div class="stat-grid" style="grid-template-columns:repeat(4,1fr);margin-bottom:28px;">
+          <div class="stat warn">
+            <div class="stat-label">Total Overdue</div>
+            <div class="stat-value">17</div>
+            <div class="stat-meta">books</div>
+          </div>
+          <div class="stat">
+            <div class="stat-label">Borrowers Affected</div>
+            <div class="stat-value">12</div>
+            <div class="stat-meta">students / faculty</div>
+          </div>
+          <div class="stat">
+            <div class="stat-label">Longest Overdue</div>
+            <div class="stat-value">18</div>
+            <div class="stat-meta">days</div>
+          </div>
+          <div class="stat">
+            <div class="stat-label">Fines Accrued</div>
+            <div class="stat-value">₱340</div>
+            <div class="stat-meta">total</div>
+          </div>
+        </div>
+        <div class="card" style="padding:0;overflow:hidden;">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Book</th>
+                <th>Borrower</th>
+                <th>ID</th>
+                <th>Due Date</th>
+                <th>Days Overdue</th>
+                <th>Fine</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="font-weight:600;font-size:13px;">The Pragmatic Programmer</td>
+                <td style="font-size:13px;">Jed F. Sayat</td>
+                <td style="font-size:12px;font-family:monospace;color:var(--ink-500);">20210088</td>
+                <td style="font-size:13px;color:var(--danger);font-weight:600;">Oct 28</td>
+                <td style="font-size:13px;color:var(--danger);font-weight:700;text-align:center;">18</td>
+                <td style="font-size:13px;font-weight:600;">₱36</td>
+                <td style="display:flex;gap:6px;">
+                  <button class="btn btn-ghost" style="padding:4px 10px;font-size:11px;">Notify</button>
+                  <button class="btn btn-secondary" style="padding:4px 10px;font-size:11px;">Mark Returned</button>
+                </td>
+              </tr>
+              <tr>
+                <td style="font-weight:600;font-size:13px;">Designing Data-Intensive Applications</td>
+                <td style="font-size:13px;">Shan A. Cruz</td>
+                <td style="font-size:12px;font-family:monospace;color:var(--ink-500);">20220001</td>
+                <td style="font-size:13px;color:var(--danger);font-weight:600;">Nov 3</td>
+                <td style="font-size:13px;color:var(--danger);font-weight:700;text-align:center;">12</td>
+                <td style="font-size:13px;font-weight:600;">₱24</td>
+                <td style="display:flex;gap:6px;">
+                  <button class="btn btn-ghost" style="padding:4px 10px;font-size:11px;">Notify</button>
+                  <button class="btn btn-secondary" style="padding:4px 10px;font-size:11px;">Mark Returned</button>
+                </td>
+              </tr>
+              <tr>
+                <td style="font-weight:600;font-size:13px;">Clean Architecture</td>
+                <td style="font-size:13px;">Maria Santos</td>
+                <td style="font-size:12px;font-family:monospace;color:var(--ink-500);">20230055</td>
+                <td style="font-size:13px;color:var(--danger);font-weight:600;">Nov 7</td>
+                <td style="font-size:13px;color:var(--danger);font-weight:700;text-align:center;">8</td>
+                <td style="font-size:13px;font-weight:600;">₱16</td>
+                <td style="display:flex;gap:6px;">
+                  <button class="btn btn-ghost" style="padding:4px 10px;font-size:11px;">Notify</button>
+                  <button class="btn btn-secondary" style="padding:4px 10px;font-size:11px;">Mark Returned</button>
+                </td>
+              </tr>
+              <tr>
+                <td style="font-weight:600;font-size:13px;">Refactoring</td>
+                <td style="font-size:13px;">Leo Manalo</td>
+                <td style="font-size:12px;font-family:monospace;color:var(--ink-500);">20220178</td>
+                <td style="font-size:13px;color:var(--danger);font-weight:600;">Nov 10</td>
+                <td style="font-size:13px;color:var(--danger);font-weight:700;text-align:center;">5</td>
+                <td style="font-size:13px;font-weight:600;">₱10</td>
+                <td style="display:flex;gap:6px;">
+                  <button class="btn btn-ghost" style="padding:4px 10px;font-size:11px;">Notify</button>
+                  <button class="btn btn-secondary" style="padding:4px 10px;font-size:11px;">Mark Returned</button>
+                </td>
+              </tr>
+              <tr>
+                <td style="font-weight:600;font-size:13px;">Code Complete</td>
+                <td style="font-size:13px;">Ana Reyes</td>
+                <td style="font-size:12px;font-family:monospace;color:var(--ink-500);">FAC-0021</td>
+                <td style="font-size:13px;color:var(--warn);font-weight:600;">Nov 13</td>
+                <td style="font-size:13px;color:var(--warn);font-weight:700;text-align:center;">2</td>
+                <td style="font-size:13px;font-weight:600;">₱4</td>
+                <td style="display:flex;gap:6px;">
+                  <button class="btn btn-ghost" style="padding:4px 10px;font-size:11px;">Notify</button>
+                  <button class="btn btn-secondary" style="padding:4px 10px;font-size:11px;">Mark Returned</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ========== REPORTS ========== -->
+      <section class="page" id="page-reports">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Library <em>Reports</em></h1>
+            <p class="page-subtitle">Circulation and collection statistics for this semester</p>
+          </div>
+          <button class="btn btn-secondary">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Export PDF
+          </button>
+        </div>
+        <div class="stat-grid" style="grid-template-columns:repeat(4,1fr);margin-bottom:28px;">
+          <div class="stat">
+            <div class="stat-label">Total Books</div>
+            <div class="stat-value">1,284</div>
+            <div class="stat-meta">in collection</div>
+          </div>
+          <div class="stat gold">
+            <div class="stat-label">Checked Out</div>
+            <div class="stat-value">213</div>
+            <div class="stat-meta">this semester</div>
+          </div>
+          <div class="stat warn">
+            <div class="stat-label">Overdue</div>
+            <div class="stat-value">17</div>
+            <div class="stat-meta">currently</div>
+          </div>
+          <div class="stat">
+            <div class="stat-label">Active Users</div>
+            <div class="stat-value">342</div>
+            <div class="stat-meta">borrowers</div>
+          </div>
+        </div>
+        <div class="two-col" style="gap:20px;align-items:start;">
+          <div class="card">
+            <h3 class="section-title" style="margin-bottom:16px;">Most Borrowed This Semester</h3>
+            <table class="table">
+              <thead>
+                <tr><th>Title</th><th>Author</th><th style="text-align:center;">Times Borrowed</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="font-weight:600;font-size:13px;">Clean Code</td>
+                  <td style="font-size:13px;color:var(--ink-500);">R.C. Martin</td>
+                  <td style="text-align:center;font-size:13px;font-weight:700;color:var(--green-700);">38</td>
+                </tr>
+                <tr>
+                  <td style="font-weight:600;font-size:13px;">The Pragmatic Programmer</td>
+                  <td style="font-size:13px;color:var(--ink-500);">Thomas, Hunt</td>
+                  <td style="text-align:center;font-size:13px;font-weight:700;color:var(--green-700);">29</td>
+                </tr>
+                <tr>
+                  <td style="font-weight:600;font-size:13px;">Clean Architecture</td>
+                  <td style="font-size:13px;color:var(--ink-500);">R.C. Martin</td>
+                  <td style="text-align:center;font-size:13px;font-weight:700;color:var(--green-700);">21</td>
+                </tr>
+                <tr>
+                  <td style="font-weight:600;font-size:13px;">Refactoring</td>
+                  <td style="font-size:13px;color:var(--ink-500);">M. Fowler</td>
+                  <td style="text-align:center;font-size:13px;font-weight:700;color:var(--green-700);">14</td>
+                </tr>
+                <tr>
+                  <td style="font-weight:600;font-size:13px;">Code Complete</td>
+                  <td style="font-size:13px;color:var(--ink-500);">S. McConnell</td>
+                  <td style="text-align:center;font-size:13px;font-weight:700;color:var(--green-700);">11</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="card">
+            <h3 class="section-title" style="margin-bottom:16px;">Collection by Subject</h3>
+            <table class="table">
+              <thead>
+                <tr><th>Subject</th><th style="text-align:center;">Titles</th><th style="text-align:center;">Copies</th><th style="text-align:center;">Loans</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="font-size:13px;font-weight:600;">Software Engineering</td>
+                  <td style="text-align:center;font-size:13px;">48</td>
+                  <td style="text-align:center;font-size:13px;">184</td>
+                  <td style="text-align:center;font-size:13px;font-weight:600;color:var(--green-700);">76</td>
+                </tr>
+                <tr>
+                  <td style="font-size:13px;font-weight:600;">Computer Science</td>
+                  <td style="text-align:center;font-size:13px;">62</td>
+                  <td style="text-align:center;font-size:13px;">210</td>
+                  <td style="text-align:center;font-size:13px;font-weight:600;color:var(--green-700);">54</td>
+                </tr>
+                <tr>
+                  <td style="font-size:13px;font-weight:600;">Mathematics</td>
+                  <td style="text-align:center;font-size:13px;">55</td>
+                  <td style="text-align:center;font-size:13px;">198</td>
+                  <td style="text-align:center;font-size:13px;font-weight:600;">41</td>
+                </tr>
+                <tr>
+                  <td style="font-size:13px;font-weight:600;">Business</td>
+                  <td style="text-align:center;font-size:13px;">38</td>
+                  <td style="text-align:center;font-size:13px;">122</td>
+                  <td style="text-align:center;font-size:13px;font-weight:600;">28</td>
+                </tr>
+                <tr>
+                  <td style="font-size:13px;font-weight:600;">Literature</td>
+                  <td style="text-align:center;font-size:13px;">31</td>
+                  <td style="text-align:center;font-size:13px;">89</td>
+                  <td style="text-align:center;font-size:13px;font-weight:600;">14</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
       <!-- ========== BORROWED BOOKS ========== -->
       <section class="page" id="page-borrowed">
         <div class="page-header">
