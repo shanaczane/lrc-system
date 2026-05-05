@@ -1385,7 +1385,13 @@
                 </div>
               </div>
               <div>
-                <span class="pill pill-info" style="margin-bottom:12px;display:inline-flex;">Software Engineering</span>
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;flex-wrap:wrap;">
+                  <span class="pill pill-info">Software Engineering</span>
+                  <span id="bookStatusPill" style="display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:999px;font-size:12px;font-weight:600;background:var(--green-100);color:var(--green-800);">
+                    <span id="bookStatusDot" style="width:7px;height:7px;border-radius:50%;background:var(--green-700);display:inline-block;"></span>
+                    <span id="bookStatusText">Available</span>
+                  </span>
+                </div>
                 <h1 class="page-title" style="margin-bottom:8px;">Clean Code</h1>
                 <p style="font-size:18px;color:var(--ink-700);margin-bottom:8px;">A Handbook of Agile Software Craftsmanship</p>
                 <p style="color:var(--ink-500);font-size:14px;">By <strong style="color:var(--ink-900);">Robert C. Martin</strong> · Prentice Hall · 2008</p>
@@ -1418,8 +1424,8 @@
                 <!-- Demo toggle -->
                 <div style="display:inline-flex;align-items:center;gap:8px;margin-bottom:12px;background:var(--ink-100);border-radius:999px;padding:4px 6px;">
                   <span style="font-size:11px;font-weight:600;color:var(--ink-500);padding:0 6px;">Demo:</span>
-                  <button id="demoAvailBtn" onclick="document.getElementById('availStateAvailable').style.display='';document.getElementById('availStateUnavailable').style.display='none';document.getElementById('reserveInline').style.display='none';this.style.background='var(--green-700)';this.style.color='white';document.getElementById('demoUnavailBtn').style.background='';document.getElementById('demoUnavailBtn').style.color='';" style="padding:4px 12px;font-size:11px;font-weight:600;border-radius:999px;background:var(--green-700);color:white;border:none;cursor:pointer;">Available</button>
-                  <button id="demoUnavailBtn" onclick="document.getElementById('availStateAvailable').style.display='none';document.getElementById('availStateUnavailable').style.display='';document.getElementById('reserveInline').style.display='none';this.style.background='var(--warn)';this.style.color='white';document.getElementById('demoAvailBtn').style.background='';document.getElementById('demoAvailBtn').style.color='';" style="padding:4px 12px;font-size:11px;font-weight:600;border-radius:999px;border:none;cursor:pointer;">Checked Out</button>
+                  <button id="demoAvailBtn" onclick="document.getElementById('availStateAvailable').style.display='';document.getElementById('availStateUnavailable').style.display='none';document.getElementById('reserveInline').style.display='none';this.style.background='var(--green-700)';this.style.color='white';document.getElementById('demoUnavailBtn').style.background='';document.getElementById('demoUnavailBtn').style.color='';document.getElementById('bookStatusPill').style.background='var(--green-100)';document.getElementById('bookStatusPill').style.color='var(--green-800)';document.getElementById('bookStatusDot').style.background='var(--green-700)';document.getElementById('bookStatusText').textContent='Available';" style="padding:4px 12px;font-size:11px;font-weight:600;border-radius:999px;background:var(--green-700);color:white;border:none;cursor:pointer;">Available</button>
+                  <button id="demoUnavailBtn" onclick="document.getElementById('availStateAvailable').style.display='none';document.getElementById('availStateUnavailable').style.display='';document.getElementById('reserveInline').style.display='none';this.style.background='var(--warn)';this.style.color='white';document.getElementById('demoAvailBtn').style.background='';document.getElementById('demoAvailBtn').style.color='';document.getElementById('bookStatusPill').style.background='var(--warn-bg)';document.getElementById('bookStatusPill').style.color='var(--warn)';document.getElementById('bookStatusDot').style.background='var(--warn)';document.getElementById('bookStatusText').textContent='Checked Out';" style="padding:4px 12px;font-size:11px;font-weight:600;border-radius:999px;border:none;cursor:pointer;">Checked Out</button>
                 </div>
 
                 <!-- Availability: AVAILABLE state -->
